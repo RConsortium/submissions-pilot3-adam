@@ -1149,6 +1149,25 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "c7eef2996ac270a18c2715c997a727c5"
+    },
+    "envsetup": {
+      "Package": "envsetup",
+      "Version": "0.0.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pharmaverse",
+      "RemoteRepo": "envsetup",
+      "RemoteRef": "main",
+      "RemoteSha": "539514d89cbff4f61635052ba865d05a1d3fb181",
+      "Hash": "c194b17837fb23766fa208f96adfccbc"
+    },
+    "config": {
+      "Package": "config",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "31d77b09f63550cee9ecb5a08bf76e8f"
     }
   }
 }
