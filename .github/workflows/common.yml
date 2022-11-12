@@ -49,6 +49,18 @@ jobs:
     if: github.event_name == 'pull_request'
     with:
       r-version: "4.1"
+  readme:
+    name: Render README
+    uses: pharmaverse/admiralci/.github/workflows/readme-render.yml@main
+    if: github.event_name == 'push'
+    with:
+      r-version: "4.1"
+  validation:
+    name: Validation
+    uses: pharmaverse/admiralci/.github/workflows/r-pkg-validation.yml@main
+    if: github.event_name == 'release'
+    with:
+      r-version: "4.1"
   check:
     name: Check
     uses: pharmaverse/admiralci/.github/workflows/r-cmd-check.yml@main
