@@ -12,6 +12,7 @@ while(! "DESCRIPTION" %in% list.files(home)){
 path <- list(
  home      = "",                   # Project home
  adam      = "adam",                 # ADaM data
+ sdtm      = "sdtm",                 # SDTM data
  output    = "output"                # Output
 
 
