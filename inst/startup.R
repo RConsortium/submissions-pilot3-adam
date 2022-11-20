@@ -1,7 +1,7 @@
 # Project Level Setup
-r_version <- "4.1.2" # set up project R version
-snapshot <- "2021-08-31" # set up snapshot date
-repos <- paste0("https://mran.microsoft.com/snapshot/", snapshot) # set up repository based on snapshot
+r_version <- "4.2.1" # set up project R version
+snapshot <- "2022-11-01" # set up snapshot date
+repos <- paste0("https://cran.microsoft.com/snapshot/", snapshot) # set up repository based on snapshot
 
 home <- normalizePath(".") # set up home directory
 while (!"DESCRIPTION" %in% list.files(home)) {
