@@ -1,5 +1,5 @@
 # Project Level Setup
-R_version <- "4.1.2" # set up project R version
+r_version <- "4.1.2" # set up project R version
 snapshot <- "2021-08-31" # set up snapshot date
 repos <- paste0("https://mran.microsoft.com/snapshot/", snapshot) # set up repository based on snapshot
 
@@ -21,8 +21,8 @@ path <- lapply(path, function(x) file.path(home, x))
 options(repos = repos)
 
 # Check R Version
-if (paste(R.version$major, R.version$minor, sep = ".") != R_version & interactive()) {
-  stop("The current R version is not the same with the current project in ", R_version)
+if (paste(R.version$major, R.version$minor, sep = ".") != r_version && interactive()) {
+  stop("The current R version is not the same with the current project in ", r_version)
 }
 
 # Repository
@@ -31,7 +31,6 @@ message(paste0("    ", getOption("repos")))
 message(" ")
 
 # Display R Session Status
-# message("R packages were installed from repo: ", options('repo'), "\n")
 message(
   "Below R package path are searching in order to find installed R pacakges in this R session:", "\n",
   paste(paste0("    ", .libPaths()), collapse = "\n")
@@ -41,4 +40,4 @@ message("\n")
 message("The project home directory is ", home)
 message("\n")
 
-rm(home, R_version)
+rm(home, r_version)

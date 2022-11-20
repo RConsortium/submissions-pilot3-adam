@@ -3,8 +3,10 @@
 # After required package are installed.
 # The path variable needs to be defined by using example code below
 #
+# nolint start
 # path = list(adam = "path/to/esub/analysis/adam/datasets")    	# Modify path to the actual location
 # path$output = "."                                             # Output saved in current folder
+# nolint end
 
 ## ------------------------------------------------------------------------------------------------------------------------------
 # Working directory requires write permission

@@ -3,8 +3,10 @@
 # After required package are installed.
 # The path variable needs to be defined by using example code below
 #
+# nolint start
 # path = list(adam = "path/to/esub/analysis/adam/datasets")    	# Modify path to the actual location
 # path$output = "."                                             # Output saved in current folder
+# nolint end
 
 ## ------------------------------------------------------------------------------------------------------------------------------
 # Working directory requires write permission
@@ -64,7 +66,7 @@ pdf.options(reset = TRUE, onefile = FALSE)
 
 pdf(file.path(path$output, "tlf-kmplot.pdf"))
 
-KM <- visR::visr(surv_mod,
+km <- visR::visr(surv_mod,
   y_label = "Probability of event\n",
   x_label = "Time to First Dermatologic Event (Days)",
   y_ticks = seq(0, 1, 0.10)
@@ -72,10 +74,10 @@ KM <- visR::visr(surv_mod,
   add_CNSR() %>%
   add_CI()
 
-KM <- KM +
+km <- km +
   ggplot2::geom_hline(yintercept = 0.5, linetype = "dashed")
 
-KM <- KM %>%
+km <- km %>%
   visR::add_risktable(group = "statlist")
 
 title <- cowplot::ggdraw() +
@@ -93,11 +95,11 @@ caption <- cowplot::ggdraw() +
     size = 10
   )
 
-KM <- cowplot::plot_grid(
-  title, KM, caption,
+km <- cowplot::plot_grid(
+  title, km, caption,
   ncol = 1,
   rel_heights = c(0.1, 0.8, 0.1)
 )
 
-print(KM)
+print(km)
 dev.off()

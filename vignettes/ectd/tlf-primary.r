@@ -3,8 +3,10 @@
 # After required package are installed.
 # The path variable needs to be defined by using example code below
 #
+# nolint start
 # path = list(adam = "path/to/esub/analysis/adam/datasets")    	# Modify path to the actual location
 # path$output = "."                                             # Output saved in current folder
+# nolint end
 
 ## ------------------------------------------------------------------------------------------------------------------------------
 # Working directory requires write permission
@@ -94,10 +96,10 @@ model_portion <- efficacy_models(adas, "CHG", 24)
 final <- bind_rows(sum_data, model_portion)
 
 ht <- huxtable::as_hux(final, add_colnames = FALSE) %>%
-  huxtable::set_bold(1, 1:ncol(final), TRUE) %>%
-  huxtable::set_align(1, 1:ncol(final), "center") %>%
-  huxtable::set_valign(1, 1:ncol(final), "bottom") %>%
-  huxtable::set_bottom_border(1, 1:ncol(final), 1) %>%
+  huxtable::set_bold(1, seq_len(ncol(final)), TRUE) %>%
+  huxtable::set_align(1, seq_len(ncol(final)), "center") %>%
+  huxtable::set_valign(1, seq_len(ncol(final)), "bottom") %>%
+  huxtable::set_bottom_border(1, seq_len(ncol(final)), 1) %>%
   huxtable::set_width(1.3) %>%
   huxtable::set_escape_contents(FALSE) %>%
   huxtable::set_col_width(c(.4, .2, .2, .2))
