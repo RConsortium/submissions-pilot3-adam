@@ -19,6 +19,7 @@ Imports:
     emmeans,
     glue,
     stringr,
+    tibble,
     tidyr
 Suggests:
     cowplot,
