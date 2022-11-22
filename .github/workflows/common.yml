@@ -42,19 +42,19 @@ jobs:
     uses: pharmaverse/admiralci/.github/workflows/style.yml@main
     if: github.event_name == 'pull_request'
     with:
-      r-version: "4.1"
+      r-version: "4.2"
   spellcheck:
     name: Spelling
     uses: pharmaverse/admiralci/.github/workflows/spellcheck.yml@main
     if: github.event_name == 'pull_request'
     with:
-      r-version: "4.1"
+      r-version: "4.2"
   readme:
     name: Render README
     uses: pharmaverse/admiralci/.github/workflows/readme-render.yml@main
     if: github.event_name == 'push'
     with:
-      r-version: "4.1"
+      r-version: "4.2"
   validation:
     name: Validation
     uses: pharmaverse/admiralci/.github/workflows/r-pkg-validation.yml@main
@@ -70,7 +70,7 @@ jobs:
     uses: pharmaverse/admiralci/.github/workflows/pkgdown.yml@main
     if: github.event_name == 'push'
     with:
-      r-version: "4.1"
+      r-version: "4.2"
       # Whether to skip multiversion docs
       # Note that if you have multiple versions of docs,
       # your URL links are likely to break due to path changes
@@ -80,7 +80,7 @@ jobs:
     uses: pharmaverse/admiralci/.github/workflows/lintr.yml@main
     if: github.event_name == 'pull_request'
     with:
-      r-version: "4.1"
+      r-version: "4.2"
   links:
     name: Links
     uses: pharmaverse/admiralci/.github/workflows/links.yml@main
@@ -109,4 +109,4 @@ jobs:
     uses: pharmaverse/admiralci/.github/workflows/man-pages.yml@main
     if: github.event_name == 'pull_request'
     with:
-      r-version: "4.1"
+      r-version: "4.2"
