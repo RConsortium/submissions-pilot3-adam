@@ -15,3 +15,4 @@
 ^vignettes$
 ^\.github$
 ^.lintr$
+^sdtm$
