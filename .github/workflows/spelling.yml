@@ -58,7 +58,7 @@ jobs:
           R_VERSION="${{ inputs.r-version }}"
           if [ "$R_VERSION" == "" ]
           then {
-            R_VERSION="4.0"
+            R_VERSION="4.2"
           }
           fi
           echo "::set-output name=R_VERSION::$R_VERSION"
