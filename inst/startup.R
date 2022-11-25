@@ -10,13 +10,10 @@ while (!"DESCRIPTION" %in% list.files(home)) {
 
 # A&R folder path (Do not edit information below)
 path <- list(
- home      = "",                   # Project home
- adam      = "adam",                 # ADaM data
- sdtm      = "sdtm",                 # SDTM data
- output    = "output"                # Output
-
-
-
+  home      = "", # Project home
+  adam      = "adam", # ADaM data
+  sdtm      = "sdtm", # SDTM data
+  output    = "output" # Output
 )
 
 path <- lapply(path, function(x) file.path(home, x))
