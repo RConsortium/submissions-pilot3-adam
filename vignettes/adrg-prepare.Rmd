@@ -32,11 +32,11 @@ path$home %>%
   prune("R/zzz.R") %>%
   pack(output = "ectd/r0pkg.txt")
 ```
-# Prepare Submission Analysis Progam
+# Prepare Submission Analysis Program
 
-Transfer Rmarkdown file to `txt` files and saved in `ectd` folder. 
+Transfer RMarkdown file to `txt` files and saved in `ectd` folder. 
 
-- (optional) Review and remove unecessary information. For example:
+- (optional) Review and remove unnecessary information. For example:
 
 ```
 knitr::include_graphics("pdf/tlf-efficacy.pdf")
