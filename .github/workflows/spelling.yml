@@ -77,12 +77,16 @@ jobs:
             ~/.staged.dependencies
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: ${{ runner.os }}-renv-
-
-      - name: Run Spellcheck
+          
+      - name: Install Dependencies
         run: |
           if (!requireNamespace("spelling", quietly = TRUE)) {
             install.packages("spelling")
           }
+        shell: Rscript {0}
+
+      - name: Run Spellcheck
+        run: |
           (spell_errors <- spelling::spell_check_package())
           if (nrow(spell_errors) > 0L) {
             quit(save = "no", status = 1, runLast = FALSE)
