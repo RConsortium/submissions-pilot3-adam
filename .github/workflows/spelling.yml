@@ -74,5 +74,8 @@ jobs:
           if (!requireNamespace("spelling", quietly = TRUE)) {
             install.packages("spelling")
           }
-          spelling::spell_check_package()
+          (spell_errors <- spelling::spell_check_package())
+          if (nrow(spell_errors) > 0L) {
+            quit(save = "no", status = 1, runLast = FALSE)
+          }
         shell: Rscript {0}
