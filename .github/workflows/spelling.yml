@@ -69,23 +69,10 @@ jobs:
         with:
           r-version: ${{ steps.normalizer.outputs.R_VERSION }}
 
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.local/share/renv
-            ~/.staged.dependencies
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: ${{ runner.os }}-renv-
-
-      - name: Run Staged dependencies
-        uses: insightsengineering/staged-dependencies-action@v1
-        with:
-          run-system-dependencies: true
-          enable-check: false
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      ##################### END boilerplate steps #####################
-
       - name: Run Spellcheck
-        uses: insightsengineering/r-spellcheck-action@v3
+        run: |
+          if (!requireNamespace("spelling", quietly = TRUE)) {
+            install.packages("spelling")
+          }
+          spelling::spell_check_package()
+        shell: Rscript {0}
