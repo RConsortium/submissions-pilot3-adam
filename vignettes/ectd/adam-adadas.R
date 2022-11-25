@@ -19,8 +19,6 @@ library(admiral)
 library(metacore)
 library(metatools)
 library(stringr)
-# Propitiatory Package, please refer appendix of ADRG to install
-# library(pilot1wrappers)
 
 
 ## -------------------------------------------------------------------------------------------------------------------
@@ -36,7 +34,7 @@ qs <- convert_blanks_to_na(qs)
 ## -------------------------------------------------------------------------------------------------------------------
 ## placeholder for origin=predecessor, use metatool::build_from_derived()
 
-## ADT/ADY
+## derive ADT/ADY
 # Get list of ADSL vars required for derivations
 adsl_vars <- vars(TRTSDT, TRTEDT, TRT01A, TRT01P)
 adas1 <- qs %>%
@@ -56,7 +54,7 @@ adas1 <- qs %>%
   ) %>%
   derive_vars_dy(reference_date = TRTSDT, source_vars = vars(ADT))
 
-## AVISIT/AVISITN
+## derive AVISIT/AVISITN
 adas2 <- adas1 %>%
   mutate(
     AVISIT = case_when(
@@ -73,12 +71,11 @@ adas2 <- adas1 %>%
 ## -------------------------------------------------------------------------------------------------------------------
 ## placeholder: replace derive_vars_merged_lookup by metatool::create_var_from_codelist()/create_cat_var()
 ## Add PARAMCD PARAM and PARAMN - from LOOK-UP table ----
-# Replace with PARAMCD lookup function
-# derive_vars_merged_lookup()
+# Replace derive_vars_merged_lookup() with PARAMCD lookup function
 
 
 ## -------------------------------------------------------------------------------------------------------------------
-## AWRANGE/AWTARGET/AWTDIFF/AWLO/AWHI/AWU
+## derive AWRANGE/AWTARGET/AWTDIFF/AWLO/AWHI/AWU
 aw_lookup <- tribble(
   ~AVISIT, ~AWRANGE, ~AWTARGET, ~AWLO, ~AWHI,
   "Baseline", "<=1", 1, NA_integer_, 1,
