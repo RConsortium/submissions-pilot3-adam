@@ -43,12 +43,6 @@ jobs:
     if: github.event_name == 'pull_request'
     with:
       r-version: "4.2"
-  spellcheck:
-    name: Spelling
-    uses: pharmaverse/admiralci/.github/workflows/spellcheck.yml@main
-    if: github.event_name == 'pull_request'
-    with:
-      r-version: "4.2"
   docs:
     name: Documentation
     uses: pharmaverse/admiralci/.github/workflows/pkgdown.yml@main
