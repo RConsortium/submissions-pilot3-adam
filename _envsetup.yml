@@ -1,0 +1,7 @@
+default:
+  paths:
+    sdtm: '/sdtm/'
+    adam: '/adam/'
+    output: '/output/'
+    programs: '/R/'
+    functions: '/R/'

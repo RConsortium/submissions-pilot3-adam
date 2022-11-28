@@ -46,7 +46,7 @@ In short, the project is organized as an R package.
 
 - `pilot3.Rproj`: RStudio project file used to open RStudio project.
 - `DESCRIPTION`: Metadata for a package including authors, license, dependency etc.
-- `vignettes/`: Analysis scripts using Rmarkdown.
+- `vignettes/`: Analysis scripts using RMarkdown.
 - `R/`: Project specific R functions.
 - `man/`: Manual of project specific R functions. 
 
