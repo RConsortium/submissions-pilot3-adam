@@ -26,7 +26,6 @@ Suggests:
     visR,
     envsetup,
     config
-Suggests: 
     devtools,
     fs,
     ggplot2,

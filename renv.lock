@@ -2042,7 +2042,7 @@
       "RemoteRepo": "envsetup",
       "RemoteRef": "main",
       "RemoteSha": "539514d89cbff4f61635052ba865d05a1d3fb181",
-      "Hash": "c194b17837fb23766fa208f96adfccbc"
+      "Hash": "c194b17837fb23766fa208f96adfccbc",
       "Requirements": []
     },
     "config": {
