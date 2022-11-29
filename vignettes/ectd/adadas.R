@@ -123,3 +123,11 @@ adas5 <- adas4 %>%
 
 ## -------------------------------------------------------------------------------------------------------------------
 ## placeholder for using metacore/metatools
+
+## -------------------------------------------------------------------------------------------------------------------
+## out to an XPT
+#adadas %>% 
+#  xportr_type(adsl_spec, "ADADAS") %>%
+#  xportr_length(adsl_spec, "ADADAS") %>%
+#  xportr_write(".../ADADAS.xpt", 
+#               label = "")
