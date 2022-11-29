@@ -15,7 +15,7 @@ This is a FDA-industry collaboration through the non-profit organization R conso
 
 The [working group website](https://rconsortium.github.io/submissions-wg/).
 
-The [RConsortium/submissions-pilot1](https://github.com/RConsortium/submissions-pilot3-adam) repo demonstrates an approach to organize internal developed R function ADaM generation program using an R package. 
+The [RConsortium/submissions-pilot3-adam](https://github.com/RConsortium/submissions-pilot3-adam) repo demonstrates an approach to organize internal developed R function ADaM generation program using an R package. 
 
 ## FDA Response 
 
