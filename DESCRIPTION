@@ -22,10 +22,9 @@ Imports:
     tibble,
     tidyr
 Suggests:
-    cowplot,
-    visR,
     envsetup,
     config,
+    cowplot,
     devtools,
     fs,
     ggplot2,
