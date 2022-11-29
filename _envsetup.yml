@@ -1,10 +1,10 @@
 default:
   paths:
-    sdtm: !expr file.path(getwd(), "sdtm")
-    adam: !expr list(PROD = file.path(getwd(), "submission/datasets"), QC = file.path(getwd(), "adam"))
-    output: !expr file.path(getwd(), "output")
-    programs: !expr file.path(getwd(), "submission/programs")
-    functions: !expr file.path(getwd(), "R")
+    sdtm: "./sdtm"
+    adam: !expr list(PROD = "./submission/datasets", QC = "./adam")
+    output: "./output"
+    programs: "./submission/programs"
+    functions: "./R"
     envsetup_environ: !expr Sys.setenv(ENVSETUP_ENVIRON = 'QC'); 'QC'
     
 prod:
