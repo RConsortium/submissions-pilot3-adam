@@ -1,3 +1,10 @@
+###########################################################################
+#' developers : Kangjie Zhang/
+#' date: 29NOV2022
+#' modification History:
+#' program ADADAS
+###########################################################################
+
 ## ----setup, message=FALSE-------------------------------------------------------------------------------------------
 # CRAN package, please using install.packages() to install
 library(dplyr)
@@ -8,9 +15,8 @@ library(stringr)
 
 
 ## -------------------------------------------------------------------------------------------------------------------
-qs <- haven::read_xpt(file.path(path$sdtm, "qs.xpt"))
-adsl <- haven::read_xpt(file.path(path$adam, "adsl.xpt"))
-adas_qc <- haven::read_xpt(file.path(path$adam, "adadas.xpt"))
+qs <- haven::read_xpt(file.path("sdtm", "qs.xpt"))
+adsl <- haven::read_xpt(file.path("adam", "adsl.xpt"))
 
 
 ## -------------------------------------------------------------------------------------------------------------------
