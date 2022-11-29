@@ -48,7 +48,7 @@ toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
 
 # site groups - if not pooled then SITEGR1=SITEID. If pooled, SITEGR1 will be 900 - no SAP available
 format_siteid <- function(x) {
-  case_when(
+  dplyr::case_when(
     x %in% c("702", "706", "707", "711", "714", "715", "717") ~ "900",
     TRUE ~ x
   )
@@ -56,7 +56,7 @@ format_siteid <- function(x) {
 
 # AGEGR1 - AGEGR1 = 1 if AGE <65. AGEGR1 = 2 if AGE 65-80. AGEGR1 = 3 if AGE >80
 format_agegr1 <- function(x) {
-  case_when(
+  dplyr::case_when(
     x < 65 ~ "<65",
     dplyr::between(x, 65, 80) ~ "65-80",
     x > 80 ~ ">80",
@@ -64,7 +64,7 @@ format_agegr1 <- function(x) {
 }
 
 format_agegr1n <- function(x) {
-  case_when(
+  dplyr::case_when(
     x < 65 ~ 1,
     dplyr::between(x, 65, 80) ~ 2,
     x > 80 ~ 3,
@@ -73,45 +73,46 @@ format_agegr1n <- function(x) {
 
 # Race group numbering
 format_racen <- function(x) {
-  case_when(
+  dplyr::case_when(
     x == "WHITE" ~ 1,
     x== "BLACK OR AFRICAN AMERICAN" ~ 2,
     x== "AMERICAN INDIAN OR ALASKA NATIVE" ~ 6
   )
 }
-unique(adsl_prod[, c("RACE", "RACEN")])
-
 
 # Disposition information -------------------------------------------------
 unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
 
 ds00 <- ds %>%
-  dplyr::filter(DSDECOD == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
-  derive_vars_dt(
+  dplyr::filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
+  admiral::derive_vars_dt(
     dtc = DSSTDTC,
-    new_vars_prefix = "DSS",
+    new_vars_prefix = "DSST",
     highest_imputation = "n",
-  ) 
-
-# Last visit --------------------------------------------------------------
-
-?derive_vars_dt
-If the date of final dose is missing for the subject and the subject discontinued after visit 3, use the date of discontinuation as the date of last dose. Convert the date to a SAS date.</TranslatedText>
+  )
 
 # Treatment information ---------------------------------------------------
 
 ex_dt <- ex %>%
-  derive_vars_dt(
+  admiral::derive_vars_dt(
     dtc = EXSTDTC,
     new_vars_prefix = "EXST",
     highest_imputation = "n",
   ) %>%
-  derive_vars_dt(
+  # treatment end is imputed by discontinuation if subject discontinued after visit 3 = randomization as per protocol
+  admiral::derive_vars_merged(
+    dataset_add = ds00,
+    by_vars = vars(STUDYID, USUBJID),
+    new_vars = vars(EOSDT = DSSTDT),
+    filter_add = DSCAT == "DISPOSITION EVENT" & DSDECOD != "COMPLETED"
+  ) %>%
+  admiral::derive_vars_dt(
     dtc = EXENDTC,
     new_vars_prefix = "EXEN",
     highest_imputation = "Y",
     min_dates = vars(EXSTDT), 
-    max_dates = vars(ds00$DSSTDT),
+    max_dates = vars(EOSDT),
+    date_imputation = "last"
   ) %>%
   dplyr::mutate(DOSE = EXDOSE* (EXENDT-EXSTDT + 1))
 
@@ -245,6 +246,7 @@ dfcompare(
     ,showdiffs = 10000
     ,debug = F
 )
+
 
 # Disposition -------------------------------------------------------------
 
