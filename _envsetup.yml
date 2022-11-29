@@ -1,7 +1,16 @@
 default:
   paths:
-    sdtm: '/sdtm/'
-    adam: '/adam/'
-    output: '/output/'
-    programs: '/R/'
-    functions: '/R/'
+    sdtm: "./sdtm"
+    adam: !expr list(PROD = "./submission/datasets", QC = "./adam")
+    output: "./output"
+    programs: "./submission/programs"
+    functions: "./R"
+    envsetup_environ: !expr Sys.setenv(ENVSETUP_ENVIRON = 'QC'); 'QC'
+    
+prod:
+  paths:
+    envsetup_environ: !expr Sys.setenv(ENVSETUP_ENVIRON = 'PROD'); 'PROD'
+
+qc:
+  paths:
+    envsetup_environ: !expr Sys.setenv(ENVSETUP_ENVIRON = 'QC'); 'QC'

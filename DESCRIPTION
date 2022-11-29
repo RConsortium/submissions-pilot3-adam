@@ -22,6 +22,8 @@ Imports:
     tibble,
     tidyr
 Suggests:
+    envsetup,
+    config,
     cowplot,
     visR,
     envsetup,
