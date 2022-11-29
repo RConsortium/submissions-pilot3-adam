@@ -1,5 +1,5 @@
 ###########################################################################
-#' developpers : Steven Haesendonckx/
+#' developers : Steven Haesendonckx/
 #' date: 28NOV2022
 #' modification History:
 #' 
@@ -15,34 +15,27 @@ library(admiral)
 library(dplyr)
 
 # read source -------------------------------------------------------------
-
-dm <- haven::read_xpt(file.path("sdtm", "dm.xpt"))
-ds <- haven::read_xpt(file.path("sdtm", "ds.xpt"))
-ex <- haven::read_xpt(file.path("sdtm", "ex.xpt"))
-qs <- haven::read_xpt(file.path("sdtm", "qs.xpt"))
-sv <- haven::read_xpt(file.path("sdtm", "sv.xpt"))
+# When SAS datasets are imported into R using haven::read_sas(), missing
+# character values from SAS appear as "" characters in R, instead of appearing
+# as NA values. Further details can be obtained via the following link:
+# https://pharmaverse.github.io/admiral/articles/admiral.html#handling-of-missing-values
 
 
-ae <- haven::read_xpt(file.path("sdtm", "ae.xpt"))
-lb <- haven::read_xpt(file.path("sdtm", "lb.xpt"))
-vs <- haven::read_xpt(file.path("sdtm", "vs.xpt"))
+dm <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "dm.xpt")))
+ds <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "ds.xpt")))
+ex <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "ex.xpt")))
+qs <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "qs.xpt")))
+sv <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "sv.xpt")))
+vs <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "vs.xpt")))
+sc <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "sc.xpt")))
 
-adsl_prod <- haven::read_xpt(file.path("adam", "adsl.xpt"))
+# ae <- haven::read_xpt(file.path("sdtm", "ae.xpt"))
+# lb <- haven::read_xpt(file.path("sdtm", "lb.xpt"))
+# vs <- haven::read_xpt(file.path("sdtm", "vs.xpt"))
+
+adsl_prod <- admiral::convert_blanks_to_na(haven::read_xpt(file.path(adam[2], "adsl.xpt")))
 
 toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
-
-
-# # When SAS datasets are imported into R using haven::read_sas(), missing
-# # character values from SAS appear as "" characters in R, instead of appearing
-# # as NA values. Further details can be obtained via the following link:
-# # https://pharmaverse.github.io/admiral/articles/admiral.html#handling-of-missing-values
-# 
-# dm <- convert_blanks_to_na(dm)
-# ds <- convert_blanks_to_na(ds)
-# ex <- convert_blanks_to_na(ex)
-# ae <- convert_blanks_to_na(ae)
-# lb <- convert_blanks_to_na(lb)
-
 
 # Formats -----------------------------------------------------------------
 
@@ -87,9 +80,14 @@ ds00 <- ds %>%
   dplyr::filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
   admiral::derive_vars_dt(
     dtc = DSSTDTC,
-    new_vars_prefix = "DSST",
+    new_vars_prefix = "EOS",
     highest_imputation = "n",
-  )
+  ) %>%
+  dplyr::mutate(DISCONFL = ifelse(!is.na(EOSDT) & DSDECOD != "COMPLETED", "Y", NA),
+                DSRAEFL = ifelse(DSTERM == "ADVERSE EVENT", "Y", NA),
+                DCDECOD = DSDECOD
+  ) %>%
+  dplyr::select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD) 
 
 # Treatment information ---------------------------------------------------
 
@@ -103,8 +101,8 @@ ex_dt <- ex %>%
   admiral::derive_vars_merged(
     dataset_add = ds00,
     by_vars = vars(STUDYID, USUBJID),
-    new_vars = vars(EOSDT = DSSTDT),
-    filter_add = DSCAT == "DISPOSITION EVENT" & DSDECOD != "COMPLETED"
+    new_vars = vars(EOSDT = EOSDT),
+    filter_add = DCDECOD != "COMPLETED"
   ) %>%
   admiral::derive_vars_dt(
     dtc = EXENDTC,
@@ -185,6 +183,7 @@ adsl01 <- adsl00 %>%
 # SAFFL - Y if ITTFL='Y' and TRTSDT ne missing. N otherwise
 # ITTFL - Y if ARMCD ne ' '. N otherwise
 # EFFFL - Y if SAFFL='Y AND at least one record in QS for ADAS-Cog and for CIBIC+ with VISITNUM>3, N otherwise
+# these variables are also in suppdm, but define said derived
 
 qstest <- distinct(qs[,c("QSTESTCD", "QSTEST")])
 
@@ -215,7 +214,7 @@ adsl02 <- adsl01 %>%
   )
 
 # Study Visit compliance --------------------------------------------------
-
+# these variables are also in suppdm, but define said derived
 sv00 <- sv %>%
   dplyr::select(STUDYID, USUBJID, VISIT, VISITDY, SVSTDTC) %>%
   dplyr::mutate(FLG = "Y",
@@ -223,45 +222,87 @@ sv00 <- sv %>%
                           VISIT == "WEEK 8" ~ "COMP8FL",
                           VISIT == "WEEK 16" ~ "COMP16FL",
                           VISIT == "WEEK 24" ~ "COMP24FL",
-                          TRUE ~ "NA" # ensures every subject with one visit will get a row with minimally 'N'
+                          TRUE ~ "ZZZ" # ensures every subject with one visit will get a row with minimally 'N'
                 )) %>%
   dplyr::arrange(STUDYID, USUBJID, VISITDY) %>%
   dplyr::distinct(STUDYID, USUBJID, VISITCMP, FLG) %>%
-  tidyr::pivot_wider(names_from = VISITCMP, values_from = FLG, values_fill = "N")
+  tidyr::pivot_wider(names_from = VISITCMP, values_from = FLG, values_fill = "N") %>%
+  dplyr::select(-ZZZ)
 
 adsl03 <- adsl02 %>%
   dplyr::left_join(sv00, by = c("STUDYID", "USUBJID")) 
 
-
-
-## Content check using in-house package
-adsl03[["AVGDD"]] <- as.numeric(adsl03[["AVGDD"]])
-adsl03[["CUMDOSE"]] <- as.numeric(adsl03[["CUMDOSE"]])
-
-dfcompare(
-     file = "adsl_compare"
-    ,left = adsl_prod
-    ,right = adsl03
-    ,keys = c("STUDYID", "USUBJID")
-    ,showdiffs = 10000
-    ,debug = F
-)
-
-
 # Disposition -------------------------------------------------------------
 
+format_dcsreas <- function(dsdecod) {
+  dplyr::case_when(
+    dsdecod == "ADVERSE EVENT" ~ "Adverse Event",
+    dsdecod == "STUDY TERMINATED BY SPONSOR" ~ "Sponsor Decision",
+    dsdecod == "DEATH" ~ "Death",
+    dsdecod == "WITHDRAWAL BY SUBJECT" ~ "Withdrew Consent",
+    dsdecod == "PHYSICIAN DECISION" ~ "Physician Decision",
+    dsdecod == "PROTOCOL VIOLATION" ~ "Protocol Violation",
+    dsdecod == "LOST TO FOLLOW-UP" ~ "Lost to Follow-up",
+    dsdecod == "LACK OF EFFICACY" ~ "Lack of Efficacy"
+  )
+}
 
+adsl04 <- adsl03 %>%
+  dplyr::left_join(ds00, by = c("STUDYID", "USUBJID")) %>%
+  dplyr::select(-DSDECOD) %>%
+  admiral::derive_var_disposition_status(
+    dataset_ds = ds00,
+    new_var = EOSSTT,
+    status_var = DSDECOD, #this variable is removed after reformat
+    filter_ds = !is.na(USUBJID)
+  ) %>%
+  admiral::derive_vars_disposition_reason(
+    dataset_ds = ds00,
+    new_var = DCSREAS,
+    reason_var = DSDECOD,
+    filter_ds = !is.na(USUBJID),
+    format_new_vars = format_dcsreas #could not include dsterm in formatting logic
+  ) %>%
+  dplyr::mutate(DCSREAS = ifelse(DSTERM == "PROTOCOL ENTRY CRITERIA NOT MET", "I/E Not Met", DCSREAS))
 
- "DISCONFL" "DSRAEFL" 
+# Baseline variables ------------------------------------------------------
 
+# "BMIBL" VS
+# "BMIBLGR1" VS
+# "HEIGHTBL" VS
+# "WEIGHTBL" VS
+# "EDUCLVL" SC
 
-"BMIBL"    "BMIBLGR1" "HEIGHTBL" "WEIGHTBL" "EDUCLVL" 
+# Disease information -----------------------------------------------------
 
-"DISONSDT" "DURDIS"  "DURDSGR1" "VISIT1DT" "VISNUMEN" "RFENDT"   "DCDECOD"  "EOSSTT"   "DCSREAS" 
+# "DISONSDT"
+# "DURDIS"
+# "DURDSGR1"
+# "MMSETOT" 
 
-"MMSETOT" 
+# More visit information --------------------------------------------------
 
-  
+# "VISIT1DT"
+# "VISNUMEN"
+# "RFENDT"  
+
+# QC ----------------------------------------------------------------------
+
+adsl <- adsl04
+
+## Content check using in-house package
+adsl[["AVGDD"]] <- as.numeric(adsl[["AVGDD"]])
+adsl[["CUMDOSE"]] <- as.numeric(adsl[["CUMDOSE"]])
+
+dfcompare(
+  file = "adsl_compare"
+  ,left = adsl_prod
+  ,right = adsl
+  ,keys = c("STUDYID", "USUBJID")
+  ,showdiffs = 10000
+  ,debug = F
+)
+
   
   
 ## in define.xml following derivation should use TRTDURD: AVGDD = CUMDOSE/TRTDUR
