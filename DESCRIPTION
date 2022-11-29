@@ -25,10 +25,6 @@ Suggests:
     envsetup,
     config,
     cowplot,
-    visR,
-    envsetup,
-    config
-Suggests: 
     devtools,
     fs,
     ggplot2,
