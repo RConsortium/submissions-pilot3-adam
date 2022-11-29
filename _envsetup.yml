@@ -1,7 +1,8 @@
 default:
   paths:
     sdtm: '/sdtm/'
-    adam: '/adam/'
+    adam: '/submission/datasets/'
+    qc: '/adam/'
     output: '/output/'
-    programs: '/R/'
+    programs: '/submission/programs/'
     functions: '/R/'
