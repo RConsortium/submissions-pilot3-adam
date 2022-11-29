@@ -1,17 +1,3 @@
-## ---- message = FALSE-----------------------------------------------------------------------------------------------
-# Initiate start-up file
-source(file.path(rprojroot::find_root("DESCRIPTION"), "inst/startup.R"))
-
-## -------------------------------------------------------------------------------------------------------------------
-# Working directory requires write permission
-if (file.access(".", 2) != 0) {
-  warning(
-    "The working directory '", normalizePath("."), "' is not writable.\n",
-    "Please change it to a location with write permission."
-  )
-}
-
-
 ## ----setup, message=FALSE-------------------------------------------------------------------------------------------
 # CRAN package, please using install.packages() to install
 library(dplyr)
