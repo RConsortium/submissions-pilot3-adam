@@ -19,4 +19,4 @@
 ^pilot3.*\.tgz$
 ^.lintr$
 ^sdtm$
-
+^_envsetup.yml$
