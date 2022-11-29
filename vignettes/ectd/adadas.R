@@ -121,6 +121,11 @@ adas5 <- adas4 %>%
   )
 
 
+## remaining work:
+## 1. derive PARAMCD=ACTOT, DTYPE=LOCF
+## 2. pending define to use metacore/metatools + output XPT
+## 3. QC in qc_adadas.R program
+
 ## -------------------------------------------------------------------------------------------------------------------
 ## placeholder for derive PARAMCD=ACTOT, DTYPE=LOCF
 
