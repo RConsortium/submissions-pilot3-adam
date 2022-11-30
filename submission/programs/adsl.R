@@ -445,11 +445,11 @@ haven::write_xpt(adsl, file.path("submission/datasets/adsl.xpt"))
 # QC ----------------------------------------------------------------------
 
 
-dfcompare(
-  file = "adsl_compare"
-  ,left = adsl_prod
-  ,right = adsl
-  ,keys = c("STUDYID", "USUBJID")
-  ,showdiffs = 10000
-  ,debug = F
-)
+#dfcompare(
+#  file = "adsl_compare"
+#  ,left = adsl_prod
+#  ,right = adsl
+#  ,keys = c("STUDYID", "USUBJID")
+#  ,showdiffs = 10000
+#  ,debug = F
+#)
