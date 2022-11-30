@@ -28,10 +28,7 @@ qs <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "qs.xpt"))
 sv <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "sv.xpt")))
 vs <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "vs.xpt")))
 sc <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "sc.xpt")))
-
-# ae <- haven::read_xpt(file.path("sdtm", "ae.xpt"))
-# lb <- haven::read_xpt(file.path("sdtm", "lb.xpt"))
-# vs <- haven::read_xpt(file.path("sdtm", "vs.xpt"))
+mh <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "mh.xpt")))
 
 adsl_prod <- admiral::convert_blanks_to_na(haven::read_xpt(file.path(adam[2], "adsl.xpt")))
 
@@ -68,10 +65,28 @@ format_agegr1n <- function(x) {
 format_racen <- function(x) {
   dplyr::case_when(
     x == "WHITE" ~ 1,
-    x== "BLACK OR AFRICAN AMERICAN" ~ 2,
-    x== "AMERICAN INDIAN OR ALASKA NATIVE" ~ 6
+    x == "BLACK OR AFRICAN AMERICAN" ~ 2,
+    x == "AMERICAN INDIAN OR ALASKA NATIVE" ~ 6
   )
 }
+# BMI group
+format_bmi <- function(x) {
+  dplyr::case_when(
+    !is.na(x) & x < 25 ~ "<25",
+    25 <= x & x < 30 ~ "25-<30",
+    30 <= x ~ ">=30"
+  )
+}
+
+# Disease duration group
+format_dis <- function(x) {
+  dplyr::case_when(
+    !is.na(x) & x < 12 ~ "<12",
+    12 <= x ~ ">=12"
+  )
+}
+
+
 
 # Disposition information -------------------------------------------------
 unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
@@ -266,74 +281,149 @@ adsl04 <- adsl03 %>%
   dplyr::mutate(DCSREAS = ifelse(DSTERM == "PROTOCOL ENTRY CRITERIA NOT MET", "I/E Not Met", DCSREAS))
 
 # Baseline variables ------------------------------------------------------
+# selection definition from define
 
-# "BMIBL" VS
-# "BMIBLGR1" VS
-# "HEIGHTBL" VS
-# "WEIGHTBL" VS
-# "EDUCLVL" SC
+vs00 <- vs %>%
+  dplyr::filter((VSTESTCD == "HEIGHT" & VISITNUM == 1) | (VSTESTCD == "WEIGHT" & VISITNUM == 3)) %>%
+  dplyr::mutate(AVAL = round(VSSTRESN, digits = 1)) %>%
+  dplyr::select(STUDYID, USUBJID, VSTESTCD, AVAL) %>%
+  tidyr::pivot_wider(names_from = VSTESTCD, values_from = AVAL, names_glue = "{VSTESTCD}BL") %>%
+  dplyr::mutate(BMIBL = round(WEIGHTBL/(HEIGHTBL/100)^2, digits = 1),
+                BMIBLGR1 = format_bmi(BMIBL)
+               ) 
+
+sc00 <- sc %>%
+  dplyr::filter(SCTESTCD == "EDLEVEL") %>%
+  dplyr::select(STUDYID, USUBJID, SCTESTCD, SCSTRESN) %>%
+  tidyr::pivot_wider(names_from = SCTESTCD, values_from = SCSTRESN, names_glue = "EDUCLVL")
+
+adsl05 <- adsl04 %>%
+  dplyr::left_join(vs00, by = c("STUDYID", "USUBJID")) %>%
+  dplyr::left_join(sc00, by = c("STUDYID", "USUBJID"))
 
 # Disease information -----------------------------------------------------
 
-# "DISONSDT"
-# "DURDIS"
-# "DURDSGR1"
-# "MMSETOT" 
+visit1dt <- sv %>%
+  dplyr::filter(VISITNUM == 1) %>%
+  admiral::derive_vars_dt(
+    dtc = SVSTDTC,
+    new_vars_prefix = "VISIT1",
+  ) %>%
+  dplyr::select(STUDYID, USUBJID, VISIT1DT)
 
-# More visit information --------------------------------------------------
+visnumen <- sv %>%
+  dplyr::filter(VISITNUM < 100) %>%
+  dplyr::arrange(STUDYID, USUBJID, SVSTDTC) %>%
+  dplyr::group_by(STUDYID, USUBJID) %>%
+  dplyr::slice(n()) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(VISNUMEN = ifelse(round(VISITNUM, digits = 0) == 13, 12, round(VISITNUM, digits = 0))) %>%
+  dplyr::select(STUDYID, USUBJID, VISNUMEN)
 
-# "VISIT1DT"
-# "VISNUMEN"
-# "RFENDT"  
+disonsdt <- mh %>%
+  dplyr::filter(MHCAT == 'PRIMARY DIAGNOSIS') %>%
+  admiral::derive_vars_dt(
+    dtc = MHSTDTC,
+    new_vars_prefix = "DISONS",
+  ) %>%
+  dplyr::select(STUDYID, USUBJID, DISONSDT)
 
-# QC ----------------------------------------------------------------------
+adsl06 <- adsl05 %>%
+  dplyr::left_join(visit1dt, by = c("STUDYID", "USUBJID")) %>%
+  dplyr::left_join(visnumen, by = c("STUDYID", "USUBJID")) %>%
+  dplyr::left_join(disonsdt, by = c("STUDYID", "USUBJID")) %>%
+  admiral::derive_vars_duration(new_var=DURDIS,
+                              start_date = DISONSDT,
+                              end_date = VISIT1DT, 
+                              out_unit = "months",
+                              add_one = TRUE) %>%
+  dplyr::mutate(DURDIS = round(DURDIS, digits = 1),
+                DURDSGR1 = format_dis(DURDIS)) %>%
+  admiral::derive_vars_dt(
+    dtc = RFENDTC,
+    new_vars_prefix = "RFEN",
+  ) 
 
-adsl <- adsl04
+mmsetot <- qs %>%
+  dplyr::filter(QSCAT == "MINI-MENTAL STATE") %>%
+  dplyr::group_by(STUDYID, USUBJID) %>%
+  dplyr::summarise(MMSETOT = sum(as.numeric(QSORRES), na.rm = TRUE)) %>%
+  dplyr::select(STUDYID, USUBJID, MMSETOT)
 
-## Content check using in-house package
+adsl07 <- adsl06 %>%
+  dplyr::left_join(mmsetot, by = c("STUDYID", "USUBJID"))
+  
+# Add Labels --------------------------------------------------------------
+
+#dput(colnames(adsl_prod))
+
+adsl <- adsl07[ , c("STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM", 
+"TRT01P", "TRT01PN", "TRT01A", "TRT01AN", "TRTSDT", "TRTEDT", 
+"TRTDURD", "AVGDD", "CUMDOSE", "AGE", "AGEGR1", "AGEGR1N", "AGEU", 
+"RACE", "RACEN", "SEX", "ETHNIC", "SAFFL", "ITTFL", "EFFFL", 
+"COMP8FL", "COMP16FL", "COMP24FL", "DISCONFL", "DSRAEFL", "DTHFL", 
+"BMIBL", "BMIBLGR1", "HEIGHTBL", "WEIGHTBL", "EDUCLVL", "DISONSDT", 
+"DURDIS", "DURDSGR1", "VISIT1DT", "RFSTDTC", "RFENDTC", "VISNUMEN", 
+"RFENDT", "DCDECOD", "EOSSTT", "DCSREAS", "MMSETOT")]
+
+labs_prod <- sapply(colnames(adsl_prod), FUN = function(x) attr(adsl_prod[[x]], "label"))
+labs <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
+
+setdiff(labs_prod, labs)
+
+labs[unlist(lapply(labs,is.null))]
+
+
 adsl[["AVGDD"]] <- as.numeric(adsl[["AVGDD"]])
 adsl[["CUMDOSE"]] <- as.numeric(adsl[["CUMDOSE"]])
 
-dfcompare(
-  file = "adsl_compare"
-  ,left = adsl_prod
-  ,right = adsl
-  ,keys = c("STUDYID", "USUBJID")
-  ,showdiffs = 10000
-  ,debug = F
-)
+attr(adsl[["TRT01P"]], "label") <- "Planned Treatment for Period 01"
+attr(adsl[["TRT01PN"]], "label") <- "Planned Treatment for Period 01 (N)"
+attr(adsl[["TRT01A"]], "label") <- "Actual Treatment for Period 01"
+attr(adsl[["TRT01AN"]], "label") <- "Actual Treatment for Period 01 (N)"
+attr(adsl[["DTHFL"]], "label") <- "Subject Died?"
+attr(adsl[["SITEGR1"]], "label") <- "Pooled Site Group 1"
+attr(adsl[["TRTSDT"]], "label") <- "Date of First Exposure to Treatment"
+attr(adsl[["TRTEDT"]], "label") <- "Date of Last Exposure to Treatment"
+attr(adsl[["TRTDURD"]], "label") <- "Total Treatment Duration (Days)"
+attr(adsl[["AVGDD"]], "label") <- "Avg Daily Dose (as planned)"
+attr(adsl[["CUMDOSE"]], "label") <- "Cumulative Dose (as planned)"
+attr(adsl[["AGEGR1"]], "label") <- "Pooled Age Group 1"
+attr(adsl[["AGEGR1N"]], "label") <- "Pooled Age Group 1 (N)"
+attr(adsl[["RACEN"]], "label") <- "Race (N)"
+attr(adsl[["SAFFL"]], "label") <- "Safety Population Flag"
+attr(adsl[["ITTFL"]], "label") <- "Intent-To-Treat Population Flag"
+attr(adsl[["EFFFL"]], "label") <- "Efficacy Population Flag"
+attr(adsl[["COMP8FL"]], "label") <- "Completers of Week 8 Population Flag"
+attr(adsl[["COMP16FL"]], "label") <- "Completers of Week 16 Population Flag"
+attr(adsl[["COMP24FL"]], "label") <- "Completers of Week 24 Population Flag"
+attr(adsl[["DISCONFL"]], "label") <- "Did the Subject Discontinue the Study?"
+attr(adsl[["DSRAEFL"]], "label") <- "Discontinued due to AE?"
+attr(adsl[["BMIBL"]], "label") <- "Baseline BMI (kg/m^2)"
+attr(adsl[["BMIBLGR1"]], "label") <- "Pooled Baseline BMI Group 1"
+attr(adsl[["HEIGHTBL"]], "label") <- "Baseline Height (cm)"
+attr(adsl[["WEIGHTBL"]], "label") <- "Baseline Weight (kg)"
+attr(adsl[["EDUCLVL"]], "label") <- "Years of Education"
+attr(adsl[["DISONSDT"]], "label") <- "Date of Onset of Disease"
+attr(adsl[["DURDIS"]], "label") <- "Duration of Disease (Months)"
+attr(adsl[["DURDSGR1"]], "label") <- "Pooled Disease Duration Group 1"
+attr(adsl[["VISIT1DT"]], "label") <- "Date of Visit 1"
+attr(adsl[["RFENDT"]], "label") <- "Date of Discontinuation/Completion"
+attr(adsl[["VISNUMEN"]], "label") <- "End of Trt Visit (Vis 12 or Early Term.)"
+attr(adsl[["EOSSTT"]], "label") <- "End of Study Status"
+attr(adsl[["DCSREAS"]], "label") <- "Reason for Discontinuation from Study"
+attr(adsl[["MMSETOT"]], "label") <- "MMSE Total"
 
-  
-  
-## in define.xml following derivation should use TRTDURD: AVGDD = CUMDOSE/TRTDUR
-## in define.xml we should mention that screen failures are removed from DM
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Add Labels --------------------------------------------------------------
-
-
+labsupdated <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
+labsupdated[unlist(lapply(labsupdated,is.null))]
 
 # QC dev vs prod ----------------------------------------------------------
 
 ## Metadata compare (labels)
 
-# difflabels <- dplyr::setdiff(labsprod, labsupdated)
-# discr_labels <- unlist(labsprod)[which(unlist(labsprod) %in% difflabels)]
+# difflabels <- dplyr::setdiff(labs_prod, labsupdated)
+# discr_labels <- unlist(labs_prod)[which(unlist(labs_prod) %in% difflabels)]
 
 ## Content check using in-house package
 
@@ -351,3 +441,15 @@ dfcompare(
 haven::write_xpt(adsl, file.path("submission/datasets/adsl.xpt"))
 
 # END of Code -------------------------------------------------------------
+
+# QC ----------------------------------------------------------------------
+
+
+dfcompare(
+  file = "adsl_compare"
+  ,left = adsl_prod
+  ,right = adsl
+  ,keys = c("STUDYID", "USUBJID")
+  ,showdiffs = 10000
+  ,debug = F
+)
