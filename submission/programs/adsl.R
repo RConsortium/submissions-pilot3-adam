@@ -125,7 +125,8 @@ ex_dt <- ex %>%
     highest_imputation = "Y",
     min_dates = vars(EXSTDT), 
     max_dates = vars(EOSDT),
-    date_imputation = "last"
+    date_imputation = "last",
+    flag_imputation = "none"
   ) %>%
   dplyr::mutate(DOSE = EXDOSE* (EXENDT-EXSTDT + 1))
 
