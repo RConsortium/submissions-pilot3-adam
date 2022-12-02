@@ -79,7 +79,7 @@ format_bmiblgr1 <- function(x) {
 }
 
 # Disease duration group
-format_dis <- function(x) {
+format_durdsgr1 <- function(x) {
   dplyr::case_when(
     !is.na(x) & x < 12 ~ "<12",
     12 <= x ~ ">=12"
