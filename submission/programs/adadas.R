@@ -54,7 +54,7 @@ adas2 <- adas1 %>%
   )
 
 
-## placeholder: replace derive_vars_merged_lookup() by 
+## placeholder: replace derive_vars_merged_lookup() by
 ## metatool::create_var_from_codelist()/create_cat_var()
 
 
