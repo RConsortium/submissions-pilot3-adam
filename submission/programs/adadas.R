@@ -5,25 +5,19 @@
 #' program ADADAS
 ###########################################################################
 
-## ----setup, message=FALSE-------------------------------------------------------------------------------------------
-# CRAN package, please using install.packages() to install
+## setup
 library(dplyr)
 library(admiral)
 library(metacore)
 library(metatools)
 library(stringr)
 
-
-## -------------------------------------------------------------------------------------------------------------------
 qs <- haven::read_xpt(file.path("sdtm", "qs.xpt"))
 adsl <- haven::read_xpt(file.path("adam", "adsl.xpt"))
 
-
-## -------------------------------------------------------------------------------------------------------------------
 qs <- convert_blanks_to_na(qs)
 
 
-## -------------------------------------------------------------------------------------------------------------------
 ## placeholder for origin=predecessor, use metatool::build_from_derived()
 
 ## derive ADT/ADY
@@ -60,13 +54,10 @@ adas2 <- adas1 %>%
   )
 
 
-## -------------------------------------------------------------------------------------------------------------------
-## placeholder: replace derive_vars_merged_lookup by metatool::create_var_from_codelist()/create_cat_var()
-## Add PARAMCD PARAM and PARAMN - from LOOK-UP table ----
-# Replace derive_vars_merged_lookup() with PARAMCD lookup function
+## placeholder: replace derive_vars_merged_lookup() by 
+## metatool::create_var_from_codelist()/create_cat_var()
 
 
-## -------------------------------------------------------------------------------------------------------------------
 ## derive AWRANGE/AWTARGET/AWTDIFF/AWLO/AWHI/AWU
 aw_lookup <- tribble(
   ~AVISIT, ~AWRANGE, ~AWTARGET, ~AWLO, ~AWHI,
@@ -105,8 +96,7 @@ adas4 <- adas3 %>%
   derive_var_pchg()
 
 
-
-## -------------------------------------------------------------------------------------------------------------------
+## ANL01FL
 adas5 <- adas4 %>%
   mutate(diff = AWTARGET - ADY) %>%
   restrict_derivation(
@@ -126,16 +116,12 @@ adas5 <- adas4 %>%
 ## 2. pending define to use metacore/metatools + output XPT
 ## 3. QC in qc_adadas.R program
 
-## -------------------------------------------------------------------------------------------------------------------
+
 ## placeholder for derive PARAMCD=ACTOT, DTYPE=LOCF
-
-## -------------------------------------------------------------------------------------------------------------------
 ## placeholder for using metacore/metatools
-
-## -------------------------------------------------------------------------------------------------------------------
 ## out to an XPT
-#adadas %>% 
+# adadas %>%
 #  xportr_type(adsl_spec, "ADADAS") %>%
 #  xportr_length(adsl_spec, "ADADAS") %>%
-#  xportr_write(".../ADADAS.xpt", 
+#  xportr_write(".../ADADAS.xpt",
 #               label = "")
