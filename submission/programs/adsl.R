@@ -37,7 +37,7 @@ toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
 # Formats -----------------------------------------------------------------
 
 # site groups - if not pooled then SITEGR1=SITEID. If pooled, SITEGR1 will be 900 - no SAP available
-format_siteid <- function(x) {
+format_sitegr1 <- function(x) {
   dplyr::case_when(
     x %in% c("702", "706", "707", "711", "714", "715", "717") ~ "900",
     TRUE ~ x
