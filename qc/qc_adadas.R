@@ -15,4 +15,4 @@ adadas <- haven::read_xpt(file.path("submission/datasets/", "adadas.xpt"))
 qc_adadas <- haven::read_xpt(file.path("adam", "adadas.xpt"))
 
 # compare R generated submission/datasets/adadas with adam/adadas
-diffdf(adadas , qc_adadas , keys = c("USUBJID", "PARAMCD", "AVISIT", "ADT"))
+diffdf(adadas, qc_adadas, keys = c("USUBJID", "PARAMCD", "AVISIT", "ADT"))

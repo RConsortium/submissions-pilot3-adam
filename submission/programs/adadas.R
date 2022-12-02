@@ -11,6 +11,7 @@ library(admiral)
 library(metacore)
 library(metatools)
 library(stringr)
+library(xportr)
 
 qs <- haven::read_xpt(file.path("sdtm", "qs.xpt"))
 adsl <- haven::read_xpt(file.path("adam", "adsl.xpt"))
@@ -120,8 +121,9 @@ adas5 <- adas4 %>%
 ## placeholder for derive PARAMCD=ACTOT, DTYPE=LOCF
 ## placeholder for using metacore/metatools
 ## out to an XPT
-# adadas %>%
-#  xportr_type(adsl_spec, "ADADAS") %>%
-#  xportr_length(adsl_spec, "ADADAS") %>%
-#  xportr_write(".../ADADAS.xpt",
-#               label = "")
+adas5 %>%
+  #  pending define: xportr_type(adsl_spec, "ADADAS") %>%
+  #  pending define: xportr_length(adsl_spec, "ADADAS") %>%
+  xportr_write("submission/datasets/adadas.xpt",
+    label = "ADAS-COG Analysis Dataset"
+  )
