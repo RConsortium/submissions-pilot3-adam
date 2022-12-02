@@ -70,7 +70,7 @@ format_racen <- function(x) {
   )
 }
 # BMI group
-format_bmi <- function(x) {
+format_bmiblgr1 <- function(x) {
   dplyr::case_when(
     !is.na(x) & x < 25 ~ "<25",
     25 <= x & x < 30 ~ "25-<30",
