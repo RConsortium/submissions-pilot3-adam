@@ -7,9 +7,6 @@
 
 # Set up ------------------------------------------------------------------
 
-fcts <- c("eff_models.R", "fmt.R", "helpers.R", "Tplyr_helpers.R")
-invisible(sapply(fcts, FUN = function(x) source(file.path("R/", x), )))
-
 library(haven)
 library(admiral)
 library(dplyr)
@@ -36,7 +33,13 @@ toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
 
 # Formats -----------------------------------------------------------------
 
-# site groups - if not pooled then SITEGR1=SITEID. If pooled, SITEGR1 will be 900 - no SAP available
+# site groups - see CSR
+# dm %>%
+#   dplyr::group_by(SITEID, ACTARMCD) %>%
+#   dplyr::summarise(n=n_distinct(USUBJID)) %>%
+#   dplyr::filter(n<3, ACTARMCD != "Scrnfail") %>%
+#   dplyr::summarise(n_distinct(SITEID))
+
 format_sitegr1 <- function(x) {
   dplyr::case_when(
     x %in% c("702", "706", "707", "711", "714", "715", "717") ~ "900",
@@ -87,9 +90,8 @@ format_durdsgr1 <- function(x) {
 }
 
 
-
 # Disposition information -------------------------------------------------
-unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
+#unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
 
 ds00 <- ds %>%
   dplyr::filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
@@ -189,7 +191,7 @@ adsl00 <- dm %>%
 
 adsl01 <- adsl00 %>%
   dplyr::mutate(
-    SITEGR1 = format_siteid(SITEID),
+    SITEGR1 = format_sitegr1(SITEID),
     AGEGR1 = format_agegr1(AGE),
     AGEGR1N = format_agegr1n(AGE),
     RACEN = format_racen(RACE)
@@ -231,6 +233,7 @@ adsl02 <- adsl01 %>%
 
 # Study Visit compliance --------------------------------------------------
 # these variables are also in suppdm, but define said derived
+
 sv00 <- sv %>%
   dplyr::select(STUDYID, USUBJID, VISIT, VISITDY, SVSTDTC) %>%
   dplyr::mutate(FLG = "Y",
@@ -290,7 +293,7 @@ vs00 <- vs %>%
   dplyr::select(STUDYID, USUBJID, VSTESTCD, AVAL) %>%
   tidyr::pivot_wider(names_from = VSTESTCD, values_from = AVAL, names_glue = "{VSTESTCD}BL") %>%
   dplyr::mutate(BMIBL = round(WEIGHTBL/(HEIGHTBL/100)^2, digits = 1),
-                BMIBLGR1 = format_bmi(BMIBL)
+                BMIBLGR1 = format_bmiblgr1(BMIBL)
                ) 
 
 sc00 <- sc %>%
@@ -339,7 +342,7 @@ adsl06 <- adsl05 %>%
                               out_unit = "months",
                               add_one = TRUE) %>%
   dplyr::mutate(DURDIS = round(DURDIS, digits = 1),
-                DURDSGR1 = format_dis(DURDIS)) %>%
+                DURDSGR1 = format_durdsgr1(DURDIS)) %>%
   admiral::derive_vars_dt(
     dtc = RFENDTC,
     new_vars_prefix = "RFEN",
@@ -355,8 +358,6 @@ adsl07 <- adsl06 %>%
   dplyr::left_join(mmsetot, by = c("STUDYID", "USUBJID"))
   
 # Add Labels --------------------------------------------------------------
-
-#dput(colnames(adsl_prod))
 
 adsl <- adsl07[ , c("STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM", 
 "TRT01P", "TRT01PN", "TRT01A", "TRT01AN", "TRTSDT", "TRTEDT", 
@@ -415,42 +416,11 @@ attr(adsl[["EOSSTT"]], "label") <- "End of Study Status"
 attr(adsl[["DCSREAS"]], "label") <- "Reason for Discontinuation from Study"
 attr(adsl[["MMSETOT"]], "label") <- "MMSE Total"
 
-
 labsupdated <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
 labsupdated[unlist(lapply(labsupdated,is.null))]
-
-# QC dev vs prod ----------------------------------------------------------
-
-## Metadata compare (labels)
-
-# difflabels <- dplyr::setdiff(labs_prod, labsupdated)
-# discr_labels <- unlist(labs_prod)[which(unlist(labs_prod) %in% difflabels)]
-
-## Content check using in-house package
-
- # dfcompare(
- #      file = "tlcompare"
- #     ,left = prod
- #     ,right = adtte
- #     ,keys = c("STUDYID", "USUBJID")
- #     ,showdiffs = 1000
- #     ,debug = FALSE
- # )
 
 # Output ------------------------------------------------------------------
 
 haven::write_xpt(adsl, file.path("submission/datasets/adsl.xpt"))
 
 # END of Code -------------------------------------------------------------
-
-# QC ----------------------------------------------------------------------
-
-
-#dfcompare(
-#  file = "adsl_compare"
-#  ,left = adsl_prod
-#  ,right = adsl
-#  ,keys = c("STUDYID", "USUBJID")
-#  ,showdiffs = 10000
-#  ,debug = F
-#)
