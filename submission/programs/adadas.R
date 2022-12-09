@@ -41,7 +41,15 @@ adas1 <- qs %>%
   ) %>%
   derive_vars_dy(reference_date = TRTSDT, source_vars = vars(ADT))
 
-## derive AVISIT/AVISITN
+## derive AVISIT/AVISITN/ABLFL/AVAL
+avisitn_lookup <- tibble::tribble(
+  ~AVISIT, ~AVISITN,
+  "Baseline", 0,
+  "Week 8", 8,
+  "Week 16", 16,
+  "Week 24", 24
+)
+
 adas2 <- adas1 %>%
   mutate(
     AVISIT = case_when(
@@ -51,13 +59,35 @@ adas2 <- adas1 %>%
       ADY > 140 ~ "Week 24",
       TRUE ~ NA_character_
     ),
-    PARAMCD = QSTESTCD
+    PARAMCD = QSTESTCD,
+    ABLFL = QSBLFL,
+    AVAL = QSSTRESN
+  ) %>%
+  # Add AVISITN
+  derive_vars_merged(
+    dataset_add = avisitn_lookup,
+    by_vars = vars(AVISIT)
   )
 
-
-## placeholder: replace derive_vars_merged_lookup() by
+## placeholder: replace look up table by
 ## metatool::create_var_from_codelist()/create_cat_var()
 
+# derive PARAMCD=ACTOT, DTYPE=LOCF
+# A dataset with combinations of PARAMCD, AVISIT which are expected.
+actot_expected_obsv <- tibble::tribble(
+  ~PARAMCD, ~AVISITN, ~AVISIT,
+  "ACTOT", 0, "Baseline",
+  "ACTOT", 8, "Week 8",
+  "ACTOT", 16, "Week 16",
+  "ACTOT", 24, "Week 24"
+)
+
+adas_locf <-derive_locf_records(
+  data = adas2,
+  dataset_expected_obs = actot_expected_obsv,
+  by_vars = vars(STUDYID, USUBJID, PARAMCD),
+  order = vars(AVISITN, AVISIT)
+)
 
 ## derive AWRANGE/AWTARGET/AWTDIFF/AWLO/AWHI/AWU
 aw_lookup <- tribble(
@@ -69,7 +99,7 @@ aw_lookup <- tribble(
 )
 
 adas3 <- derive_vars_merged(
-  adas2,
+  adas_locf,
   dataset_add = aw_lookup,
   by_vars = vars(AVISIT)
 ) %>%
@@ -79,12 +109,8 @@ adas3 <- derive_vars_merged(
   )
 
 
-## baseline information ---- ABLFL/AVAL/BASE/CHG/PCHG
+## baseline information BASE/CHG/PCHG
 adas4 <- adas3 %>%
-  mutate(
-    ABLFL = QSBLFL,
-    AVAL = QSSTRESN
-  ) %>%
   # Calculate BASE
   derive_var_base(
     by_vars = vars(STUDYID, USUBJID, PARAMCD),
