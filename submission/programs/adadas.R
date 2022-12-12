@@ -13,6 +13,7 @@ library(metatools)
 library(stringr)
 library(xportr)
 
+dm <- haven::read_xpt(file.path("sdtm", "dm.xpt"))
 qs <- haven::read_xpt(file.path("sdtm", "qs.xpt"))
 adsl <- haven::read_xpt(file.path("adam", "adsl.xpt"))
 
@@ -20,36 +21,33 @@ qs <- convert_blanks_to_na(qs)
 
 
 ## placeholder for origin=predecessor, use metatool::build_from_derived()
+metacore <- spec_to_metacore("adam/TDF_ADaM - Pilot 3 Team updated.xlsx", where_sep_sheet = FALSE)
+# Get the specifications for the dataset we are currently building
+adadas_spec <- metacore %>% 
+  select_dataset("ADADAS")
+# Pull together all the predecessor variables 
+adadas_pred <- build_from_derived(adadas_spec, 
+                                  ds_list = list("ADSL" = adsl, "QS" = qs, "DM" = dm)) 
 
-## derive ADT/ADY
-# Get list of ADSL vars required for derivations
-adsl_vars <- vars(TRTSDT, TRTEDT, TRT01A, TRT01P)
-adas1 <- qs %>%
-  # subset to interested QSTESTCD
-  filter(QSTESTCD %in%
-    c(str_c("ACITM", str_pad(1:14, 2, pad = "0")), "ACTOT")) %>%
-  # Join ADSL with QS (need TRTSDT for ADY derivation)
+## ADT/ADY
+adas1 <- adadas_pred %>%
   derive_vars_merged(
-    dataset_add = adsl,
-    new_vars = adsl_vars,
-    by_vars = vars(STUDYID, USUBJID)
+    dataset_add = qs,
+    new_vars = vars(QSDTC, QSSTRESN, QSTEST),  # Get QS vars required for derivations 
+    by_vars = vars(STUDYID, USUBJID, QSSEQ)
   ) %>%
-  ## Calculate ADT, ADY ----
+  # subset to interested PARAMCD(QSTESTCD)
+  filter(PARAMCD %in%
+    c(str_c("ACITM", str_pad(1:14, 2, pad = "0")), "ACTOT")) %>%
+  # ADT
   derive_vars_dt(
     new_vars_prefix = "A",
     dtc = QSDTC
   ) %>%
+  # ADY
   derive_vars_dy(reference_date = TRTSDT, source_vars = vars(ADT))
 
-## derive AVISIT/AVISITN/ABLFL/AVAL
-avisitn_lookup <- tibble::tribble(
-  ~AVISIT, ~AVISITN,
-  "Baseline", 0,
-  "Week 8", 8,
-  "Week 16", 16,
-  "Week 24", 24
-)
-
+## mutate AVISIT/AVAL/PARAM, assign AVISITN/PARAMN based on codelist from define
 adas2 <- adas1 %>%
   mutate(
     AVISIT = case_when(
@@ -59,19 +57,12 @@ adas2 <- adas1 %>%
       ADY > 140 ~ "Week 24",
       TRUE ~ NA_character_
     ),
-    PARAMCD = QSTESTCD,
-    ABLFL = QSBLFL,
-    AVAL = QSSTRESN
-  ) %>%
-  # Add AVISITN
-  derive_vars_merged(
-    dataset_add = avisitn_lookup,
-    by_vars = vars(AVISIT)
-  )
-
-## placeholder: replace look up table by
-## metatool::create_var_from_codelist()/create_cat_var()
-
+    AVAL = QSSTRESN,
+    PARAM = QSTEST %>% str_to_title()
+  ) %>%  
+  create_var_from_codelist(adadas_spec, AVISIT, AVISITN) %>%  #derive AVISITN from codelist
+  create_var_from_codelist(adadas_spec, PARAM, PARAMN) #derive PARAMN from codelist
+  
 # derive PARAMCD=ACTOT, DTYPE=LOCF
 # A dataset with combinations of PARAMCD, AVISIT which are expected.
 actot_expected_obsv <- tibble::tribble(
@@ -148,8 +139,12 @@ adas5 <- adas4 %>%
 ## placeholder for using metacore/metatools
 ## out to an XPT
 adas5 %>%
-  #  pending define: xportr_type(adsl_spec, "ADADAS") %>%
-  #  pending define: xportr_length(adsl_spec, "ADADAS") %>%
+  drop_unspec_vars(adadas_spec) %>% # only keep vars from define
+  order_cols(adadas_spec) %>%       # order columns based on define
+  set_variable_labels(adadas_spec) %>% # apply variable lables based on define
+
+ # xportr_type(adadas_spec, "ADADAS") %>%
+  xportr_length(adadas_spec, "ADADAS") %>%
   xportr_write("submission/datasets/adadas.xpt",
     label = "ADAS-COG Analysis Dataset"
   )
