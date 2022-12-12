@@ -2,7 +2,7 @@
 #' developers : Steven Haesendonckx/
 #' date: 28NOV2022
 #' modification History:
-#' 
+#'
 ###########################################################################
 
 # Set up ------------------------------------------------------------------
@@ -91,7 +91,7 @@ format_durdsgr1 <- function(x) {
 
 
 # Disposition information -------------------------------------------------
-#unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
+# unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
 
 ds00 <- ds %>%
   dplyr::filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
@@ -100,11 +100,12 @@ ds00 <- ds %>%
     new_vars_prefix = "EOS",
     highest_imputation = "n",
   ) %>%
-  dplyr::mutate(DISCONFL = ifelse(!is.na(EOSDT) & DSDECOD != "COMPLETED", "Y", NA),
-                DSRAEFL = ifelse(DSTERM == "ADVERSE EVENT", "Y", NA),
-                DCDECOD = DSDECOD
+  dplyr::mutate(
+    DISCONFL = ifelse(!is.na(EOSDT) & DSDECOD != "COMPLETED", "Y", NA),
+    DSRAEFL = ifelse(DSTERM == "ADVERSE EVENT", "Y", NA),
+    DCDECOD = DSDECOD
   ) %>%
-  dplyr::select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD) 
+  dplyr::select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD)
 
 # Treatment information ---------------------------------------------------
 
@@ -125,69 +126,69 @@ ex_dt <- ex %>%
     dtc = EXENDTC,
     new_vars_prefix = "EXEN",
     highest_imputation = "Y",
-    min_dates = vars(EXSTDT), 
+    min_dates = vars(EXSTDT),
     max_dates = vars(EOSDT),
     date_imputation = "last",
     flag_imputation = "none"
   ) %>%
-  dplyr::mutate(DOSE = EXDOSE* (EXENDT-EXSTDT + 1))
+  dplyr::mutate(DOSE = EXDOSE * (EXENDT - EXSTDT + 1))
 
 ex_dose <- ex_dt %>%
   dplyr::group_by(STUDYID, USUBJID, EXTRT) %>%
-  dplyr::summarise(cnt = dplyr::n_distinct(EXTRT), CUMDOSE = sum(DOSE)) 
+  dplyr::summarise(cnt = dplyr::n_distinct(EXTRT), CUMDOSE = sum(DOSE))
 
 ex_dose[which(ex_dose[["cnt"]] > 1), "USUBJID"] # are there subjects with mixed treatments?
 
 adsl00 <- dm %>%
   dplyr::select(-DOMAIN) %>%
   dplyr::filter(ACTARMCD != "Scrnfail") %>%
-  
   # planned treatment
-  dplyr::mutate(TRT01P = ARM, 
-                TRT01PN = dplyr::case_when(ARM == "Placebo" ~ 0,
-                                           ARM == "Xanomeline High Dose" ~ 81,
-                                           ARM =="Xanomeline Low Dose" ~ 54)) %>%
-  
+  dplyr::mutate(
+    TRT01P = ARM,
+    TRT01PN = dplyr::case_when(
+      ARM == "Placebo" ~ 0,
+      ARM == "Xanomeline High Dose" ~ 81,
+      ARM == "Xanomeline Low Dose" ~ 54
+    )
+  ) %>%
   # actual treatment - It is assumed TRT01A=TRT01P which is not really true.
-  dplyr::mutate(TRT01A = TRT01P, 
-                TRT01AN = TRT01PN) %>%
-  
+  dplyr::mutate(
+    TRT01A = TRT01P,
+    TRT01AN = TRT01PN
+  ) %>%
   # treatment start
   admiral::derive_vars_merged(
     dataset_add = ex_dt,
     filter_add = (EXDOSE > 0 |
-                    (EXDOSE == 0 &
-                       grepl("PLACEBO", EXTRT, fixed = TRUE))) &
-                         !is.na(EXSTDT),
+      (EXDOSE == 0 &
+        grepl("PLACEBO", EXTRT, fixed = TRUE))) &
+      !is.na(EXSTDT),
     new_vars = vars(TRTSDT = EXSTDT),
     order = vars(EXSTDT, EXSEQ),
     mode = "first",
     by_vars = vars(STUDYID, USUBJID)
   ) %>%
-  
   # treatment end
   admiral::derive_vars_merged(
     dataset_add = ex_dt,
     filter_add = (EXDOSE > 0 |
-                    (EXDOSE == 0 &
-                       grepl("PLACEBO", EXTRT, fixed = TRUE))) &
+      (EXDOSE == 0 &
+        grepl("PLACEBO", EXTRT, fixed = TRUE))) &
       !is.na(EXENDT),
     new_vars = vars(TRTEDT = EXENDT),
     order = vars(EXENDT, EXSEQ),
     mode = "last",
     by_vars = vars(STUDYID, USUBJID)
   ) %>%
-  
   # treatment duration
   admiral::derive_var_trtdurd() %>%
-  
   # dosing
   dplyr::left_join(ex_dose, by = c("STUDYID", "USUBJID")) %>%
   dplyr::select(-cnt) %>%
-  dplyr::mutate(AVGDD = round(CUMDOSE/TRTDURD, digits = 1))
+  dplyr::mutate(AVGDD = round(CUMDOSE / TRTDURD, digits = 1))
 
 # Demographic grouping ----------------------------------------------------
-#distinct(adsl_prod[which(adsl_prod$SITEGR1 == "900"), c("SITEID", "SITEGR1")])
+# distinct(adsl_prod[which(adsl_prod$SITEGR1 == "900"), c("SITEID", "SITEGR1")])
 
 adsl01 <- adsl00 %>%
   dplyr::mutate(
@@ -203,32 +204,31 @@ adsl01 <- adsl00 %>%
 # EFFFL - Y if SAFFL='Y AND at least one record in QS for ADAS-Cog and for CIBIC+ with VISITNUM>3, N otherwise
 # these variables are also in suppdm, but define said derived
 
-qstest <- distinct(qs[,c("QSTESTCD", "QSTEST")])
+qstest <- distinct(qs[, c("QSTESTCD", "QSTEST")])
 
 eff <- qs %>%
-  dplyr::filter(VISITNUM>3, QSTESTCD %in% c("CIBIC", "ACTOT")) %>%
+  dplyr::filter(VISITNUM > 3, QSTESTCD %in% c("CIBIC", "ACTOT")) %>%
   dplyr::group_by(STUDYID, USUBJID) %>%
   dplyr::summarise(effcnt = dplyr::n_distinct(QSTESTCD))
 
 adsl02 <- adsl01 %>%
   dplyr::left_join(eff, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::mutate(SAFFL = dplyr::case_when(
-                          ARMCD != "Scrnfail" & ARMCD != "" & !is.na(TRTSDT) ~ "Y",
-                          ARMCD == "Scrnfail" ~ NA_character_,
-                          TRUE ~ "N"
-                        ),
-                
-                ITTFL = dplyr::case_when(
-                  ARMCD != "Scrnfail" & ARMCD != "" ~ "Y",
-                  ARMCD == "Scrnfail" ~ NA_character_,
-                  TRUE ~ "N"
-                        ),
-                
-                EFFFL = dplyr::case_when(
-                  ARMCD != "Scrnfail" & ARMCD != "" & !is.na(TRTSDT) & effcnt == 2 ~ "Y",
-                  ARMCD == "Scrnfail" ~ NA_character_,
-                  TRUE ~ "N"
-                )
+  dplyr::mutate(
+    SAFFL = dplyr::case_when(
+      ARMCD != "Scrnfail" & ARMCD != "" & !is.na(TRTSDT) ~ "Y",
+      ARMCD == "Scrnfail" ~ NA_character_,
+      TRUE ~ "N"
+    ),
+    ITTFL = dplyr::case_when(
+      ARMCD != "Scrnfail" & ARMCD != "" ~ "Y",
+      ARMCD == "Scrnfail" ~ NA_character_,
+      TRUE ~ "N"
+    ),
+    EFFFL = dplyr::case_when(
+      ARMCD != "Scrnfail" & ARMCD != "" & !is.na(TRTSDT) & effcnt == 2 ~ "Y",
+      ARMCD == "Scrnfail" ~ NA_character_,
+      TRUE ~ "N"
+    )
   )
 
 # Study Visit compliance --------------------------------------------------
@@ -236,20 +236,22 @@ adsl02 <- adsl01 %>%
 
 sv00 <- sv %>%
   dplyr::select(STUDYID, USUBJID, VISIT, VISITDY, SVSTDTC) %>%
-  dplyr::mutate(FLG = "Y",
-                VISITCMP = dplyr::case_when(
-                          VISIT == "WEEK 8" ~ "COMP8FL",
-                          VISIT == "WEEK 16" ~ "COMP16FL",
-                          VISIT == "WEEK 24" ~ "COMP24FL",
-                          TRUE ~ "ZZZ" # ensures every subject with one visit will get a row with minimally 'N'
-                )) %>%
+  dplyr::mutate(
+    FLG = "Y",
+    VISITCMP = dplyr::case_when(
+      VISIT == "WEEK 8" ~ "COMP8FL",
+      VISIT == "WEEK 16" ~ "COMP16FL",
+      VISIT == "WEEK 24" ~ "COMP24FL",
+      TRUE ~ "ZZZ" # ensures every subject with one visit will get a row with minimally 'N'
+    )
+  ) %>%
   dplyr::arrange(STUDYID, USUBJID, VISITDY) %>%
   dplyr::distinct(STUDYID, USUBJID, VISITCMP, FLG) %>%
   tidyr::pivot_wider(names_from = VISITCMP, values_from = FLG, values_fill = "N") %>%
   dplyr::select(-ZZZ)
 
 adsl03 <- adsl02 %>%
-  dplyr::left_join(sv00, by = c("STUDYID", "USUBJID")) 
+  dplyr::left_join(sv00, by = c("STUDYID", "USUBJID"))
 
 # Disposition -------------------------------------------------------------
 
@@ -272,7 +274,7 @@ adsl04 <- adsl03 %>%
   admiral::derive_var_disposition_status(
     dataset_ds = ds00,
     new_var = EOSSTT,
-    status_var = DSDECOD, #this variable is removed after reformat
+    status_var = DSDECOD, # this variable is removed after reformat
     filter_ds = !is.na(USUBJID)
   ) %>%
   admiral::derive_vars_disposition_reason(
@@ -280,7 +282,7 @@ adsl04 <- adsl03 %>%
     new_var = DCSREAS,
     reason_var = DSDECOD,
     filter_ds = !is.na(USUBJID),
-    format_new_vars = format_dcsreas #could not include dsterm in formatting logic
+    format_new_vars = format_dcsreas # could not include dsterm in formatting logic
   ) %>%
   dplyr::mutate(DCSREAS = ifelse(DSTERM == "PROTOCOL ENTRY CRITERIA NOT MET", "I/E Not Met", DCSREAS))
 
@@ -292,9 +294,10 @@ vs00 <- vs %>%
   dplyr::mutate(AVAL = round(VSSTRESN, digits = 1)) %>%
   dplyr::select(STUDYID, USUBJID, VSTESTCD, AVAL) %>%
   tidyr::pivot_wider(names_from = VSTESTCD, values_from = AVAL, names_glue = "{VSTESTCD}BL") %>%
-  dplyr::mutate(BMIBL = round(WEIGHTBL/(HEIGHTBL/100)^2, digits = 1),
-                BMIBLGR1 = format_bmiblgr1(BMIBL)
-               ) 
+  dplyr::mutate(
+    BMIBL = round(WEIGHTBL / (HEIGHTBL / 100)^2, digits = 1),
+    BMIBLGR1 = format_bmiblgr1(BMIBL)
+  )
 
 sc00 <- sc %>%
   dplyr::filter(SCTESTCD == "EDLEVEL") %>%
@@ -325,7 +328,7 @@ visnumen <- sv %>%
   dplyr::select(STUDYID, USUBJID, VISNUMEN)
 
 disonsdt <- mh %>%
-  dplyr::filter(MHCAT == 'PRIMARY DIAGNOSIS') %>%
+  dplyr::filter(MHCAT == "PRIMARY DIAGNOSIS") %>%
   admiral::derive_vars_dt(
     dtc = MHSTDTC,
     new_vars_prefix = "DISONS",
@@ -336,17 +339,21 @@ adsl06 <- adsl05 %>%
   dplyr::left_join(visit1dt, by = c("STUDYID", "USUBJID")) %>%
   dplyr::left_join(visnumen, by = c("STUDYID", "USUBJID")) %>%
   dplyr::left_join(disonsdt, by = c("STUDYID", "USUBJID")) %>%
-  admiral::derive_vars_duration(new_var=DURDIS,
-                              start_date = DISONSDT,
-                              end_date = VISIT1DT, 
-                              out_unit = "months",
-                              add_one = TRUE) %>%
-  dplyr::mutate(DURDIS = round(DURDIS, digits = 1),
-                DURDSGR1 = format_durdsgr1(DURDIS)) %>%
+  admiral::derive_vars_duration(
+    new_var = DURDIS,
+    start_date = DISONSDT,
+    end_date = VISIT1DT,
+    out_unit = "months",
+    add_one = TRUE
+  ) %>%
+  dplyr::mutate(
+    DURDIS = round(DURDIS, digits = 1),
+    DURDSGR1 = format_durdsgr1(DURDIS)
+  ) %>%
   admiral::derive_vars_dt(
     dtc = RFENDTC,
     new_vars_prefix = "RFEN",
-  ) 
+  )
 
 mmsetot <- qs %>%
   dplyr::filter(QSCAT == "MINI-MENTAL STATE") %>%
@@ -356,24 +363,26 @@ mmsetot <- qs %>%
 
 adsl07 <- adsl06 %>%
   dplyr::left_join(mmsetot, by = c("STUDYID", "USUBJID"))
-  
+
 # Add Labels --------------------------------------------------------------
 
-adsl <- adsl07[ , c("STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM", 
-"TRT01P", "TRT01PN", "TRT01A", "TRT01AN", "TRTSDT", "TRTEDT", 
-"TRTDURD", "AVGDD", "CUMDOSE", "AGE", "AGEGR1", "AGEGR1N", "AGEU", 
-"RACE", "RACEN", "SEX", "ETHNIC", "SAFFL", "ITTFL", "EFFFL", 
-"COMP8FL", "COMP16FL", "COMP24FL", "DISCONFL", "DSRAEFL", "DTHFL", 
-"BMIBL", "BMIBLGR1", "HEIGHTBL", "WEIGHTBL", "EDUCLVL", "DISONSDT", 
-"DURDIS", "DURDSGR1", "VISIT1DT", "RFSTDTC", "RFENDTC", "VISNUMEN", 
-"RFENDT", "DCDECOD", "EOSSTT", "DCSREAS", "MMSETOT")]
+adsl <- adsl07[, c(
+  "STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM",
+  "TRT01P", "TRT01PN", "TRT01A", "TRT01AN", "TRTSDT", "TRTEDT",
+  "TRTDURD", "AVGDD", "CUMDOSE", "AGE", "AGEGR1", "AGEGR1N", "AGEU",
+  "RACE", "RACEN", "SEX", "ETHNIC", "SAFFL", "ITTFL", "EFFFL",
+  "COMP8FL", "COMP16FL", "COMP24FL", "DISCONFL", "DSRAEFL", "DTHFL",
+  "BMIBL", "BMIBLGR1", "HEIGHTBL", "WEIGHTBL", "EDUCLVL", "DISONSDT",
+  "DURDIS", "DURDSGR1", "VISIT1DT", "RFSTDTC", "RFENDTC", "VISNUMEN",
+  "RFENDT", "DCDECOD", "EOSSTT", "DCSREAS", "MMSETOT"
+)]
 
 labs_prod <- sapply(colnames(adsl_prod), FUN = function(x) attr(adsl_prod[[x]], "label"))
 labs <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
 
 setdiff(labs_prod, labs)
 
-labs[unlist(lapply(labs,is.null))]
+labs[unlist(lapply(labs, is.null))]
 
 
 adsl[["AVGDD"]] <- as.numeric(adsl[["AVGDD"]])
@@ -417,7 +426,7 @@ attr(adsl[["DCSREAS"]], "label") <- "Reason for Discontinuation from Study"
 attr(adsl[["MMSETOT"]], "label") <- "MMSE Total"
 
 labsupdated <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
-labsupdated[unlist(lapply(labsupdated,is.null))]
+labsupdated[unlist(lapply(labsupdated, is.null))]
 
 # Output ------------------------------------------------------------------
 
