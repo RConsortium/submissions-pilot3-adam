@@ -24,17 +24,18 @@ qs <- convert_blanks_to_na(qs)
 ## placeholder for origin=predecessor, use metatool::build_from_derived()
 metacore <- spec_to_metacore("adam/TDF_ADaM - Pilot 3 Team updated.xlsx", where_sep_sheet = FALSE)
 # Get the specifications for the dataset we are currently building
-adadas_spec <- metacore %>% 
+adadas_spec <- metacore %>%
   select_dataset("ADADAS")
-# Pull together all the predecessor variables 
-adadas_pred <- build_from_derived(adadas_spec, 
-                                  ds_list = list("ADSL" = adsl, "QS" = qs, "DM" = dm)) 
+# Pull together all the predecessor variables
+adadas_pred <- build_from_derived(adadas_spec,
+  ds_list = list("ADSL" = adsl, "QS" = qs, "DM" = dm)
+)
 
 ## ADT/ADY
 adas1 <- adadas_pred %>%
   derive_vars_merged(
     dataset_add = qs,
-    new_vars = vars(QSDTC, QSSTRESN, QSTEST),  # Get QS vars required for derivations 
+    new_vars = vars(QSDTC, QSSTRESN, QSTEST), # Get QS vars required for derivations
     by_vars = vars(STUDYID, USUBJID, QSSEQ)
   ) %>%
   # subset to interested PARAMCD(QSTESTCD)
@@ -60,10 +61,10 @@ adas2 <- adas1 %>%
     ),
     AVAL = QSSTRESN,
     PARAM = QSTEST %>% str_to_title()
-  ) %>%  
-  create_var_from_codelist(adadas_spec, AVISIT, AVISITN) %>%  #derive AVISITN from codelist
-  create_var_from_codelist(adadas_spec, PARAM, PARAMN) #derive PARAMN from codelist
-  
+  ) %>%
+  create_var_from_codelist(adadas_spec, AVISIT, AVISITN) %>% # derive AVISITN from codelist
+  create_var_from_codelist(adadas_spec, PARAM, PARAMN) # derive PARAMN from codelist
+
 # derive PARAMCD=ACTOT, DTYPE=LOCF
 # A dataset with combinations of PARAMCD, AVISIT which are expected.
 actot_expected_obsv <- tibble::tribble(
@@ -74,15 +75,15 @@ actot_expected_obsv <- tibble::tribble(
   "ACTOT", 24, "Week 24"
 )
 
-adas_locf <-derive_locf_records(
+adas_locf <- derive_locf_records(
   data = adas2,
   dataset_expected_obs = actot_expected_obsv,
   by_vars = vars(STUDYID, USUBJID, PARAMCD),
-  #by_vars = vars(STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
-  #               TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX, 
+  # by_vars = vars(STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
+  #               TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,
   #               ITTFL, EFFFL, COMP24FL, PARAMCD),
   order = vars(AVISITN, AVISIT)
-) 
+)
 # ADT/ADY/.. to be populated for LOCF records
 # issue raised for admiral::derive_locf_records
 
@@ -119,7 +120,7 @@ adas4 <- adas3 %>%
   # Calculate PCHG
   derive_var_pchg() %>%
   mutate(CHG = replace(CHG, which(ABLFL == "Y"), NA)) %>%
-  mutate(PCHG = replace(PCHG, which(ABLFL == "Y"), NA)) 
+  mutate(PCHG = replace(PCHG, which(ABLFL == "Y"), NA))
 
 
 ## ANL01FL
@@ -139,16 +140,15 @@ adas5 <- adas4 %>%
 ## out to XPT
 adas5 %>%
   drop_unspec_vars(adadas_spec) %>% # only keep vars from define
-  order_cols(adadas_spec) %>%       # order columns based on define
+  order_cols(adadas_spec) %>% # order columns based on define
   set_variable_labels(adadas_spec) %>% # apply variable labels based on define
-  # xportr_type(adadas_spec, "ADADAS") %>%  
-  # xportr_length(adadas_spec, "ADADAS") %>%  
-  # unresolved issue in xportr_length due to: 
+  # xportr_type(adadas_spec, "ADADAS") %>%
+  # xportr_length(adadas_spec, "ADADAS") %>%
+  # unresolved issue in xportr_length due to:
   # https://github.com/tidyverse/haven/issues/699
   # no difference found by diffdf after commenting out xportr_length()
   xportr_format(adadas_spec$var_spec %>%
-                  mutate_at(c('format'), ~replace_na(.,"")), "ADADAS") %>%
+    mutate_at(c("format"), ~ replace_na(., "")), "ADADAS") %>%
   xportr_write("submission/datasets/adadas.xpt",
     label = "ADAS-COG Analysis Dataset"
   )
-
