@@ -7,6 +7,7 @@
 
 ## setup
 library(dplyr)
+library(tidyr)
 library(admiral)
 library(metacore)
 library(metatools)
@@ -77,8 +78,13 @@ adas_locf <-derive_locf_records(
   data = adas2,
   dataset_expected_obs = actot_expected_obsv,
   by_vars = vars(STUDYID, USUBJID, PARAMCD),
+  #by_vars = vars(STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
+  #               TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX, 
+  #               ITTFL, EFFFL, COMP24FL, PARAMCD),
   order = vars(AVISITN, AVISIT)
-)
+) 
+# ADT/ADY/.. to be populated for LOCF records
+# issue raised for admiral::derive_locf_records
 
 ## derive AWRANGE/AWTARGET/AWTDIFF/AWLO/AWHI/AWU
 aw_lookup <- tribble(
@@ -111,7 +117,9 @@ adas4 <- adas3 %>%
   # Calculate CHG
   derive_var_chg() %>%
   # Calculate PCHG
-  derive_var_pchg()
+  derive_var_pchg() %>%
+  mutate(CHG = replace(CHG, which(ABLFL == "Y"), NA)) %>%
+  mutate(PCHG = replace(PCHG, which(ABLFL == "Y"), NA)) 
 
 
 ## ANL01FL
@@ -128,23 +136,19 @@ adas5 <- adas4 %>%
     filter = !is.na(AVISIT)
   )
 
-
-## remaining work:
-## 1. derive PARAMCD=ACTOT, DTYPE=LOCF
-## 2. pending define to use metacore/metatools + output XPT
-## 3. QC in qc_adadas.R program
-
-
-## placeholder for derive PARAMCD=ACTOT, DTYPE=LOCF
-## placeholder for using metacore/metatools
-## out to an XPT
+## out to XPT
 adas5 %>%
   drop_unspec_vars(adadas_spec) %>% # only keep vars from define
   order_cols(adadas_spec) %>%       # order columns based on define
-  set_variable_labels(adadas_spec) %>% # apply variable lables based on define
-
- # xportr_type(adadas_spec, "ADADAS") %>%
-  xportr_length(adadas_spec, "ADADAS") %>%
+  set_variable_labels(adadas_spec) %>% # apply variable labels based on define
+  # xportr_type(adadas_spec, "ADADAS") %>%  
+  # xportr_length(adadas_spec, "ADADAS") %>%  
+  # unresolved issue in xportr_length due to: 
+  # https://github.com/tidyverse/haven/issues/699
+  # no difference found by diffdf after commenting out xportr_length()
+  xportr_format(adadas_spec$var_spec %>%
+                  mutate_at(c('format'), ~replace_na(.,"")), "ADADAS") %>%
   xportr_write("submission/datasets/adadas.xpt",
     label = "ADAS-COG Analysis Dataset"
   )
+
