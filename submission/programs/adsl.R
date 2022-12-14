@@ -1,6 +1,6 @@
 ###########################################################################
-#' developers : Steven Haesendonckx/
-#' date: 28NOV2022
+#' developers : Steven Haesendonckx/Declan Hodges
+#' date: 09DEC2022
 #' modification History:
 #' 
 ###########################################################################
@@ -13,32 +13,33 @@ invisible(sapply(fcts, FUN = function(x) source(file.path("R/", x), )))
 library(haven)
 library(admiral)
 library(dplyr)
+library(pilot3)
 
 # read source -------------------------------------------------------------
-# When SAS datasets are imported into R using haven::read_sas(), missing
+# When SAS datasets are imported into R using read_sas(), missing
 # character values from SAS appear as "" characters in R, instead of appearing
 # as NA values. Further details can be obtained via the following link:
 # https://pharmaverse.github.io/admiral/articles/admiral.html#handling-of-missing-values
 
 
-dm <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "dm.xpt")))
-ds <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "ds.xpt")))
-ex <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "ex.xpt")))
-qs <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "qs.xpt")))
-sv <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "sv.xpt")))
-vs <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "vs.xpt")))
-sc <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "sc.xpt")))
-mh <- admiral::convert_blanks_to_na(haven::read_xpt(file.path("sdtm", "mh.xpt")))
+dm <- convert_blanks_to_na(read_xpt(file.path("sdtm", "dm.xpt")))
+ds <- convert_blanks_to_na(read_xpt(file.path("sdtm", "ds.xpt")))
+ex <- convert_blanks_to_na(read_xpt(file.path("sdtm", "ex.xpt")))
+qs <- convert_blanks_to_na(read_xpt(file.path("sdtm", "qs.xpt")))
+sv <- convert_blanks_to_na(read_xpt(file.path("sdtm", "sv.xpt")))
+vs <- convert_blanks_to_na(read_xpt(file.path("sdtm", "vs.xpt")))
+sc <- convert_blanks_to_na(read_xpt(file.path("sdtm", "sc.xpt")))
+mh <- convert_blanks_to_na(read_xpt(file.path("sdtm", "mh.xpt")))
 
-adsl_prod <- admiral::convert_blanks_to_na(haven::read_xpt(file.path(adam[2], "adsl.xpt")))
+# adsl_prod <- convert_blanks_to_na(read_xpt(file.path(adam[2], "adsl.xpt")))
 
-toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
+# toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
 
 # Formats -----------------------------------------------------------------
 
 # site groups - if not pooled then SITEGR1=SITEID. If pooled, SITEGR1 will be 900 - no SAP available
 format_siteid <- function(x) {
-  dplyr::case_when(
+  case_when(
     x %in% c("702", "706", "707", "711", "714", "715", "717") ~ "900",
     TRUE ~ x
   )
@@ -46,24 +47,24 @@ format_siteid <- function(x) {
 
 # AGEGR1 - AGEGR1 = 1 if AGE <65. AGEGR1 = 2 if AGE 65-80. AGEGR1 = 3 if AGE >80
 format_agegr1 <- function(x) {
-  dplyr::case_when(
+  case_when(
     x < 65 ~ "<65",
-    dplyr::between(x, 65, 80) ~ "65-80",
+    between(x, 65, 80) ~ "65-80",
     x > 80 ~ ">80",
   )
 }
 
 format_agegr1n <- function(x) {
-  dplyr::case_when(
+  case_when(
     x < 65 ~ 1,
-    dplyr::between(x, 65, 80) ~ 2,
+    between(x, 65, 80) ~ 2,
     x > 80 ~ 3,
   )
 }
 
 # Race group numbering
 format_racen <- function(x) {
-  dplyr::case_when(
+  case_when(
     x == "WHITE" ~ 1,
     x == "BLACK OR AFRICAN AMERICAN" ~ 2,
     x == "AMERICAN INDIAN OR ALASKA NATIVE" ~ 6
@@ -71,7 +72,7 @@ format_racen <- function(x) {
 }
 # BMI group
 format_bmi <- function(x) {
-  dplyr::case_when(
+  case_when(
     !is.na(x) & x < 25 ~ "<25",
     25 <= x & x < 30 ~ "25-<30",
     30 <= x ~ ">=30"
@@ -80,7 +81,7 @@ format_bmi <- function(x) {
 
 # Disease duration group
 format_dis <- function(x) {
-  dplyr::case_when(
+  case_when(
     !is.na(x) & x < 12 ~ "<12",
     12 <= x ~ ">=12"
   )
@@ -92,65 +93,66 @@ format_dis <- function(x) {
 unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
 
 ds00 <- ds %>%
-  dplyr::filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
-  admiral::derive_vars_dt(
+  filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
+  derive_vars_dt(
     dtc = DSSTDTC,
     new_vars_prefix = "EOS",
     highest_imputation = "n",
   ) %>%
-  dplyr::mutate(DISCONFL = ifelse(!is.na(EOSDT) & DSDECOD != "COMPLETED", "Y", NA),
+  mutate(DISCONFL = ifelse(!is.na(EOSDT) & DSDECOD != "COMPLETED", "Y", NA),
                 DSRAEFL = ifelse(DSTERM == "ADVERSE EVENT", "Y", NA),
                 DCDECOD = DSDECOD
   ) %>%
-  dplyr::select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD) 
+  select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD) 
 
 # Treatment information ---------------------------------------------------
 
 ex_dt <- ex %>%
-  admiral::derive_vars_dt(
+  derive_vars_dt(
     dtc = EXSTDTC,
     new_vars_prefix = "EXST",
     highest_imputation = "n",
   ) %>%
   # treatment end is imputed by discontinuation if subject discontinued after visit 3 = randomization as per protocol
-  admiral::derive_vars_merged(
+  derive_vars_merged(
     dataset_add = ds00,
     by_vars = vars(STUDYID, USUBJID),
     new_vars = vars(EOSDT = EOSDT),
     filter_add = DCDECOD != "COMPLETED"
   ) %>%
-  admiral::derive_vars_dt(
+  derive_vars_dt(
     dtc = EXENDTC,
     new_vars_prefix = "EXEN",
     highest_imputation = "Y",
     min_dates = vars(EXSTDT), 
     max_dates = vars(EOSDT),
-    date_imputation = "last"
+    date_imputation = "last",
+    flag_imputation = "none"
   ) %>%
-  dplyr::mutate(DOSE = EXDOSE* (EXENDT-EXSTDT + 1))
+  mutate(DOSE = EXDOSE* (EXENDT-EXSTDT + 1))
 
 ex_dose <- ex_dt %>%
-  dplyr::group_by(STUDYID, USUBJID, EXTRT) %>%
-  dplyr::summarise(cnt = dplyr::n_distinct(EXTRT), CUMDOSE = sum(DOSE)) 
+  group_by(STUDYID, USUBJID, EXTRT) %>%
+  summarise(cnt = n_distinct(EXTRT), CUMDOSE = sum(DOSE)) 
 
 ex_dose[which(ex_dose[["cnt"]] > 1), "USUBJID"] # are there subjects with mixed treatments?
 
 adsl00 <- dm %>%
-  dplyr::select(-DOMAIN) %>%
-  dplyr::filter(ACTARMCD != "Scrnfail") %>%
+  select(-DOMAIN) %>%
+  filter(ACTARMCD != "Scrnfail") %>%
   
   # planned treatment
-  dplyr::mutate(TRT01P = ARM, 
-                TRT01PN = dplyr::case_when(ARM == "Placebo" ~ 0,
+  mutate(TRT01P = ARM, 
+                TRT01PN = case_when(ARM == "Placebo" ~ 0,
                                            ARM == "Xanomeline High Dose" ~ 81,
                                            ARM =="Xanomeline Low Dose" ~ 54)) %>%
   
   # actual treatment - It is assumed TRT01A=TRT01P which is not really true.
-  dplyr::mutate(TRT01A = TRT01P, 
+  mutate(TRT01A = TRT01P, 
                 TRT01AN = TRT01PN) %>%
   
   # treatment start
-  admiral::derive_vars_merged(
+  derive_vars_merged(
     dataset_add = ex_dt,
     filter_add = (EXDOSE > 0 |
                     (EXDOSE == 0 &
@@ -163,7 +165,7 @@ adsl00 <- dm %>%
   ) %>%
   
   # treatment end
-  admiral::derive_vars_merged(
+  derive_vars_merged(
     dataset_add = ex_dt,
     filter_add = (EXDOSE > 0 |
                     (EXDOSE == 0 &
@@ -176,18 +178,18 @@ adsl00 <- dm %>%
   ) %>%
   
   # treatment duration
-  admiral::derive_var_trtdurd() %>%
+  derive_var_trtdurd() %>%
   
   # dosing
-  dplyr::left_join(ex_dose, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::select(-cnt) %>%
-  dplyr::mutate(AVGDD = round(CUMDOSE/TRTDURD, digits = 1))
+  left_join(ex_dose, by = c("STUDYID", "USUBJID")) %>%
+  select(-cnt) %>%
+  mutate(AVGDD = round(CUMDOSE/TRTDURD, digits = 1))
 
 # Demographic grouping ----------------------------------------------------
-#distinct(adsl_prod[which(adsl_prod$SITEGR1 == "900"), c("SITEID", "SITEGR1")])
+# distinct(adsl_prod[which(adsl_prod$SITEGR1 == "900"), c("SITEID", "SITEGR1")])
 
 adsl01 <- adsl00 %>%
-  dplyr::mutate(
+  mutate(
     SITEGR1 = format_siteid(SITEID),
     AGEGR1 = format_agegr1(AGE),
     AGEGR1N = format_agegr1n(AGE),
@@ -203,25 +205,25 @@ adsl01 <- adsl00 %>%
 qstest <- distinct(qs[,c("QSTESTCD", "QSTEST")])
 
 eff <- qs %>%
-  dplyr::filter(VISITNUM>3, QSTESTCD %in% c("CIBIC", "ACTOT")) %>%
-  dplyr::group_by(STUDYID, USUBJID) %>%
-  dplyr::summarise(effcnt = dplyr::n_distinct(QSTESTCD))
+  filter(VISITNUM>3, QSTESTCD %in% c("CIBIC", "ACTOT")) %>%
+  group_by(STUDYID, USUBJID) %>%
+  summarise(effcnt = n_distinct(QSTESTCD))
 
 adsl02 <- adsl01 %>%
-  dplyr::left_join(eff, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::mutate(SAFFL = dplyr::case_when(
+  left_join(eff, by = c("STUDYID", "USUBJID")) %>%
+  mutate(SAFFL = case_when(
                           ARMCD != "Scrnfail" & ARMCD != "" & !is.na(TRTSDT) ~ "Y",
                           ARMCD == "Scrnfail" ~ NA_character_,
                           TRUE ~ "N"
                         ),
                 
-                ITTFL = dplyr::case_when(
+                ITTFL = case_when(
                   ARMCD != "Scrnfail" & ARMCD != "" ~ "Y",
                   ARMCD == "Scrnfail" ~ NA_character_,
                   TRUE ~ "N"
                         ),
                 
-                EFFFL = dplyr::case_when(
+                EFFFL = case_when(
                   ARMCD != "Scrnfail" & ARMCD != "" & !is.na(TRTSDT) & effcnt == 2 ~ "Y",
                   ARMCD == "Scrnfail" ~ NA_character_,
                   TRUE ~ "N"
@@ -231,26 +233,26 @@ adsl02 <- adsl01 %>%
 # Study Visit compliance --------------------------------------------------
 # these variables are also in suppdm, but define said derived
 sv00 <- sv %>%
-  dplyr::select(STUDYID, USUBJID, VISIT, VISITDY, SVSTDTC) %>%
-  dplyr::mutate(FLG = "Y",
-                VISITCMP = dplyr::case_when(
+  select(STUDYID, USUBJID, VISIT, VISITDY, SVSTDTC) %>%
+  mutate(FLG = "Y",
+                VISITCMP = case_when(
                           VISIT == "WEEK 8" ~ "COMP8FL",
                           VISIT == "WEEK 16" ~ "COMP16FL",
                           VISIT == "WEEK 24" ~ "COMP24FL",
                           TRUE ~ "ZZZ" # ensures every subject with one visit will get a row with minimally 'N'
                 )) %>%
-  dplyr::arrange(STUDYID, USUBJID, VISITDY) %>%
-  dplyr::distinct(STUDYID, USUBJID, VISITCMP, FLG) %>%
-  tidyr::pivot_wider(names_from = VISITCMP, values_from = FLG, values_fill = "N") %>%
-  dplyr::select(-ZZZ)
+  arrange(STUDYID, USUBJID, VISITDY) %>%
+  distinct(STUDYID, USUBJID, VISITCMP, FLG) %>%
+  pivot_wider(names_from = VISITCMP, values_from = FLG, values_fill = "N") %>%
+  select(-ZZZ)
 
 adsl03 <- adsl02 %>%
-  dplyr::left_join(sv00, by = c("STUDYID", "USUBJID")) 
+  left_join(sv00, by = c("STUDYID", "USUBJID")) 
 
 # Disposition -------------------------------------------------------------
 
 format_dcsreas <- function(dsdecod) {
-  dplyr::case_when(
+  case_when(
     dsdecod == "ADVERSE EVENT" ~ "Adverse Event",
     dsdecod == "STUDY TERMINATED BY SPONSOR" ~ "Sponsor Decision",
     dsdecod == "DEATH" ~ "Death",
@@ -263,99 +265,99 @@ format_dcsreas <- function(dsdecod) {
 }
 
 adsl04 <- adsl03 %>%
-  dplyr::left_join(ds00, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::select(-DSDECOD) %>%
-  admiral::derive_var_disposition_status(
+  left_join(ds00, by = c("STUDYID", "USUBJID")) %>%
+  select(-DSDECOD) %>%
+  derive_var_disposition_status(
     dataset_ds = ds00,
     new_var = EOSSTT,
     status_var = DSDECOD, #this variable is removed after reformat
     filter_ds = !is.na(USUBJID)
   ) %>%
-  admiral::derive_vars_disposition_reason(
+  derive_vars_disposition_reason(
     dataset_ds = ds00,
     new_var = DCSREAS,
     reason_var = DSDECOD,
     filter_ds = !is.na(USUBJID),
     format_new_vars = format_dcsreas #could not include dsterm in formatting logic
   ) %>%
-  dplyr::mutate(DCSREAS = ifelse(DSTERM == "PROTOCOL ENTRY CRITERIA NOT MET", "I/E Not Met", DCSREAS))
+  mutate(DCSREAS = ifelse(DSTERM == "PROTOCOL ENTRY CRITERIA NOT MET", "I/E Not Met", DCSREAS))
 
 # Baseline variables ------------------------------------------------------
 # selection definition from define
 
 vs00 <- vs %>%
-  dplyr::filter((VSTESTCD == "HEIGHT" & VISITNUM == 1) | (VSTESTCD == "WEIGHT" & VISITNUM == 3)) %>%
-  dplyr::mutate(AVAL = round(VSSTRESN, digits = 1)) %>%
-  dplyr::select(STUDYID, USUBJID, VSTESTCD, AVAL) %>%
-  tidyr::pivot_wider(names_from = VSTESTCD, values_from = AVAL, names_glue = "{VSTESTCD}BL") %>%
-  dplyr::mutate(BMIBL = round(WEIGHTBL/(HEIGHTBL/100)^2, digits = 1),
+  filter((VSTESTCD == "HEIGHT" & VISITNUM == 1) | (VSTESTCD == "WEIGHT" & VISITNUM == 3)) %>%
+  mutate(AVAL = round(VSSTRESN, digits = 1)) %>%
+  select(STUDYID, USUBJID, VSTESTCD, AVAL) %>%
+  pivot_wider(names_from = VSTESTCD, values_from = AVAL, names_glue = "{VSTESTCD}BL") %>%
+  mutate(BMIBL = round(WEIGHTBL/(HEIGHTBL/100)^2, digits = 1),
                 BMIBLGR1 = format_bmi(BMIBL)
                ) 
 
 sc00 <- sc %>%
-  dplyr::filter(SCTESTCD == "EDLEVEL") %>%
-  dplyr::select(STUDYID, USUBJID, SCTESTCD, SCSTRESN) %>%
-  tidyr::pivot_wider(names_from = SCTESTCD, values_from = SCSTRESN, names_glue = "EDUCLVL")
+  filter(SCTESTCD == "EDLEVEL") %>%
+  select(STUDYID, USUBJID, SCTESTCD, SCSTRESN) %>%
+  pivot_wider(names_from = SCTESTCD, values_from = SCSTRESN, names_glue = "EDUCLVL")
 
 adsl05 <- adsl04 %>%
-  dplyr::left_join(vs00, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::left_join(sc00, by = c("STUDYID", "USUBJID"))
+  left_join(vs00, by = c("STUDYID", "USUBJID")) %>%
+  left_join(sc00, by = c("STUDYID", "USUBJID"))
 
 # Disease information -----------------------------------------------------
 
 visit1dt <- sv %>%
-  dplyr::filter(VISITNUM == 1) %>%
-  admiral::derive_vars_dt(
+  filter(VISITNUM == 1) %>%
+  derive_vars_dt(
     dtc = SVSTDTC,
     new_vars_prefix = "VISIT1",
   ) %>%
-  dplyr::select(STUDYID, USUBJID, VISIT1DT)
+  select(STUDYID, USUBJID, VISIT1DT)
 
 visnumen <- sv %>%
-  dplyr::filter(VISITNUM < 100) %>%
-  dplyr::arrange(STUDYID, USUBJID, SVSTDTC) %>%
-  dplyr::group_by(STUDYID, USUBJID) %>%
-  dplyr::slice(n()) %>%
-  dplyr::ungroup() %>%
-  dplyr::mutate(VISNUMEN = ifelse(round(VISITNUM, digits = 0) == 13, 12, round(VISITNUM, digits = 0))) %>%
-  dplyr::select(STUDYID, USUBJID, VISNUMEN)
+  filter(VISITNUM < 100) %>%
+  arrange(STUDYID, USUBJID, SVSTDTC) %>%
+  group_by(STUDYID, USUBJID) %>%
+  slice(n()) %>%
+  ungroup() %>%
+  mutate(VISNUMEN = ifelse(round(VISITNUM, digits = 0) == 13, 12, round(VISITNUM, digits = 0))) %>%
+  select(STUDYID, USUBJID, VISNUMEN)
 
 disonsdt <- mh %>%
-  dplyr::filter(MHCAT == 'PRIMARY DIAGNOSIS') %>%
-  admiral::derive_vars_dt(
+  filter(MHCAT == 'PRIMARY DIAGNOSIS') %>%
+  derive_vars_dt(
     dtc = MHSTDTC,
     new_vars_prefix = "DISONS",
   ) %>%
-  dplyr::select(STUDYID, USUBJID, DISONSDT)
+  select(STUDYID, USUBJID, DISONSDT)
 
 adsl06 <- adsl05 %>%
-  dplyr::left_join(visit1dt, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::left_join(visnumen, by = c("STUDYID", "USUBJID")) %>%
-  dplyr::left_join(disonsdt, by = c("STUDYID", "USUBJID")) %>%
-  admiral::derive_vars_duration(new_var=DURDIS,
-                              start_date = DISONSDT,
-                              end_date = VISIT1DT, 
-                              out_unit = "months",
-                              add_one = TRUE) %>%
-  dplyr::mutate(DURDIS = round(DURDIS, digits = 1),
+  left_join(visit1dt, by = c("STUDYID", "USUBJID")) %>%
+  left_join(visnumen, by = c("STUDYID", "USUBJID")) %>%
+  left_join(disonsdt, by = c("STUDYID", "USUBJID")) %>%
+  derive_vars_duration(new_var=DURDIS,
+                                start_date = DISONSDT,
+                                end_date = VISIT1DT, 
+                                out_unit = "months",
+                                add_one = TRUE) %>%
+  mutate(DURDIS = round(DURDIS, digits = 1),
                 DURDSGR1 = format_dis(DURDIS)) %>%
-  admiral::derive_vars_dt(
+  derive_vars_dt(
     dtc = RFENDTC,
     new_vars_prefix = "RFEN",
   ) 
 
 mmsetot <- qs %>%
-  dplyr::filter(QSCAT == "MINI-MENTAL STATE") %>%
-  dplyr::group_by(STUDYID, USUBJID) %>%
-  dplyr::summarise(MMSETOT = sum(as.numeric(QSORRES), na.rm = TRUE)) %>%
-  dplyr::select(STUDYID, USUBJID, MMSETOT)
+  filter(QSCAT == "MINI-MENTAL STATE") %>%
+  group_by(STUDYID, USUBJID) %>%
+  summarise(MMSETOT = sum(as.numeric(QSORRES), na.rm = TRUE)) %>%
+  select(STUDYID, USUBJID, MMSETOT)
 
 adsl07 <- adsl06 %>%
-  dplyr::left_join(mmsetot, by = c("STUDYID", "USUBJID"))
+  left_join(mmsetot, by = c("STUDYID", "USUBJID"))
   
 # Add Labels --------------------------------------------------------------
 
-#dput(colnames(adsl_prod))
+# dput(colnames(adsl_prod))
 
 adsl <- adsl07[ , c("STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM", 
 "TRT01P", "TRT01PN", "TRT01A", "TRT01AN", "TRTSDT", "TRTEDT", 
@@ -366,12 +368,12 @@ adsl <- adsl07[ , c("STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM",
 "DURDIS", "DURDSGR1", "VISIT1DT", "RFSTDTC", "RFENDTC", "VISNUMEN", 
 "RFENDT", "DCDECOD", "EOSSTT", "DCSREAS", "MMSETOT")]
 
-labs_prod <- sapply(colnames(adsl_prod), FUN = function(x) attr(adsl_prod[[x]], "label"))
-labs <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
+# labs_prod <- sapply(colnames(adsl_prod), FUN = function(x) attr(adsl_prod[[x]], "label"))
+# labs <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
 
-setdiff(labs_prod, labs)
+# setdiff(labs_prod, labs)
 
-labs[unlist(lapply(labs,is.null))]
+# labs[unlist(lapply(labs,is.null))]
 
 
 adsl[["AVGDD"]] <- as.numeric(adsl[["AVGDD"]])
@@ -422,7 +424,7 @@ labsupdated[unlist(lapply(labsupdated,is.null))]
 
 ## Metadata compare (labels)
 
-# difflabels <- dplyr::setdiff(labs_prod, labsupdated)
+# difflabels <- setdiff(labs_prod, labsupdated)
 # discr_labels <- unlist(labs_prod)[which(unlist(labs_prod) %in% difflabels)]
 
 ## Content check using in-house package
@@ -438,7 +440,7 @@ labsupdated[unlist(lapply(labsupdated,is.null))]
 
 # Output ------------------------------------------------------------------
 
-haven::write_xpt(adsl, file.path("submission/datasets/adsl.xpt"))
+write_xpt(adsl, file.path("submission/datasets/adsl.xpt"))
 
 # END of Code -------------------------------------------------------------
 
