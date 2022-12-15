@@ -42,56 +42,6 @@ mh <- convert_blanks_to_na(read_xpt(file.path("sdtm", "mh.xpt")))
 #   filter(n<3, ACTARMCD != "Scrnfail") %>%
 #   summarise(n_distinct(SITEID))
 
-format_sitegr1 <- function(x) {
-  case_when(
-    x %in% c("702", "706", "707", "711", "714", "715", "717") ~ "900",
-    TRUE ~ x
-  )
-}
-
-# AGEGR1 - AGEGR1 = 1 if AGE <65. AGEGR1 = 2 if AGE 65-80. AGEGR1 = 3 if AGE >80
-format_agegr1 <- function(x) {
-  case_when(
-    x < 65 ~ "<65",
-    between(x, 65, 80) ~ "65-80",
-    x > 80 ~ ">80",
-  )
-}
-
-format_agegr1n <- function(x) {
-  case_when(
-    x < 65 ~ 1,
-    between(x, 65, 80) ~ 2,
-    x > 80 ~ 3,
-  )
-}
-
-# Race group numbering
-format_racen <- function(x) {
-  case_when(
-    x == "WHITE" ~ 1,
-    x == "BLACK OR AFRICAN AMERICAN" ~ 2,
-    x == "AMERICAN INDIAN OR ALASKA NATIVE" ~ 6
-  )
-}
-# BMI group
-format_bmiblgr1 <- function(x) {
-  case_when(
-    !is.na(x) & x < 25 ~ "<25",
-    25 <= x & x < 30 ~ "25-<30",
-    30 <= x ~ ">=30"
-  )
-}
-
-# Disease duration group
-format_durdsgr1 <- function(x) {
-  case_when(
-    !is.na(x) & x < 12 ~ "<12",
-    12 <= x ~ ">=12"
-  )
-}
-
-
 # Disposition information -------------------------------------------------
 # unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
 
@@ -256,19 +206,6 @@ adsl03 <- adsl02 %>%
   left_join(sv00, by = c("STUDYID", "USUBJID"))
 
 # Disposition -------------------------------------------------------------
-
-format_dcsreas <- function(dsdecod) {
-  case_when(
-    dsdecod == "ADVERSE EVENT" ~ "Adverse Event",
-    dsdecod == "STUDY TERMINATED BY SPONSOR" ~ "Sponsor Decision",
-    dsdecod == "DEATH" ~ "Death",
-    dsdecod == "WITHDRAWAL BY SUBJECT" ~ "Withdrew Consent",
-    dsdecod == "PHYSICIAN DECISION" ~ "Physician Decision",
-    dsdecod == "PROTOCOL VIOLATION" ~ "Protocol Violation",
-    dsdecod == "LOST TO FOLLOW-UP" ~ "Lost to Follow-up",
-    dsdecod == "LACK OF EFFICACY" ~ "Lack of Efficacy"
-  )
-}
 
 adsl04 <- adsl03 %>%
   left_join(ds00, by = c("STUDYID", "USUBJID")) %>%
