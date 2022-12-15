@@ -2,10 +2,10 @@
 % Please edit documentation in R/adam_functions.R
 \name{format_agegr1}
 \alias{format_agegr1}
-\title{Derive AGEGR1}
+\title{Derive pooled age group}
 \usage{
 format_agegr1(x)
 }
 \description{
-\code{format_agegr1} derives the AGEGR1 variable, which pools subjects into age groups.
+\code{format_agegr1} derives the \code{AGEGR1} variable, which pools subjects into age groups.
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/adam_functions.R
 \name{format_bmiblgr1}
 \alias{format_bmiblgr1}
-\title{Derive BMIBLGR1}
+\title{Derive pooled baseline BMI group}
 \usage{
 format_bmiblgr1(x)
 }
 \description{
-\code{format_bmiblgr1} derives the BMIBLGR1 variable, which pools subjects into baseline BMI groups.
+\code{format_bmiblgr1} derives the \code{BMIBLGR1} variable, which pools subjects into baseline BMI groups.
 }

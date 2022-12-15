@@ -2,10 +2,10 @@
 % Please edit documentation in R/adam_functions.R
 \name{format_racen}
 \alias{format_racen}
-\title{Derive RACEN}
+\title{Derive race (N)}
 \usage{
 format_racen(x)
 }
 \description{
-\code{format_racen} derives the RACEN variable, which is the numeric code for RACE.
+\code{format_racen} derives the \code{RACEN} variable, which is the numeric code for \code{RACE}.
 }

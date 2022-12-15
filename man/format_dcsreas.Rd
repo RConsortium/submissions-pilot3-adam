@@ -2,10 +2,10 @@
 % Please edit documentation in R/adam_functions.R
 \name{format_dcsreas}
 \alias{format_dcsreas}
-\title{Derive DCSREAS}
+\title{Derive subject's disposition reason(s)}
 \usage{
 format_dcsreas(dsdecod)
 }
 \description{
-\code{format_dcsreas} derives the DCSREAS variable, which contains subjects' disposition reason(s).
+\code{format_dcsreas} derives the \code{DCSREAS} variable, which contains subjects' disposition reason(s).
 }

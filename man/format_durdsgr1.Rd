@@ -2,10 +2,10 @@
 % Please edit documentation in R/adam_functions.R
 \name{format_durdsgr1}
 \alias{format_durdsgr1}
-\title{Derive DURDSGR1}
+\title{Derive pooled disease duration group}
 \usage{
 format_durdsgr1(x)
 }
 \description{
-\code{format_durdsgr1} derives the DURDSGR1 variable, which pools subjects into disease duration groups.
+\code{format_durdsgr1} derives the \code{DURDSGR1} variable, which pools subjects into disease duration groups.
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/adam_functions.R
 \name{format_sitegr1}
 \alias{format_sitegr1}
-\title{Derive SITEGR1}
+\title{Derive pooled site group}
 \usage{
 format_sitegr1(x)
 }
 \description{
-\code{format_sitegr1} derives the SITEGR1 variable, which pools sites with fewer than 3 subjects in any one treatment group.
+\code{format_sitegr1} derives the \code{SITEGR1} variable, which pools sites with fewer than 3 subjects in any one treatment group.
 }
