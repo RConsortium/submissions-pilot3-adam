@@ -1,5 +1,5 @@
 ###########################################################################
-#' developers : Steven Haesendonckx/Declan Hodges
+#' developers : Steven Haesendonckx/Declan Hodges/Thomas Neitmann
 #' date: 09DEC2022
 #' modification History:
 #'
@@ -11,7 +11,10 @@ library(haven)
 library(admiral)
 library(dplyr)
 library(tidyr)
+library(metacore)
+library(metatools)
 library(pilot3)
+library(xportr)
 
 # read source -------------------------------------------------------------
 # When SAS datasets are imported into R using read_sas(), missing
@@ -29,21 +32,11 @@ vs <- convert_blanks_to_na(read_xpt(file.path("sdtm", "vs.xpt")))
 sc <- convert_blanks_to_na(read_xpt(file.path("sdtm", "sc.xpt")))
 mh <- convert_blanks_to_na(read_xpt(file.path("sdtm", "mh.xpt")))
 
-# adsl_prod <- convert_blanks_to_na(read_xpt(file.path(adam[2], "adsl.xpt")))
-
-# toprogram <- setdiff(colnames(adsl_prod), colnames(dm))
-
-# Formats -----------------------------------------------------------------
-
-# site groups - see CSR
-# dm %>%
-#   group_by(SITEID, ACTARMCD) %>%
-#   summarise(n=n_distinct(USUBJID)) %>%
-#   filter(n<3, ACTARMCD != "Scrnfail") %>%
-#   summarise(n_distinct(SITEID))
-
-# Disposition information -------------------------------------------------
-# unique(ds[order(ds[["DSCAT"]]) , c("DSCAT", "DSDECOD")])
+## placeholder for origin=predecessor, use metatool::build_from_derived()
+metacore <- spec_to_metacore("adam/TDF_ADaM - Pilot 3 Team updated.xlsx", where_sep_sheet = FALSE)
+# Get the specifications for the dataset we are currently building
+adsl_spec <- metacore %>%
+  select_dataset("ADSL")
 
 ds00 <- ds %>%
   filter(DSCAT == "DISPOSITION EVENT", DSDECOD != "SCREEN FAILURE") %>%
@@ -303,72 +296,13 @@ mmsetot <- qs %>%
 adsl07 <- adsl06 %>%
   left_join(mmsetot, by = c("STUDYID", "USUBJID"))
 
-# Add Labels --------------------------------------------------------------
-
-adsl <- adsl07[, c(
-  "STUDYID", "USUBJID", "SUBJID", "SITEID", "SITEGR1", "ARM",
-  "TRT01P", "TRT01PN", "TRT01A", "TRT01AN", "TRTSDT", "TRTEDT",
-  "TRTDURD", "AVGDD", "CUMDOSE", "AGE", "AGEGR1", "AGEGR1N", "AGEU",
-  "RACE", "RACEN", "SEX", "ETHNIC", "SAFFL", "ITTFL", "EFFFL",
-  "COMP8FL", "COMP16FL", "COMP24FL", "DISCONFL", "DSRAEFL", "DTHFL",
-  "BMIBL", "BMIBLGR1", "HEIGHTBL", "WEIGHTBL", "EDUCLVL", "DISONSDT",
-  "DURDIS", "DURDSGR1", "VISIT1DT", "RFSTDTC", "RFENDTC", "VISNUMEN",
-  "RFENDT", "DCDECOD", "EOSSTT", "DCSREAS", "MMSETOT"
-)]
-
-# labs_prod <- sapply(colnames(adsl_prod), FUN = function(x) attr(adsl_prod[[x]], "label"))
-# labs <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
-
-# setdiff(labs_prod, labs)
-
-# labs[unlist(lapply(labs, is.null))]
-
-
-adsl[["AVGDD"]] <- as.numeric(adsl[["AVGDD"]])
-adsl[["CUMDOSE"]] <- as.numeric(adsl[["CUMDOSE"]])
-
-attr(adsl[["TRT01P"]], "label") <- "Planned Treatment for Period 01"
-attr(adsl[["TRT01PN"]], "label") <- "Planned Treatment for Period 01 (N)"
-attr(adsl[["TRT01A"]], "label") <- "Actual Treatment for Period 01"
-attr(adsl[["TRT01AN"]], "label") <- "Actual Treatment for Period 01 (N)"
-attr(adsl[["DTHFL"]], "label") <- "Subject Died?"
-attr(adsl[["SITEGR1"]], "label") <- "Pooled Site Group 1"
-attr(adsl[["TRTSDT"]], "label") <- "Date of First Exposure to Treatment"
-attr(adsl[["TRTEDT"]], "label") <- "Date of Last Exposure to Treatment"
-attr(adsl[["TRTDURD"]], "label") <- "Total Treatment Duration (Days)"
-attr(adsl[["AVGDD"]], "label") <- "Avg Daily Dose (as planned)"
-attr(adsl[["CUMDOSE"]], "label") <- "Cumulative Dose (as planned)"
-attr(adsl[["AGEGR1"]], "label") <- "Pooled Age Group 1"
-attr(adsl[["AGEGR1N"]], "label") <- "Pooled Age Group 1 (N)"
-attr(adsl[["RACEN"]], "label") <- "Race (N)"
-attr(adsl[["SAFFL"]], "label") <- "Safety Population Flag"
-attr(adsl[["ITTFL"]], "label") <- "Intent-To-Treat Population Flag"
-attr(adsl[["EFFFL"]], "label") <- "Efficacy Population Flag"
-attr(adsl[["COMP8FL"]], "label") <- "Completers of Week 8 Population Flag"
-attr(adsl[["COMP16FL"]], "label") <- "Completers of Week 16 Population Flag"
-attr(adsl[["COMP24FL"]], "label") <- "Completers of Week 24 Population Flag"
-attr(adsl[["DISCONFL"]], "label") <- "Did the Subject Discontinue the Study?"
-attr(adsl[["DSRAEFL"]], "label") <- "Discontinued due to AE?"
-attr(adsl[["BMIBL"]], "label") <- "Baseline BMI (kg/m^2)"
-attr(adsl[["BMIBLGR1"]], "label") <- "Pooled Baseline BMI Group 1"
-attr(adsl[["HEIGHTBL"]], "label") <- "Baseline Height (cm)"
-attr(adsl[["WEIGHTBL"]], "label") <- "Baseline Weight (kg)"
-attr(adsl[["EDUCLVL"]], "label") <- "Years of Education"
-attr(adsl[["DISONSDT"]], "label") <- "Date of Onset of Disease"
-attr(adsl[["DURDIS"]], "label") <- "Duration of Disease (Months)"
-attr(adsl[["DURDSGR1"]], "label") <- "Pooled Disease Duration Group 1"
-attr(adsl[["VISIT1DT"]], "label") <- "Date of Visit 1"
-attr(adsl[["RFENDT"]], "label") <- "Date of Discontinuation/Completion"
-attr(adsl[["VISNUMEN"]], "label") <- "End of Trt Visit (Vis 12 or Early Term.)"
-attr(adsl[["EOSSTT"]], "label") <- "End of Study Status"
-attr(adsl[["DCSREAS"]], "label") <- "Reason for Discontinuation from Study"
-attr(adsl[["MMSETOT"]], "label") <- "MMSE Total"
-
-labsupdated <- sapply(colnames(adsl), FUN = function(x) attr(adsl[[x]], "label"))
-labsupdated[unlist(lapply(labsupdated, is.null))]
-
-# Output ------------------------------------------------------------------
-
-write_xpt(adsl, file.path("submission/datasets/adsl.xpt"))
-
-# END of Code -------------------------------------------------------------
+# Export to xpt -----------------------------------------------------
+adsl07 %>% 
+  drop_unspec_vars(adsl_spec) %>% # Check all variables specified are present and no more
+  check_ct_data(adsl_spec, na_acceptable = TRUE) %>% # Checks all variables with CT only contain values within the CT
+  order_cols(adsl_spec) %>% # Orders the columns according to the spec
+  sort_by_key(adsl_spec) %>% # Sorts the rows by the sort keys 
+  xportr_length(adsl_spec) %>% # Assigns SAS length from a variable level metadata 
+  xportr_label(adsl_spec) %>% # Assigns variable label from metacore specifications 
+  xportr_df_label(adsl_spec) %>% # Assigns dataset label from metacore specifications
+  xportr_write("submission/datasets/adsl.xpt")
