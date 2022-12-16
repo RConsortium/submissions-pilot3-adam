@@ -4,7 +4,10 @@
 \alias{format_dcsreas}
 \title{Derive subject's disposition reason(s)}
 \usage{
-format_dcsreas(dsdecod)
+format_dcsreas(x)
+}
+\arguments{
+\item{x}{The input vector of values to format}
 }
 \description{
 \code{format_dcsreas} derives the \code{DCSREAS} variable, which contains subjects' disposition reason(s).

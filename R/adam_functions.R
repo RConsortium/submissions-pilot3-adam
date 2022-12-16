@@ -93,15 +93,15 @@ format_durdsgr1 <- function(x) {
 #' @inheritParams format_sitegr1
 #'
 #' @export
-format_dcsreas <- function(dsdecod) {
+format_dcsreas <- function(x) {
   case_when(
-    dsdecod == "ADVERSE EVENT" ~ "Adverse Event",
-    dsdecod == "STUDY TERMINATED BY SPONSOR" ~ "Sponsor Decision",
-    dsdecod == "DEATH" ~ "Death",
-    dsdecod == "WITHDRAWAL BY SUBJECT" ~ "Withdrew Consent",
-    dsdecod == "PHYSICIAN DECISION" ~ "Physician Decision",
-    dsdecod == "PROTOCOL VIOLATION" ~ "Protocol Violation",
-    dsdecod == "LOST TO FOLLOW-UP" ~ "Lost to Follow-up",
-    dsdecod == "LACK OF EFFICACY" ~ "Lack of Efficacy"
+    x == "ADVERSE EVENT" ~ "Adverse Event",
+    x == "STUDY TERMINATED BY SPONSOR" ~ "Sponsor Decision",
+    x == "DEATH" ~ "Death",
+    x == "WITHDRAWAL BY SUBJECT" ~ "Withdrew Consent",
+    x == "PHYSICIAN DECISION" ~ "Physician Decision",
+    x == "PROTOCOL VIOLATION" ~ "Protocol Violation",
+    x == "LOST TO FOLLOW-UP" ~ "Lost to Follow-up",
+    x == "LACK OF EFFICACY" ~ "Lack of Efficacy"
   )
 }
