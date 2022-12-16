@@ -116,12 +116,15 @@ adas4 <- adas3 %>%
     new_var = BASE
   ) %>%
   # Calculate CHG
-  derive_var_chg() %>%
+  restrict_derivation(
+    derivation = derive_var_chg,
+    filter = is.na(ABLFL)
+  ) %>%
   # Calculate PCHG
-  derive_var_pchg() %>%
-  mutate(CHG = replace(CHG, which(ABLFL == "Y"), NA)) %>%
-  mutate(PCHG = replace(PCHG, which(ABLFL == "Y"), NA))
-
+  restrict_derivation(
+    derivation = derive_var_pchg,
+    filter = is.na(ABLFL)
+  )
 
 ## ANL01FL
 adas5 <- adas4 %>%
