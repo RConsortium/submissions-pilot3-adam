@@ -6,6 +6,9 @@
 \usage{
 format_agegr1(x)
 }
+\arguments{
+\item{x}{The input vector of values to format}
+}
 \description{
 \code{format_agegr1} derives the \code{AGEGR1} variable, which pools subjects into age groups.
 }

@@ -6,6 +6,9 @@
 \usage{
 format_durdsgr1(x)
 }
+\arguments{
+\item{x}{The input vector of values to format}
+}
 \description{
 \code{format_durdsgr1} derives the \code{DURDSGR1} variable, which pools subjects into disease duration groups.
 }

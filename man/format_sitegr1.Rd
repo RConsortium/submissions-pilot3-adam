@@ -6,6 +6,9 @@
 \usage{
 format_sitegr1(x)
 }
+\arguments{
+\item{x}{The input vector of values to format}
+}
 \description{
 \code{format_sitegr1} derives the \code{SITEGR1} variable, which pools sites with fewer than 3 subjects in any one treatment group.
 }

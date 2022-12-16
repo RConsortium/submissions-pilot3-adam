@@ -1,6 +1,8 @@
 #' Derive pooled site group
 #'
 #' `format_sitegr1` derives the `SITEGR1` variable, which pools sites with fewer than 3 subjects in any one treatment group.
+#' 
+#' @param x The input vector of values to format
 #'
 #' @export
 format_sitegr1 <- function(x) {
@@ -13,6 +15,8 @@ format_sitegr1 <- function(x) {
 #' Derive pooled age group
 #'
 #' `format_agegr1` derives the `AGEGR1` variable, which pools subjects into age groups.
+#' 
+#' @inheritParams format_sitegr1
 #'
 #' @export
 format_agegr1 <- function(x) {
@@ -26,6 +30,8 @@ format_agegr1 <- function(x) {
 #' Derive pooled age group (N)
 #'
 #' `format_agegr1n` derives the `AGEGR1N` variable, which is the numeric code for `AGEGR1`.
+#' 
+#' @inheritParams format_sitegr1
 #'
 #' @export
 format_agegr1n <- function(x) {
@@ -39,6 +45,8 @@ format_agegr1n <- function(x) {
 #' Derive race (N)
 #'
 #' `format_racen` derives the `RACEN` variable, which is the numeric code for `RACE`.
+#' 
+#' @inheritParams format_sitegr1
 #'
 #' @export
 format_racen <- function(x) {
@@ -52,6 +60,8 @@ format_racen <- function(x) {
 #' Derive pooled baseline BMI group
 #'
 #' `format_bmiblgr1` derives the `BMIBLGR1` variable, which pools subjects into baseline BMI groups.
+#' 
+#' @inheritParams format_sitegr1
 #'
 #' @export
 format_bmiblgr1 <- function(x) {
@@ -65,6 +75,8 @@ format_bmiblgr1 <- function(x) {
 #' Derive pooled disease duration group
 #'
 #' `format_durdsgr1` derives the `DURDSGR1` variable, which pools subjects into disease duration groups.
+#' 
+#' @inheritParams format_sitegr1
 #'
 #' @export
 format_durdsgr1 <- function(x) {
@@ -77,6 +89,8 @@ format_durdsgr1 <- function(x) {
 #' Derive subject's disposition reason(s)
 #'
 #' `format_dcsreas` derives the `DCSREAS` variable, which contains subjects' disposition reason(s).
+#' 
+#' @inheritParams format_sitegr1
 #'
 #' @export
 format_dcsreas <- function(dsdecod) {

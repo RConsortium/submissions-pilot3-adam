@@ -6,6 +6,9 @@
 \usage{
 format_agegr1n(x)
 }
+\arguments{
+\item{x}{The input vector of values to format}
+}
 \description{
 \code{format_agegr1n} derives the \code{AGEGR1N} variable, which is the numeric code for \code{AGEGR1}.
 }

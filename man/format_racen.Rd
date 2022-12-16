@@ -6,6 +6,9 @@
 \usage{
 format_racen(x)
 }
+\arguments{
+\item{x}{The input vector of values to format}
+}
 \description{
 \code{format_racen} derives the \code{RACEN} variable, which is the numeric code for \code{RACE}.
 }
