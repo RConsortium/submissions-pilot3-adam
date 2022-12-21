@@ -57,6 +57,8 @@
 #'
 #' library(dplyr)
 #' library(tibble)
+#' library(admiraldev)
+#' library(tidyr)
 #'
 #' advs <- tribble(
 #'   ~STUDYID, ~USUBJID, ~PARAMCD, ~PARAMN, ~AVAL, ~AVISITN, ~AVISIT,
