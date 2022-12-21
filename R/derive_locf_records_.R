@@ -26,6 +26,12 @@
 #'   The dataset is sorted by `order` before carrying the last
 #'   observation forward (eg. `AVAL`) within each `by_vars`.
 #'
+#' @param keep_vars Variables that need carrying the last observation forward
+#'
+#'   Keep variables that need carrying the last observation forward other than `AVAL`
+#'   (eg. `PARAMN`, `VISITNUM`). If by default `NULL`, only variables specified in
+#'   `by_vars` and `AVAL` will be populated in the newly created records.
+#'
 #' @author G Gayatri
 #'
 #' @details For each group (with respect to the variables specified for the
@@ -51,7 +57,6 @@
 #'
 #' library(dplyr)
 #' library(tibble)
-#' library(admiraldev)
 #'
 #' advs <- tribble(
 #'   ~STUDYID, ~USUBJID, ~PARAMCD, ~PARAMN, ~AVAL, ~AVISITN, ~AVISIT,
@@ -114,8 +119,13 @@ derive_locf_records_ <- function(dataset,
   assert_data_frame(dataset_expected_obs)
   assert_data_frame(
     dataset,
-    required_vars = quo_c(by_vars, extract_vars(order), chr2vars(colnames(dataset_expected_obs)), keep_vars)
+    required_vars = quo_c(by_vars, extract_vars(order), chr2vars(colnames(dataset_expected_obs)))
   )
+  assert_data_frame(
+    dataset,
+    required_vars = keep_vars
+  )
+
 
   #### Prepping 'dataset_expected_obs' ####
 

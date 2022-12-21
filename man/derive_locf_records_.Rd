@@ -35,6 +35,12 @@ in the newly created records.}
 
 The dataset is sorted by \code{order} before carrying the last
 observation forward (eg. \code{AVAL}) within each \code{by_vars}.}
+
+\item{keep_vars}{Variables that need carrying the last observation forward
+
+Keep variables that need carrying the last observation forward other than \code{AVAL}
+(eg. \code{PARAMN}, \code{VISITNUM}). If by default \code{NULL}, only variables specified in
+\code{by_vars} and \code{AVAL} will be populated in the newly created records.}
 }
 \value{
 The input dataset with the new "LOCF" observations added for each
@@ -62,7 +68,6 @@ previous observation in the input dataset (when sorted by \code{order}) and
 
 library(dplyr)
 library(tibble)
-library(admiraldev)
 
 advs <- tribble(
   ~STUDYID, ~USUBJID, ~PARAMCD, ~PARAMN, ~AVAL, ~AVISITN, ~AVISIT,
