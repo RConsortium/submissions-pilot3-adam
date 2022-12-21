@@ -100,7 +100,7 @@ advs_expected_obsv <- tibble::tribble(
   "SYSBP",         6, "WEEK 6"
 )
 
-derive_locf_records(
+derive_locf_records_(
   data = advs,
   dataset_expected_obs = advs_expected_obsv,
   by_vars = vars(STUDYID, USUBJID, PARAMCD),
