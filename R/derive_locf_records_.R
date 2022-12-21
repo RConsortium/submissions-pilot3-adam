@@ -98,76 +98,76 @@
 #' )
 #'
 derive_locf_records_ <- function(dataset,
-                                dataset_expected_obs,
-                                by_vars,
-                                order,
-                                keep_vars = NULL) {
+                                 dataset_expected_obs,
+                                 by_vars,
+                                 order,
+                                 keep_vars = NULL) {
   #### Input Checking ####
-  
+
   # Check if input parameters is a valid list of variables
   assert_vars(by_vars, optional = TRUE)
   assert_vars(keep_vars, optional = TRUE)
   assert_order_vars(order)
-  
+
   # Check by_vars and order variables in input datasets
   assert_data_frame(dataset_expected_obs)
   assert_data_frame(
     dataset,
     required_vars = quo_c(by_vars, extract_vars(order), chr2vars(colnames(dataset_expected_obs)), keep_vars)
   )
-  
+
   #### Prepping 'dataset_expected_obs' ####
-  
-  
+
+
   # Get the IDs from input dataset for which the expected observations are to be added
-  
+
   ids <- dataset %>%
     select(!!!setdiff(by_vars, chr2vars(colnames(dataset_expected_obs)))) %>%
     distinct()
-  
+
   exp_obsv <- ids %>%
     crossing(dataset_expected_obs)
-  
-  
-  
+
+
+
   ##### Add LOCF records ####
-  
+
   # Split input dataset into the missing and non-missing AVAL records
   aval_missing <- dataset %>%
     filter(is.na(AVAL))
-  
+
   aval_not_missing <- dataset %>%
     drop_na(AVAL)
-  
-  
+
+
   # Get the variable names from the expected observation dataset
   exp_obs_vars <- exp_obsv %>%
     colnames()
-  
-  
+
+
   # Get unique combination of visits/timepoints per parameter per subject
   # from the original input dataset (with non-missing AVAL)
   advs_unique_original <- aval_not_missing %>%
     select(all_of(exp_obs_vars)) %>%
     distinct()
-  
-  
+
+
   tmp_dtype <- get_new_tmp_var(exp_obsv, prefix = "tmp_dtype")
-  
+
   # Get all the expected observations that are to be added to the input
   # dataset (with non-missing AVAL)
   advs_exp_obsv3 <- exp_obsv %>%
     mutate(!!tmp_dtype := "LOCF") %>%
     anti_join(advs_unique_original, by = c(exp_obs_vars))
-  
+
   # Merge the expected observations with the input dataset (with non-missing AVAL)
   # Arrange the dataset by 'order' and group it by 'by_vars'
   # Use fill() to fill the AVAL from the previous observation for the newly added records
-  
-  
+
+
   aval_not_missing_locf <- aval_not_missing %>%
     full_join(advs_exp_obsv3, by = c(exp_obs_vars))
-  
+
   if ("DTYPE" %in% colnames(aval_not_missing)) {
     aval_not_missing_locf <- aval_not_missing_locf %>%
       mutate(DTYPE = if_else(!!tmp_dtype == "LOCF", "LOCF", DTYPE, missing = DTYPE)) %>%
@@ -175,15 +175,15 @@ derive_locf_records_ <- function(dataset,
   } else {
     aval_not_missing_locf <- rename(aval_not_missing_locf, DTYPE = !!tmp_dtype)
   }
-  
+
   aval_not_missing_locf <- aval_not_missing_locf %>%
     arrange(!!!by_vars, !!!order) %>%
     group_by(!!!by_vars) %>%
     fill("AVAL", !!!keep_vars) %>%
     ungroup()
-  
-  
-  
+
+
+
   # Output dataset - merge the AVAL missing with non-missing+newly added LOCF records
   bind_rows(aval_not_missing_locf, aval_missing)
 }

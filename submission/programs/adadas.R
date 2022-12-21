@@ -79,10 +79,12 @@ actot_expected_obsv <- tibble::tribble(
 adas_locf <- derive_locf_records_(
   data = adas2,
   dataset_expected_obs = actot_expected_obsv,
-  #by_vars = vars(STUDYID, USUBJID, PARAMCD),
-  by_vars = vars(STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
-                 TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,
-                 ITTFL, EFFFL, COMP24FL, PARAMCD),
+  # by_vars = vars(STUDYID, USUBJID, PARAMCD),
+  by_vars = vars(
+    STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
+    TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,
+    ITTFL, EFFFL, COMP24FL, PARAMCD
+  ),
   order = vars(AVISITN, AVISIT),
   keep_vars = vars(VISIT, VISITNUM, ADY, ADT, PARAM, PARAMN, QSSEQ)
 )
