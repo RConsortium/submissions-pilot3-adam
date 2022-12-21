@@ -62,6 +62,7 @@ previous observation in the input dataset (when sorted by \code{order}) and
 
 library(dplyr)
 library(tibble)
+library(admiraldev)
 
 advs <- tribble(
   ~STUDYID, ~USUBJID, ~PARAMCD, ~PARAMN, ~AVAL, ~AVISITN, ~AVISIT,
