@@ -125,7 +125,8 @@ derive_locf_records_ <- function(dataset,
   )
   assert_data_frame(
     dataset,
-    required_vars = keep_vars
+    required_vars = keep_vars,
+    optional = TRUE
   )
 
 
