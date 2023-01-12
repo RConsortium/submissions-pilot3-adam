@@ -64,59 +64,6 @@ previous observation in the input dataset (when sorted by \code{order}) and
 \code{DTYPE} is set to "LOCF".
 }
 }
-\examples{
-
-library(dplyr)
-library(tibble)
-library(admiraldev)
-library(tidyr)
-
-advs <- tribble(
-  ~STUDYID, ~USUBJID, ~PARAMCD, ~PARAMN, ~AVAL, ~AVISITN, ~AVISIT,
-  "CDISC01", "01-701-1015", "PULSE", 1, 61, 0, "BASELINE",
-  "CDISC01", "01-701-1015", "PULSE", 1, 60, 2, "WEEK 6",
-  "CDISC01", "01-701-1015", "DIABP", 2, 51, 0, "BASELINE",
-  "CDISC01", "01-701-1015", "DIABP", 2, 50, 2, "WEEK 2",
-  "CDISC01", "01-701-1015", "DIABP", 2, 51, 4, "WEEK 4",
-  "CDISC01", "01-701-1015", "DIABP", 2, 50, 6, "WEEK 6",
-  "CDISC01", "01-701-1015", "SYSBP", 3, 121, 0, "BASELINE",
-  "CDISC01", "01-701-1015", "SYSBP", 3, 121, 2, "WEEK 2",
-  "CDISC01", "01-701-1015", "SYSBP", 3, 121, 4, "WEEK 4",
-  "CDISC01", "01-701-1015", "SYSBP", 3, 121, 6, "WEEK 6",
-  "CDISC01", "01-701-1028", "PULSE", 1, 65, 0, "BASELINE",
-  "CDISC01", "01-701-1028", "DIABP", 2, 79, 0, "BASELINE",
-  "CDISC01", "01-701-1028", "DIABP", 2, 80, 2, "WEEK 2",
-  "CDISC01", "01-701-1028", "DIABP", 2, NA, 4, "WEEK 4",
-  "CDISC01", "01-701-1028", "DIABP", 2, NA, 6, "WEEK 6",
-  "CDISC01", "01-701-1028", "SYSBP", 3, 130, 0, "BASELINE",
-  "CDISC01", "01-701-1028", "SYSBP", 3, 132, 2, "WEEK 2"
-)
-
-
-# A dataset with all the combinations of PARAMCD, PARAM, AVISIT, AVISITN, ... which are expected.
-advs_expected_obsv <- tibble::tribble(
-  ~PARAMCD, ~AVISITN, ~AVISIT,
-  "PULSE",         0, "BASELINE",
-  "PULSE",         6, "WEEK 6",
-  "DIABP",         0, "BASELINE",
-  "DIABP",         2, "WEEK 2",
-  "DIABP",         4, "WEEK 4",
-  "DIABP",         6, "WEEK 6",
-  "SYSBP",         0, "BASELINE",
-  "SYSBP",         2, "WEEK 2",
-  "SYSBP",         4, "WEEK 4",
-  "SYSBP",         6, "WEEK 6"
-)
-
-derive_locf_records_(
-  data = advs,
-  dataset_expected_obs = advs_expected_obsv,
-  by_vars = vars(STUDYID, USUBJID, PARAMCD),
-  order = vars(AVISITN, AVISIT),
-  keep_vars = vars(PARAMN)
-)
-
-}
 \author{
 G Gayatri
 }
