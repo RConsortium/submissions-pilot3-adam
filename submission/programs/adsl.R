@@ -136,8 +136,8 @@ adsl00 <- dm %>%
 # distinct(adsl_prod[which(adsl_prod$SITEGR1 == "900"), c("SITEID", "SITEGR1")])
 
 adsl01 <- adsl00 %>%
-  create_cat_var(adsl_spec, AGE, AGEGR1, AGEGR1N)  %>% 
-  create_var_from_codelist(adsl_spec, RACE, RACEN) %>% 
+  create_cat_var(adsl_spec, AGE, AGEGR1, AGEGR1N) %>%
+  create_var_from_codelist(adsl_spec, RACE, RACEN) %>%
   mutate(
     SITEGR1 = format_sitegr1(SITEID)
   )
@@ -229,7 +229,7 @@ vs00 <- vs %>%
     BMIBL = round(WEIGHTBL / (HEIGHTBL / 100)^2, digits = 1)
   ) %>%
   create_cat_var(adsl_spec, BMIBL, BMIBLGR1)
-  
+
 sc00 <- sc %>%
   filter(SCTESTCD == "EDLEVEL") %>%
   select(STUDYID, USUBJID, SCTESTCD, SCSTRESN) %>%
@@ -280,7 +280,7 @@ adsl06 <- adsl05 %>%
   mutate(
     DURDIS = round(DURDIS, digits = 1)
   ) %>%
-  create_cat_var(adsl_spec, DURDIS, DURDSGR1)  %>% 
+  create_cat_var(adsl_spec, DURDIS, DURDSGR1) %>%
   derive_vars_dt(
     dtc = RFENDTC,
     new_vars_prefix = "RFEN",
