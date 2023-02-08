@@ -8,19 +8,15 @@
 # Developed by : [Author/Developer name]
 
 library(admiral)
-library(admiral.test) # Contains example datasets from the CDISC pilot project
 library(curl)
 library(dplyr)
 library(tidyr)
 library(lubridate)
 library(stringr)
-library(arsenal)  
 library(diffdf)
 library(xportr)
 library(metacore)
 library(metatools)
-
-rm(list = ls())  # Code removes all the Objects in the envirnoment 
 
 # ----------------------------------------------------------------------------#
 # Use e.g. haven::read_sas to read in .sas7bdat, or other suitable functions  #
@@ -49,7 +45,7 @@ ae <- convert_blanks_to_na(ae)
 adsl <- convert_blanks_to_na(adsl)
 
 #---------------------- #
-# ADSL derivation start #
+# ADAE derivation start #
 #---------------------- #
 
 #------------------------------------#
@@ -161,12 +157,6 @@ adae0 <- ae %>%
   #---------------------------------------------------------------------#
   # AOCCFL - 1st Occurrence of Any AE Flag                              #
   #---------------------------------------------------------------------#
-  # Programming Notes:                                                  #
-  # Subset to TRTEMFL='Y' and sort by Subject (USUBJID),                #
-  # Start Date (ASTDT), and Sequence Number (AESEQ) and                 #
-  # flag the first record (set AOCCFL=’Y’) within each Subject          #
-  # Not matching on 01-701-1118  as TRTEMFL = "Y"   as ASTDT is missing #
-  #---------------------------------------------------------------------#  
   restrict_derivation(
     derivation = derive_var_extreme_flag,
     args = params(
@@ -180,13 +170,6 @@ adae0 <- ae %>%
   #---------------------------------------------------------------------#
   # AOCCSFL - 1st Occurrence of SOC Flag                                #
   #---------------------------------------------------------------------#
-  # Subset to TRTEMFL='Y' and sort by Subject (USUBJID),                #
-  # System Organ Class (AEBODSYS), Start Date (ASTDT),                  #
-  # and Sequence Number (AESEQ) and flag the first record               #
-  # (set AOCCSFL=’Y’) within each Subject and SOC                       #
-  # Not Matching on 01-701-1180,1118 , 1363 , 1076 , 1258 , 1299  1355  #
-  # because their TRTEMFL = "Y" for SOCTERM when ASTDT is missing       #
-  #---------------------------------------------------------------------# 
   restrict_derivation(
     derivation = derive_var_extreme_flag,
     args = params(
@@ -200,14 +183,6 @@ adae0 <- ae %>%
   #---------------------------------------------------------------------#
   # AOCCPFL - 1st Occurrence of Preferred Term Flag                     #
   #---------------------------------------------------------------------#
-  # Subset to TRTEMFL='Y' and sort by Subject (USUBJID),                #
-  # System Organ Class (AEBODSYS), Preferred Term                       # 
-  # (AEDECOD), Start Date (ASTDT), and Sequence Number                  #
-  # (AESEQ) and flag the first record (set AOCCPFL=’Y’) within          #
-  # each Subject, SOC, and PT                                           #
-  # Not Matching on the Subjects 01-701-1180,1118 , 1363 , 1076         #
-  # ,1258 , 1299  1355                                                  #
-  #---------------------------------------------------------------------#  
   restrict_derivation(
     derivation = derive_var_extreme_flag,
     args = params(
@@ -219,11 +194,6 @@ adae0 <- ae %>%
   )  %>% 
   #---------------------------------------------------------------------#
   # AOCC02FL - 1st Occurrence 02 Flag for Serious                       #
-  #---------------------------------------------------------------------#
-  # Subset to TRTEMFL='Y' and AESER='Y' and sort by Subject             #
-  # (USUBJID), Start Date (ASTDT), and Sequence Number                  #
-  # (AESEQ) and flag the first record (set AOCC02FL=’Y’)                #
-  # within each Subject                                                 #
   #---------------------------------------------------------------------#
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -238,12 +208,6 @@ adae0 <- ae %>%
   #---------------------------------------------------------------------#
   # AOCC03FL - 1st Occurrence 03 Flag for Serious SOC                   #
   #---------------------------------------------------------------------#
-  # Subset to TRTEMFL='Y' and AESER='Y' and sort by Subject             #
-  # (USUBJID), System Organ Class (AEBODSYS), Start Date                #
-  # (ASTDT), and Sequence Number (AESEQ) and flag the                   #
-  # first record (set AOCC03FL=’Y’) within each Subject and             #
-  # SOC                                                                 #
-  #---------------------------------------------------------------------#
   restrict_derivation(
     derivation = derive_var_extreme_flag,
     args = params(
@@ -257,12 +221,6 @@ adae0 <- ae %>%
   #---------------------------------------------------------------------#
   # AOCC04FL - 1st Occurrence 04 Flag for Serious PT                    #
   #---------------------------------------------------------------------#
-  # Subset to TRTEMFL='Y' and AESER='Y' and sort by Subject             #
-  # (USUBJID), System Organ Class (AEBODSYS), Preferred                 #
-  # Term (AEDECOD), Start Date (ASTDT), and Sequence                    #
-  # Number (AESEQ) and flag the first record (set                       #
-  # AOCC04FL=’Y’) within each Subject, SOC, and PT                      #
-  #---------------------------------------------------------------------#  
   restrict_derivation(
     derivation = derive_var_extreme_flag,
     args = params(
@@ -276,19 +234,12 @@ adae0 <- ae %>%
   # --------------------------------------------------------------------#
   # CQ01NAM - Customized Query 01 Name                                  #
   # --------------------------------------------------------------------#
-  # If AEDECOD contains any of the character strings of                 #
-  # ('APPLICATION', 'DERMATITIS', 'ERYTHEMA', 'BLISTER')                #
-  # OR if AEBODSYS='SKIN AND SUBC UTANEOUS TISSUE                       #
-  # DISORDERS' but AEDECOD is not in ('COLD SWEAT',                     #
-  #                                   'HYPERHIDROSIS', 'ALOPECIA') then #
-  # CQ01NAM='DERMATOLOGIC EVENTS' Otherwise  CQ01NAM=NULL               #
-  # --------------------------------------------------------------------#  
-  mutate ( CQ01NAM  = ifelse(str_detect(.$AEDECOD , "APPLICATION" ) |
-                             str_detect(.$AEDECOD , "DERMATITIS")   |
-                             str_detect(.$AEDECOD , "ERYTHEMA")     |
-                             str_detect(.$AEDECOD , "BLISTER")      | 
-                             str_detect(.$AEBODSYS , "SKIN AND SUBCUTANEOUS TISSUE DISORDERS") &
-                             !str_detect(.$AEDECOD , "COLD SWEAT|HYPERHIDROSIS|ALOPECIA")  , 
+  mutate ( CQ01NAM  = ifelse(str_detect(AEDECOD , "APPLICATION" ) |
+                             str_detect(AEDECOD , "DERMATITIS")   |
+                             str_detect(AEDECOD , "ERYTHEMA")     |
+                             str_detect(AEDECOD , "BLISTER")      | 
+                             str_detect(AEBODSYS , "SKIN AND SUBCUTANEOUS TISSUE DISORDERS") &
+                             !str_detect(AEDECOD , "COLD SWEAT|HYPERHIDROSIS|ALOPECIA")  , 
                              "DERMATOLOGIC EVENTS" , 
                              NA_character_) 
   ) %>%
@@ -296,12 +247,6 @@ adae0 <- ae %>%
   # --------------------------------------------------------------------#
   # AOCC01FL - 1st Occurrence 01 Flag for CQ01                          #
   # --------------------------------------------------------------------#
-  # Subset to CQ01NAM='' and TRTEMFL='Y' and sort by                    #
-  # Subject (USUBJID), Start Date (ASTDT), and Sequence                 #
-  # Number (AESEQ) and flag the first record (set                       #
-  # AOCC01FL=’Y’) within each Subject (Flag First Treatment             #
-  # Emergent Dermatological Event for Time to Event Analysis)           #
-  # --------------------------------------------------------------------#  
   restrict_derivation(
     derivation = derive_var_extreme_flag,
     args = params(
@@ -311,6 +256,10 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y" & CQ01NAM =='DERMATOLOGIC EVENTS'
   )  
+
+#---------------------- #
+# ADAE derivation end   #
+#---------------------- #
 
 # --------------------------------------------- #
 # Check variables against define &              #
@@ -322,29 +271,16 @@ adae <- adae0 %>%
   order_cols(adae_spec) %>% # Orders the columns according to the spec
   sort_by_key(adae_spec) %>% 
   xportr_df_label(adae_spec) %>% #dataset label 
-  xportr_label(adae_spec) #variable labels
-
-adae1 <- convert_blanks_to_na(adae) #blanks to NA
+  xportr_label(adae_spec) %>% #variable labels
+  # xportr_format(adae_spec) %>% 
+  convert_blanks_to_na() #blanks to NA
 
 # --------------#
 # Export to xpt #
 # ------------- #
-adae1 %>%
+adae %>%
   xportr_write("submission/datasets/adae.xpt", 
                label = "Adverse Events Analysis Dataset")
 
 
 
-
-# -------------------------------------------#
-# QC/Check against original TDF ADAE dataset #
-# -------------------------------------------#
-adsl  <- haven::read_xpt("https://github.com/RConsortium/submissions-pilot3-adam/blob/main/adam/adsl.xpt?raw=true")
-adae_orig <- haven::read_xpt("https://github.com/RConsortium/submissions-pilot3-adam/blob/main/adam/adae.xpt?raw=true")
-
-adae_orig <- convert_blanks_to_na(adae_orig) #blanks to NA
-
-#---------#
-# Compare #
-#---------#
-diffdf(adae1  , adae_orig , keys = c("STUDYID","USUBJID","AESEQ")   ) 
