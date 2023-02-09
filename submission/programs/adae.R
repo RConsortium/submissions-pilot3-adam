@@ -8,7 +8,6 @@
 # Developed by : [Author/Developer name]
 
 library(admiral)
-library(curl)
 library(dplyr)
 library(tidyr)
 library(lubridate)
