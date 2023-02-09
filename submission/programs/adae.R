@@ -52,8 +52,7 @@ adsl <- convert_blanks_to_na(adsl)
 #------------------------------------#
 ## placeholder for origin=predecessor, use metatool::build_from_derived()
 metacore <- spec_to_metacore("adam/TDF_ADaM - Pilot 3 Team updated.xlsx", where_sep_sheet = FALSE, quiet=T)
-# Get the specifications for the dataset we are currently building
-adae_spec <- metacore %>% select_dataset("ADAE")
+adae_spec <- metacore %>% select_dataset("ADAE") # Get the specifications for the dataset we are currently building
 
 # ----------------------#
 # Get list of ADSL vars #
@@ -264,15 +263,26 @@ adae0 <- ae %>%
 # Check variables against define &              #
 # Assign dataset labels, var labels and formats #
 # --------------------------------------------- #
-adae <- adae0 %>% 
+ADAE <- adae0 %>% 
   drop_unspec_vars(adae_spec) %>% # Check all variables specified are present and no more
   check_ct_data(adae_spec, na_acceptable = TRUE) %>% # Checks all variables with CT only contain values within the CT
   order_cols(adae_spec) %>% # Orders the columns according to the spec
   sort_by_key(adae_spec) %>% 
   xportr_df_label(adae_spec) %>% #dataset label 
   xportr_label(adae_spec) %>% #variable labels
-  # xportr_format(adae_spec) %>% 
   convert_blanks_to_na() #blanks to NA
+
+# ------------------------------------------------------------------- #
+# NOTE : When reading in original ADAE dataset to check against, it   #
+# seems the sas.format attributes set to DATE9. are changed to DATE9, #
+# i.e. without the dot[.] at the end. So when calling diffdf() the    #
+# workaround is to also remove the dot[.] in the sas.format in the    #
+# dataset generated here. This will make the sas.format comparisons   #
+# equal in diffdf(). See code below for work around.                  #
+# ------------------------------------------------------------------- #
+adae <- ADAE %>%
+  xportr_format(adae_spec$var_spec %>%
+                  mutate_at(c("format"), ~ replace_na(., "")), "ADAE")
 
 # --------------#
 # Export to xpt #
