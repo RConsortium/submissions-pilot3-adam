@@ -26,13 +26,13 @@ library(metatools)
 # ---------- #
 # read in AE #
 # ---------- #
-ae <- haven::read_xpt("https://github.com/RConsortium/submissions-pilot3-adam/blob/main/sdtm/ae.xpt?raw=true")
-suppae <- haven::read_xpt("https://github.com/RConsortium/submissions-pilot3-adam/blob/main/sdtm/suppae.xpt?raw=true")
+ae <- haven::read_xpt(file.path("sdtm", "ae.xpt"))
+suppae <- haven::read_xpt(file.path("sdtm", "suppae.xpt"))
 
 # ------------ #
 # read in ADSL #
 # ------------ #
-adsl <- haven::read_xpt("https://github.com/RConsortium/submissions-pilot3-adam/blob/main/submission/datasets/adsl.xpt?raw=true")
+adsl <- haven::read_xpt(file.path("submission", "datasets", "adsl.xpt"))
 
 #----------------------------------------------------------------------------------------#
 # When SAS datasets are imported into R using haven::read_sas(), missing                 #
