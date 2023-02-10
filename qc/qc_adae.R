@@ -17,4 +17,4 @@ adae_orig <- read_xpt(file.path("adam", "adae.xpt"))
 #---------#
 # Compare #
 #---------#
-diffdf(adae, adae_orig, keys = c("STUDYID","USUBJID","AESEQ")   ) 
+diffdf(adae, adae_orig, keys = c("STUDYID", "USUBJID", "AESEQ"))
