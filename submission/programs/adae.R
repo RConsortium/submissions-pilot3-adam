@@ -112,7 +112,6 @@ adae0 <- ae %>%
   # Derive analysis start & end dates  #
   # -----------------------------------#
   derive_vars_dtm_to_dt(vars(ASTDTM, AENDTM)) %>%
-
   # ----------------------------#
   # Analysis Start Relative Day #
   # Analysis End Relative Day   #
@@ -140,7 +139,7 @@ adae0 <- ae %>%
       trt_start_date = TRTSDT
     ),
     filter = !is.na(ASTDT)
-  ) %>% 
+  ) %>%
   #---------------------------------------------------------------------#
   # AOCCFL - 1st Occurrence of Any AE Flag                              #
   #---------------------------------------------------------------------#
