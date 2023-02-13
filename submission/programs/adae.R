@@ -1,11 +1,10 @@
-# Name: ADAE
-#
-# Label: Adverse Event Analysis Dataset
-#
-# Input: ae, adsl
-# Output: adae.xpt
-#
-# Developed by : [Author/Developer name]
+
+###########################################################################
+#' developers : Phani Tata/Joel Laxamana
+#' date: 07FEB2023
+#' modification History:
+#' program: ADAE.R
+###########################################################################
 
 library(admiral)
 library(dplyr)
@@ -16,6 +15,7 @@ library(diffdf)
 library(xportr)
 library(metacore)
 library(metatools)
+library(haven)
 
 # ----------------------------------------------------------------------------#
 # Use e.g. haven::read_sas to read in .sas7bdat, or other suitable functions  #
@@ -26,13 +26,13 @@ library(metatools)
 # ---------- #
 # read in AE #
 # ---------- #
-ae <- haven::read_xpt(file.path("sdtm", "ae.xpt"))
-suppae <- haven::read_xpt(file.path("sdtm", "suppae.xpt"))
+ae <- read_xpt(file.path("sdtm", "ae.xpt"))
+suppae <- read_xpt(file.path("sdtm", "suppae.xpt"))
 
 # ------------ #
 # read in ADSL #
 # ------------ #
-adsl <- haven::read_xpt(file.path("submission", "datasets", "adsl.xpt"))
+adsl <- read_xpt(file.path("submission", "datasets", "adsl.xpt"))
 
 #----------------------------------------------------------------------------------------#
 # When SAS datasets are imported into R using haven::read_sas(), missing                 #
@@ -105,9 +105,10 @@ adae0 <- ae %>%
   derive_vars_dtm(
     dtc = AEENDTC,
     new_vars_prefix = "AEN",
-    highest_imputation = "M",
-    date_imputation = "last",
-    time_imputation = "last",
+    # highest_imputation = "M",
+    highest_imputation = "h",
+    # date_imputation = "last",
+    # time_imputation = "last",
     # max_dates = vars(DTHDT, EOSDT)
     max_dates = NULL
   ) %>%
@@ -139,15 +140,15 @@ adae0 <- ae %>%
   # ---------------------------------#
   # Treatment Emergent Analysis flag #
   # ---------------------------------#
-
-  ### NOTE : These 5 lines below are code from admiral{} that may need to be udpated.
-  # derive_var_trtemfl(
-  #   new_var = TRTEMFL, start_date = ASTDT , end_date = AENDT ,
-  #   trt_start_date = TRTSDT , trt_end_date = NULL, end_window = NULL,
-  #   ignore_time_for_trt_end = TRUE, initial_intensity = NULL,  intensity = NULL
-  # )
-
-  mutate(TRTEMFL = if_else(ASTDT >= TRTSDT, "Y", NA_character_)) %>%
+  restrict_derivation(
+    derivation = derive_var_trtemfl,
+    args = params(
+      start_date = ASTDT,
+      end_date = AENDT,
+      trt_start_date = TRTSDT
+    ),
+    filter = !is.na(ASTDT)
+  ) %>% 
   #---------------------------------------------------------------------#
   # AOCCFL - 1st Occurrence of Any AE Flag                              #
   #---------------------------------------------------------------------#
