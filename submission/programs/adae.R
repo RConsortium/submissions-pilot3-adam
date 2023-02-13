@@ -105,35 +105,27 @@ adae0 <- ae %>%
   derive_vars_dtm(
     dtc = AEENDTC,
     new_vars_prefix = "AEN",
-    # highest_imputation = "M",
     highest_imputation = "h",
-    # date_imputation = "last",
-    # time_imputation = "last",
-    # max_dates = vars(DTHDT, EOSDT)
     max_dates = NULL
   ) %>%
   # -----------------------------------#
   # Derive analysis start & end dates  #
   # -----------------------------------#
   derive_vars_dtm_to_dt(vars(ASTDTM, AENDTM)) %>%
-  mutate(
-    TRTSDTM = as_datetime(TRTSDT),
-    astdt_m = as_datetime(as.Date(AESTDTC)),
-    aendt_m = as_datetime(as.Date(AEENDTC))
-  ) %>%
+
   # ----------------------------#
   # Analysis Start Relative Day #
   # Analysis End Relative Day   #
   # ----------------------------#
   derive_vars_dy(
-    reference_date = TRTSDTM,
-    source_vars = vars(TRTSDTM, ASTDTM, AENDTM)
+    reference_date = TRTSDT,
+    source_vars = vars(TRTSDT, ASTDT, AENDT)
   ) %>%
   derive_vars_duration(
     new_var = ADURN,
     new_var_unit = ADURU,
-    start_date = astdt_m,
-    end_date = aendt_m,
+    start_date = ASTDT,
+    end_date = AENDT,
     out_unit = "days"
   ) %>%
   mutate(ADURU = str_replace(ADURU, "DAYS", "DAY")) %>%
