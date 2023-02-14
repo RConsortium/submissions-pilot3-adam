@@ -21,4 +21,4 @@ adae_orig <- read_xpt(file.path("adam", "adae.xpt")) %>%
 # Compare #
 #---------#
 diffdf(adae, adae_orig, keys = c("STUDYID", "USUBJID", "AESEQ")) # using diffdf{}
-summary(comparedf(adae, adae_orig, by = c("STUDYID", "USUBJID", "AESEQ"))) # using aresenal{}
+summary(comparedf(adae, adae_orig, by = c("STUDYID", "USUBJID", "AESEQ"))) # using arsenal{}
