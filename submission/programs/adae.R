@@ -17,35 +17,35 @@ library(metacore)
 library(metatools)
 library(haven)
 
-# read in AE 
-# ---------- 
+# read in AE
+# ----------
 ae <- read_xpt(file.path("sdtm", "ae.xpt"))
 suppae <- read_xpt(file.path("sdtm", "suppae.xpt"))
 
 
-# read in ADSL 
-# ------------ 
+# read in ADSL
+# ------------
 adsl <- read_xpt(file.path("submission", "datasets", "adsl.xpt"))
 
 
-# When SAS datasets are imported into R using haven::read_sas(), missing                 
-# character values from SAS appear as "" characters in R, instead of appearing           
-# as NA values. Further details can be obtained via the following link:                  
-# https://pharmaverse.github.io/admiral/articles/admiral.html#handling-of-missing-values 
+# When SAS datasets are imported into R using haven::read_sas(), missing
+# character values from SAS appear as "" characters in R, instead of appearing
+# as NA values. Further details can be obtained via the following link:
+# https://pharmaverse.github.io/admiral/articles/admiral.html#handling-of-missing-values
 #----------------------------------------------------------------------------------------
 ae <- convert_blanks_to_na(ae)
 adsl <- convert_blanks_to_na(adsl)
 
 
-# ADAE derivation start 
-# Read in specifications from define 
+# ADAE derivation start
+# Read in specifications from define
 #----------------------------------------------------------------------------------------
 ## placeholder for origin=predecessor, use metatool::build_from_derived()
 metacore <- spec_to_metacore("adam/TDF_ADaM - Pilot 3 Team updated.xlsx", where_sep_sheet = FALSE, quiet = T)
 adae_spec <- metacore %>% select_dataset("ADAE") # Get the specifications for the dataset we are currently building
 
 
-# Get list of ADSL vars 
+# Get list of ADSL vars
 #----------------------------------------------------------------------------------------
 adsl_vars <- vars(
   TRTSDT,
@@ -65,7 +65,7 @@ adsl_vars <- vars(
   TRTEDT
 )
 
-# Merge adsl to ae 
+# Merge adsl to ae
 #----------------------------------------------------------------------------------------
 adae0 <- ae %>%
   derive_vars_merged(
@@ -73,22 +73,19 @@ adae0 <- ae %>%
     new_vars = adsl_vars,
     by = vars(STUDYID, USUBJID)
   ) %>%
-
-  # Set TRTA and TRTAN from ADSL 
+  # Set TRTA and TRTAN from ADSL
   #----------------------------------------------------------------------------------------
   rename(
     TRTA = TRT01A,
     TRTAN = TRT01AN
   ) %>%
-
-  # Derive analysis start time 
+  # Derive analysis start time
   #----------------------------------------------------------------------------------------
   derive_vars_dtm(
     dtc = AESTDTC,
     new_vars_prefix = "AST",
     highest_imputation = "D"
   ) %>%
-
   # Derive analysis end time
   #----------------------------------------------------------------------------------------
   derive_vars_dtm(
@@ -97,11 +94,9 @@ adae0 <- ae %>%
     highest_imputation = "h",
     max_dates = NULL
   ) %>%
-
-  # Derive analysis start & end dates  
+  # Derive analysis start & end dates
   #----------------------------------------------------------------------------------------
   derive_vars_dtm_to_dt(vars(ASTDTM, AENDTM)) %>%
-  
   # Duration of AE
   #----------------------------------------------------------------------------------------
   derive_vars_dy(
@@ -116,8 +111,7 @@ adae0 <- ae %>%
     out_unit = "days"
   ) %>%
   mutate(ADURU = str_replace(ADURU, "DAYS", "DAY")) %>%
-
-  # Treatment Emergent Analysis flag 
+  # Treatment Emergent Analysis flag
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_trtemfl,
@@ -128,8 +122,7 @@ adae0 <- ae %>%
     ),
     filter = !is.na(ASTDT)
   ) %>%
-
-  # AOCCFL - 1st Occurrence of Any AE Flag                              
+  # AOCCFL - 1st Occurrence of Any AE Flag
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -140,8 +133,7 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y"
   ) %>%
-
-  # AOCCSFL - 1st Occurrence of SOC Flag                                
+  # AOCCSFL - 1st Occurrence of SOC Flag
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -152,8 +144,7 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y"
   ) %>%
-
-  # AOCCPFL - 1st Occurrence of Preferred Term Flag                     
+  # AOCCPFL - 1st Occurrence of Preferred Term Flag
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -164,8 +155,7 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y"
   ) %>%
-
-  # AOCC02FL - 1st Occurrence 02 Flag for Serious                       
+  # AOCC02FL - 1st Occurrence 02 Flag for Serious
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -176,8 +166,7 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y" & AESER == "Y"
   ) %>%
-
-  # AOCC03FL - 1st Occurrence 03 Flag for Serious SOC                   
+  # AOCC03FL - 1st Occurrence 03 Flag for Serious SOC
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -188,8 +177,7 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y" & AESER == "Y"
   ) %>%
-
-  # AOCC04FL - 1st Occurrence 04 Flag for Serious PT                    
+  # AOCC04FL - 1st Occurrence 04 Flag for Serious PT
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -200,8 +188,7 @@ adae0 <- ae %>%
       mode = "first"
     ), filter = TRTEMFL == "Y" & AESER == "Y"
   ) %>%
-
-  # CQ01NAM - Customized Query 01 Name                                  
+  # CQ01NAM - Customized Query 01 Name
   #----------------------------------------------------------------------------------------
   mutate(CQ01NAM = ifelse(str_detect(AEDECOD, "APPLICATION") |
     str_detect(AEDECOD, "DERMATITIS") |
@@ -212,8 +199,7 @@ adae0 <- ae %>%
   "DERMATOLOGIC EVENTS",
   NA_character_
   )) %>%
-
-  # AOCC01FL - 1st Occurrence 01 Flag for CQ01                          
+  # AOCC01FL - 1st Occurrence 01 Flag for CQ01
   #----------------------------------------------------------------------------------------
   restrict_derivation(
     derivation = derive_var_extreme_flag,
@@ -225,10 +211,10 @@ adae0 <- ae %>%
     ), filter = TRTEMFL == "Y" & CQ01NAM == "DERMATOLOGIC EVENTS"
   )
 
-# ADAE derivation end 
-# 
-# Check variables against define &              
-# Assign dataset labels, var labels and formats 
+# ADAE derivation end
+#
+# Check variables against define &
+# Assign dataset labels, var labels and formats
 #----------------------------------------------------------------------------------------
 ADAE <- adae0 %>%
   drop_unspec_vars(adae_spec) %>% # Check all variables specified are present and no more
@@ -240,19 +226,19 @@ ADAE <- adae0 %>%
   convert_blanks_to_na() # blanks to NA
 
 
-# NOTE : When reading in original ADAE dataset to check against, it   
-# seems the sas.format attributes set to DATE9. are changed to DATE9, 
-# i.e. without the dot[.] at the end. So when calling diffdf() the    
-# workaround is to also remove the dot[.] in the sas.format in the    
-# dataset generated here. This will make the sas.format comparisons   
-# equal in diffdf(). See code below for work around.                  
+# NOTE : When reading in original ADAE dataset to check against, it
+# seems the sas.format attributes set to DATE9. are changed to DATE9,
+# i.e. without the dot[.] at the end. So when calling diffdf() the
+# workaround is to also remove the dot[.] in the sas.format in the
+# dataset generated here. This will make the sas.format comparisons
+# equal in diffdf(). See code below for work around.
 #----------------------------------------------------------------------------------------
 adae <- ADAE %>%
   xportr_format(adae_spec$var_spec %>%
     mutate_at(c("format"), ~ replace_na(., "")), "ADAE")
 
 
-# Export to xpt 
+# Export to xpt
 #----------------------------------------------------------------------------------------
 adae %>%
   xportr_write("submission/datasets/adae.xpt",
