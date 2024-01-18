@@ -15,9 +15,9 @@ Note : In Pilot 3, following the same approach as Pilot1, different open-source 
 
 ```{r path, echo=FALSE}
 path <- list(
-  sdtm = "./submission/sdtm",   # Modify path to the sdtm location
-  adam = "./submission/adam",    # Modify path to the adam location
-  output = "./submission/output"    # Modify path to the output location
+  sdtm = "./submission/sdtm", # Modify path to the sdtm location
+  adam = "./submission/adam", # Modify path to the adam location
+  output = "./submission/output" # Modify path to the output location
 )
 ```
 
@@ -25,7 +25,7 @@ path <- list(
 #### Summary of Demographic and Baseline Characteristics
 
 ```{r demog, out.width = "40%", out.height = "400px", echo=FALSE, message=FALSE, comment=NA}
-setwd("/cloud/project") 
+setwd("/cloud/project")
 source("/cloud/project/submission/programs/tlf-demographic.r")
 print(tbl)
 ```
