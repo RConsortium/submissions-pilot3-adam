@@ -19,7 +19,7 @@ The website is divide into 4 sections that will walk you through our efforts:
 1. **Project Background/Setup** - Scope of work, what we used and how we used it.
 1. **Deliverables** - What was sent to the FDA - Cover Letter, TLFs, Datasets, ADRG.
 1. **Conferences** - Proceedings from different conferences on Pilot Submissions
-1. **FDA Feedback** - Specific feedback from FDA on this Submission
+1. **WG Minutes and Regulatory Feedback** - Specific feedback from FDA on this Submission
 
 
 ## Latest News

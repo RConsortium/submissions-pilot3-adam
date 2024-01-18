@@ -65,7 +65,7 @@ navbar:
       - text: PHUSE SDE London
         href: articles/conf_phuse_sde_london.html
     feedback:
-      text: Feedback from FDA
+      text: WG Minutes and Regulatory Feedback
       menu:
       - text: -------
       - text: "R Consortium WG Meeting Minutes"
