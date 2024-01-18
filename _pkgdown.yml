@@ -78,6 +78,6 @@ navbar:
       - text: January 2024
         href: https://rconsortium.github.io/submissions-wg/minutes/2024-01-05/
       - text: -------
-        text: "Pilot3 Submission Issues Compilation"
+      - text: "Pilot3 Submission Issues Compilation"
       - text: January 2024 FDA Feedback Summary
         href: articles/feedback_jan2024.html
