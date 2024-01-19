@@ -30,38 +30,6 @@ source("/cloud/project/submission/programs/tlf-demographic.r")
 print(tbl)
 ```
 
-\newpage
-
-#### Table 14-3.01
-#### Primary Endpoint Analysis: ADAS Cog (11) - Change from Baseline to Week 24 - LOCF
-
-```{r primary, echo=FALSE, message=FALSE, comment=NA}
-# setwd("/cloud/project")
-# source("/cloud/project/submission/programs/tlf-primary.r")
-```
-<center>
-
-\hfill\break\hfill\break\hfill\break\includegraphics[page=1]{/cloud/project/submission/output/tlf-primary-pilot3.rtf.pdf}
-\
-\
-
-<\center>
-
-\newpage
-
-#### Table 14-3.02
-#### Primary Endpoint Analysis: Glucose (mmol/L) - Summary at Week 20 - LOCF
-
-```{r efficacy, echo=FALSE, message=FALSE, comment=NA}
-# setwd("/cloud/project")
-# source("/cloud/project/submission/programs/tlf-efficacy.r")
-# print(tbl)
-```
-
-\includegraphics[page=1]{/cloud/project/submission/output/tlf-efficacy-pilot3.rtf.pdf}
-
-\newpage
-
 #### Figure 14-1
 #### Time to Dermatologic Event by Treatment Group
 \

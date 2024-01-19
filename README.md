@@ -19,7 +19,7 @@ The website is divide into 4 sections that will walk you through our efforts:
 1. **Project Background/Setup** - Scope of work, what we used and how we used it.
 1. **Deliverables** - What was sent to the FDA - Cover Letter, TLFs, Datasets, ADRG.
 1. **Conferences** - Proceedings from different conferences on Pilot Submissions
-1. **WG Minutes and Regulatory Feedback** - Specific feedback from FDA on this Submission
+1. **WG Minutes and Regulatory Feedback** - Provides a menu of links in two sections. **Section 1**: Provides links to the monthly WG Meeting Minutes, and **Section2**: Provides a link to the Pilot3 Team Compilation of the Regulatory Review including the Pilot3 Team Interpretation(s) of the Regulatory Feedback as the Review Process continues. 
 
 
 ## Latest News
