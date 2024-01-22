@@ -65,7 +65,19 @@ navbar:
       - text: PHUSE SDE London
         href: articles/conf_phuse_sde_london.html
     feedback:
-      text: Feedback from FDA
+      text: WG Minutes and Regulatory Feedback
       menu:
-      - text: Feedback from January 2024 Meeting
+      - text: -------
+      - text: "R Consortium WG Meeting Minutes"
+      - text: October 2023
+        href: https://rconsortium.github.io/submissions-wg/minutes/2023-10-06/
+      - text: November 2023
+        href: https://rconsortium.github.io/submissions-wg/minutes/2023-11-03/
+      - text: December 2023
+        href: https://rconsortium.github.io/submissions-wg/minutes/2023-12-01/
+      - text: January 2024
+        href: https://rconsortium.github.io/submissions-wg/minutes/2024-01-05/
+      - text: -------
+      - text: "Pilot3 Submission Issues Compilation"
+      - text: January 2024 FDA Feedback Summary
         href: articles/feedback_jan2024.html

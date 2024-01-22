@@ -1,2 +1,2 @@
 linters: linters_with_defaults(line_length_linter(150), object_usage_linter=NULL, cyclocomp_linter(complexity_limit = 20))
-exclusions: list("R/data.R")
+exclusions: list("R/data.R", "renv")
