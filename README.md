@@ -2,7 +2,7 @@
 
 The objectives of the **R Consortium R Submission Pilot 3** Project are:  
 
-1. Deliver a **publicly accessible** R-based Submission through the [eCTD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd)
+1. Deliver a **publicly accessible** R-based Submission through the [eTCD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd)
 1. Expand on the work done in [Submission Pilot 1](https://rconsortium.github.io/submissions-pilot1/), by now utilizing R to generate ADaM datasets.
 
 
