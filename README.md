@@ -2,7 +2,7 @@
 
 The objectives of the **R Consortium R Submission Pilot 3** Project are:  
 
-1. Deliver a **publicly accessible** R-based Submission through the [eTCD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd) 
+1. Deliver a **publicly accessible** R-based Submission through the [eCTD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd)
 1. Expand on the work done in [Submission Pilot 1](https://rconsortium.github.io/submissions-pilot1/), by now utilizing R to generate ADaM datasets.
 
 
@@ -19,7 +19,10 @@ The website is divide into 4 sections that will walk you through our efforts:
 1. **Project Background/Setup** - Scope of work, what we used and how we used it.
 1. **Deliverables** - What was sent to the FDA - Cover Letter, TLFs, Datasets, ADRG.
 1. **Conferences** - Proceedings from different conferences on Pilot Submissions
-1. **WG Minutes and Regulatory Feedback** - Provides a menu of links in two sections. **Section 1**: Provides links to the monthly WG Meeting Minutes, and **Section2**: Provides a link to the Pilot3 Team Compilation of the Regulatory Review including the Pilot3 Team Interpretation(s) of the Regulatory Feedback as the Review Process continues. 
+1. **WG Minutes and Regulatory Feedback** - Provides a menu of links in two sections.
+      - **Section 1**: Provides links to the monthly WG Meeting Minutes
+      - **Section 2**: Provides a link to the Pilot3 Team Compilation of the Regulatory Review
+             - Pilot3 Team *Interpretation(s)* of the Regulatory Feedback (FDA Review Continues)
 
 
 ## Latest News
