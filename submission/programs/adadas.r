@@ -126,7 +126,7 @@ actot_expected_obsv <- tibble::tribble(
   "ACTOT", 24, "Week 24"
 )
 
-adas_locf2 <- adas4 %>% 
+adas_locf2 <- adas4 %>%
   restrict_derivation(
   derivation = derive_locf_records,
   args = params(
@@ -136,7 +136,7 @@ adas_locf2 <- adas4 %>%
       TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,
       ITTFL, EFFFL, COMP24FL, PARAMCD
     ),
-    order = exprs(AVISITN, AVISIT), 
+    order = exprs(AVISITN, AVISIT),
     keep_vars = exprs(VISIT, VISITNUM, ADY, ADT, PARAM, PARAMN, QSSEQ)
     ),
   filter = !is.na(ANL01FL)
