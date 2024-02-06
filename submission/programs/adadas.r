@@ -127,10 +127,6 @@ actot_expected_obsv <- tibble::tribble(
 )
 
 adas_locf2 <- adas4 %>% 
-  # mutate(
-  #   AVAL = if_else(is.na(DTYPE), AVAL, NA),
-  #   DTYPE = if_else(is.na(DTYPE), DTYPE, NA)
-  #   ) %>%
   restrict_derivation(
   derivation = derive_locf_records,
   args = params(
