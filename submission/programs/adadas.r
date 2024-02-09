@@ -115,7 +115,11 @@ adas4 <- adas3 %>%
     filter = !is.na(AVISIT)
   )
 
-################# Test: derive LOCF only considering ANL01FL=Y
+################# Feedback from FDA on need to match Pilot 1:
+################# Derive LOCF only considering ANL01FL=Y
+# There are differences in adadas due to issues with CDISC data
+# NO impact for the output, details can be found in the wiki:
+# https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings#adadas
 # derive PARAMCD=ACTOT, DTYPE=LOCF
 # A dataset with combinations of PARAMCD, AVISIT which are expected.
 actot_expected_obsv <- tibble::tribble(
@@ -126,24 +130,20 @@ actot_expected_obsv <- tibble::tribble(
   "ACTOT", 24, "Week 24"
 )
 
-adas_locf2 <- adas4 %>% 
-  # mutate(
-  #   AVAL = if_else(is.na(DTYPE), AVAL, NA),
-  #   DTYPE = if_else(is.na(DTYPE), DTYPE, NA)
-  #   ) %>%
+adas_locf2 <- adas4 %>%
   restrict_derivation(
-  derivation = derive_locf_records,
-  args = params(
-    dataset_expected_obs = actot_expected_obsv,
-    by_vars = exprs(
-      STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
-      TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,
-      ITTFL, EFFFL, COMP24FL, PARAMCD
+    derivation = derive_locf_records,
+    args = params(
+      dataset_expected_obs = actot_expected_obsv,
+      by_vars = exprs(
+        STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,
+        TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,
+        ITTFL, EFFFL, COMP24FL, PARAMCD
+      ),
+      order = exprs(AVISITN, AVISIT),
+      keep_vars = exprs(VISIT, VISITNUM, ADY, ADT, PARAM, PARAMN, QSSEQ)
     ),
-    order = exprs(AVISITN, AVISIT), 
-    keep_vars = exprs(VISIT, VISITNUM, ADY, ADT, PARAM, PARAMN, QSSEQ)
-    ),
-  filter = !is.na(ANL01FL)
+    filter = !is.na(ANL01FL)
   ) %>%
   ################# assign ANL01FL for new records
   mutate(ANL01FL = if_else(is.na(DTYPE), ANL01FL, "Y")) %>%
