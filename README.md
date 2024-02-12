@@ -2,7 +2,7 @@
 
 The objectives of the **R Consortium R Submission Pilot 3** Project are:  
 
-1. Deliver a **publicly accessible** R-based Submission through the [eTCD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd) 
+1. Deliver a **publicly accessible** R-based Submission through the [eCTD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd)
 1. Expand on the work done in [Submission Pilot 1](https://rconsortium.github.io/submissions-pilot1/), by now utilizing R to generate ADaM datasets.
 
 
@@ -19,7 +19,10 @@ The website is divide into 4 sections that will walk you through our efforts:
 1. **Project Background/Setup** - Scope of work, what we used and how we used it.
 1. **Deliverables** - What was sent to the FDA - Cover Letter, TLFs, Datasets, ADRG.
 1. **Conferences** - Proceedings from different conferences on Pilot Submissions
-1. **FDA Feedback** - Specific feedback from FDA on this Submission
+1. **WG Minutes and Regulatory Feedback** - Provides a menu of links in two sections.
+      - **Section 1**: Provides links to the monthly WG Meeting Minutes
+      - **Section 2**: Provides a link to the Pilot3 Team Compilation of the Regulatory Review
+             - Pilot3 Team *Interpretation(s)* of the Regulatory Feedback (FDA Review Continues)
 
 
 ## Latest News
@@ -28,6 +31,11 @@ The website is divide into 4 sections that will walk you through our efforts:
 
 * [Novo Nordisk's Journey to an R based FDA Submission](https://www.youtube.com/watch?v=t33dS17QHuA)
     - *Data scientists at Novo Nordisk, a leading pharmaceutical company in diabetes, obesity, and other chronic diseases, share details of their first FDA submission package featuring outputs and* [ADaM datasets](https://www.cdisc.org/standards/foundational/adam) *written exclusively in R.*
+
+\n
+* [Testing Containers and WebAssembly in Submissions to the FDA](https://pharmaverse.github.io/blog/posts/2024-02-01_containers_webassembly_submission/containers_and_webassembly_submissions.html)
+
+    - *Blog post with short summary of the R Consortium FDA Pilots 1-4 Series and the ongoing efforts undertaken to evaluate new technologies for submissions to the Food and Drug Administration (FDA). These transformative approaches, including WebAssembly and containers, hold immense potential to transform the regulatory landscape and streamline the submission process.*
 
 ## Get in Touch
 
