@@ -115,11 +115,6 @@ adas4 <- adas3 %>%
     filter = !is.na(AVISIT)
   )
 
-################# Feedback from FDA on need to match Pilot 1:
-################# Derive LOCF only considering ANL01FL=Y
-# There are differences in adadas due to issues with CDISC data
-# NO impact for the output, details can be found in the wiki:
-# https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings#adadas
 # derive PARAMCD=ACTOT, DTYPE=LOCF
 # A dataset with combinations of PARAMCD, AVISIT which are expected.
 actot_expected_obsv <- tibble::tribble(
