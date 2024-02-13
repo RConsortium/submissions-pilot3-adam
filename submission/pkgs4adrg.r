@@ -16,5 +16,5 @@ other <- data.frame(rbindlist(pkgother, idcol = TRUE, fill = TRUE)) %>%
 pkgdesc <- bind_rows(loaded, other) # stacks all package data frames.
 # NOTE column 'loaded', from this data frame can be used to subset out packages not used and may not be needed for the adrg.pdf
 
-# update path to save CSV in your local area.  
+# update path to save CSV in your local area.
 write.csv(pkgdesc, "/cloud/project/submission/pkgs4adrg.csv", row.names = FALSE)
