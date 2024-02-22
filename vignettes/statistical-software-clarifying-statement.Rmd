@@ -1,0 +1,12 @@
+---
+title: "Statistical Software Clarifying Statement"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '2'
+    toc_float: true
+---
+
+
+![Statistical Software Clarifying Statement](pdf/statistical-software-clarifying-statement.pdf){width=700px height=1100px}

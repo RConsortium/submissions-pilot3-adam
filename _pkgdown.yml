@@ -29,6 +29,8 @@ navbar:
         href: articles/project_background.html
       - text: Project Setup
         href: articles/project_setup.html
+      - text: Statistical Software Clarifying Statement
+        href: articles/statistical-software-clarifying-statement.html
     articles:
       text: Deliverables
       menu:
