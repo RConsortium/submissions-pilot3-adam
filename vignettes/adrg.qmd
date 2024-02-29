@@ -79,11 +79,11 @@ This was a prospective, randomized, multi-center, double-blind, placebo-controll
 
 300 subjects total (100 subjects in each of 3 groups)
 
-{{< pagebreak >}}
-
 ### Study schema:
 
 ![](adrg_images/Screenshot%202024-02-28%20223852.png){fig-align="center"}
+
+{{< pagebreak >}}
 
 # Analysis Considerations Related to Multiple Analysis Datasets
 
@@ -167,6 +167,8 @@ Yes
 
 For ASTDT in ADAE, this date was converted to numeric SAS date from AE.AESTDTC. If the day component is missing, a value of '01' is used. If both the month and day are missing no imputation is performed. See define.xml.
 
+{{< pagebreak >}}
+
 # Analysis Data Creation and Processing Issues
 
 ## Split Datasets
@@ -186,6 +188,8 @@ There were no datasets that required splitting due to size constraints.
 ## Intermediate Datasets
 
 No intermediate datasets were created for this trial.
+
+{{< pagebreak >}}
 
 # Analysis Dataset Descriptions
 
@@ -243,6 +247,8 @@ ADLBC contains one record per lab analysis parameter, per time point, per subjec
 
 ADTTE contains one observation per parameter per subject. ADTTE is specifically for safety analyses of the time to the first dermatologic adverse event. Dermatologic AEs are considered an adverse event of special interest. The key parameter used for the analysis of time to the first dermatological event is with PARAMCD of "TTDE".
 
+{{< pagebreak >}}
+
 # Data Conformance Summary
 
 ## Conformance Inputs
@@ -281,6 +287,8 @@ In this Pilot 3 study, our focus was to create ADaMs based on Pilot 1 where afte
 [QC Findings](https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings)
 
 [Common Issues](https://github.com/RConsortium/submissions-pilot3-adam/wiki/Common-Issues)
+
+{{< pagebreak >}}
 
 # Submission of Programs
 
@@ -438,6 +446,8 @@ For reference, below is a description of the analysis programs utilized and outp
 | xportr                             | 0.2.0               | Tools to build CDISC compliant data sets and check for CDISC compliance.                                                                                                                                                                                                                                                                                                                                                                                                                |
 +------------------------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+{{< pagebreak >}}
+
 # Directory Structure
 
 m5
@@ -547,6 +557,8 @@ m5
         \|   │   │   ├── adtte.xpt
 
         \|   │   │   ├── define2-0-0.xsl
+
+{{< pagebreak >}}
 
 # Appendix
 
