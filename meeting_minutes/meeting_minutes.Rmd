@@ -15,6 +15,170 @@ knitr::opts_chunk$set(echo = TRUE)
 Pilot 3 team should be able to see updated meeting minutes here on a
 weekly basis.
 
+# Meeting Minutes - 29th February 2024 by Joel Laxamana
+
+## Updates:
+- Pilot3utils merge to main by Ben
+- Response for issue #149 by Steven
+- ADRG PR by Joel
+
+## Actions:
+- Finalize ADRG and response letter
+- Clarify file submission specifications
+
+
+
+# Meeting Minutes - 15th February 2024 by Joel Laxamana
+
+## Updates:
+- Unit tests for Pilot 3 functions by Ben and Robert
+- LOCF branch merge by Kangjie
+- Comparison of attributes by Steven
+
+## Actions:
+- Zip for Pilot3utils and storage in eCTD structure
+- ADRG response letter draft
+- Include Alexandra in Pilot 3 team
+- Completion by 1st week of March 2024
+
+# Pilot 3 Catch-up - 08th February 2024 by Joel Laxamana
+
+## Meeting Feedback:
+- Differences between R and R-Studio versions
+- Differences between Pilot 3 ADaM and CDISC datasets
+- Package and filenames standardization
+- File path clarification
+- Different primary output in Pilot 1 vs Pilot 3
+
+## Actions:
+- Draft responses for feedback
+- Update ADRG
+- Finalize LOCF approach
+- Review with FDA
+
+
+
+# Pilot 3 - RCSWG Meeting - 2024 by Joel Laxamana
+
+- Recipients to be changed
+- LOCF considerations
+- Meeting with Eric for system alignment
+
+
+
+# Meeting Minutes - 18th August 2023 by Joel Laxamana
+
+## Updates:
+- Updated renv.lock to renv.txt
+- ADRG updated with renv.txt
+- Robert to update report-tlf.pdf
+
+
+# Meeting Minutes - 30th June 2023 by Joel Laxamana
+
+## Priority: Running/Testing
+- ADRG update by Joel
+- Renaming renv.lock to renv.txt in the submission repo
+
+## Tasks:
+- Relative paths documentation
+- Package and filename standardization
+
+# Meeting Minutes - 23rd June 2023 by Joel Laxamana
+
+## Priority: Testing from the FDA package
+- All to test by next Friday's meeting.
+
+## Updates:
+- Pilot 3 Package readme
+- Cover letter approved
+- Website updates by Ben S.
+
+## Additional Tasks:
+- Deliverable tab updates
+- Wiki PDFs to vignettes
+- QC findings updates
+
+
+
+# Meeting Minutes - 09th June 2023 by Joel Laxamana
+
+## Pilot 3 Package Readme
+- [Thanks, Steven](https://github.com/RConsortium/submissions-pilot3-utilities/tree/readme)
+
+## Tasks and Assignments
+- Check R-CMD-check [Thanks, Ben](https://github.com/RConsortium/submissions-pilot3-adam/pull/110)
+- Investigate rtf conversion for report-tlf.pdf [Assigned to Phani](https://merck.github.io/r2rtf/articles/rtf-convert-format.html)
+- Testing from the FDA package [Assigned to Phani, Robert, Nicole](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/12)
+- Update ADRG guide and appendix [Assigned to Robert, Steven](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/13)
+- Cover letter update [Assigned to Lei](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/1)
+- Website update [Thanks, Ben](https://phuse.s3.eu-central-1.amazonaws.com/Archive/2023/SDE/EU/London/PRE_London09.pdf)
+- QUARTO website [Assigned to Phani, Robert](https://quarto.org/docs/publishing/github-pages.html)
+
+
+# Meeting Minutes - 02nd June 2023 by Joel Laxamana
+
+- **FDA Repo Updates:**
+  - Cover letter update assigned to Joel.
+  - Robert assigned to issue #59 to update report-tlf.pdf; Phani to connect with Robert for support.
+  - Declan to update readme in FDA repo [here](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/10); Phani/Lei to review.
+
+- **Pilot 3 Package Readme:**
+  - Steven to update; Joel and Kaz to review.
+
+- **Deadlines:**
+  - Initial draft due by June 9th, final by the 16th.
+  - Kaz to be Joel's backup to merge into main after PR pass review.
+
+- **Last Steps:**
+  - Finalize ADRG.
+  - Test running programs from the FDA package.
+
+
+
+# Meeting Minutes - 19th May 2023 by Joel Laxamana
+
+## Agenda: Pilot 3 Progress
+
+### Attendees:
+- Robert
+- Kaz
+- Declan
+- Ben
+
+---
+
+### Robert:
+- Updated the site [https://rconsortium.github.io/submissions-pilot3-adam/main/](https://rconsortium.github.io/submissions-pilot3-adam/main/)
+    - Included QC wiki page and Declan's slides on Pilot 3
+    - Suggested using Quarto
+- Provided materials for discussion:
+    1. [Pilot3 report-tlf.pdf](1) (based upon Pilot1) with timestamps
+    2. [Pilot3 report-adam.pdf](2) (based on updated Pilot3 QC Findings with finalized ADRG)
+    3. Pilot3 Website (GH Pages feature) for discussion (limitations, differences from Pilot1, and related)
+
+---
+
+### Kaz:
+- Discussed the Pinnacle 21 report for SDTM.
+- Proposed creating a submissions folder called 'sdtm' [here](https://github.com/RConsortium/submissions-pilot3-adam/tree/main/submission).
+
+---
+
+### Declan:
+- Shared slides for Pilot 3.
+- Updating slides on 3 repos or 2.
+- Moving departments to a different team.
+
+---
+
+### Ben:
+- Will collaborate with Joel to understand the cleanup of the project area vs package area for Pilot 3.
+
+---
+
+[1]: Pilot3 report-tlf.pdf
+[2]: Pilot3 report-adam.pdf
 
 ## 28Apr2023 - Minutes by Joel Laxamana
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
@@ -329,7 +493,6 @@ https://docs.google.com/spreadsheets/d/13T15AS69ENeHktMofEQD4QBOg_moY-mU/edit?us
     codelists, variables from datasets that we are not generating in
     Pilot 3.
 
-![](images/pilot3_meeting_minutes_define.PNG)
 
 ### ACTION to Lei Zhao : Thanks to the discussion within the team, we should be able to resolve the issues directly in P21. Then Lei will : <https://github.com/RConsortium/submissions-pilot3-adam/issues/61>
 

@@ -32,7 +32,7 @@ The website is divide into 4 sections that will walk you through our efforts:
 * [Novo Nordisk's Journey to an R based FDA Submission](https://www.youtube.com/watch?v=t33dS17QHuA)
     - *Data scientists at Novo Nordisk, a leading pharmaceutical company in diabetes, obesity, and other chronic diseases, share details of their first FDA submission package featuring outputs and* [ADaM datasets](https://www.cdisc.org/standards/foundational/adam) *written exclusively in R.*
 
-\n
+
 * [Testing Containers and WebAssembly in Submissions to the FDA](https://pharmaverse.github.io/blog/posts/2024-02-01_containers_webassembly_submission/containers_and_webassembly_submissions.html)
 
     - *Blog post with short summary of the R Consortium FDA Pilots 1-4 Series and the ongoing efforts undertaken to evaluate new technologies for submissions to the Food and Drug Administration (FDA). These transformative approaches, including WebAssembly and containers, hold immense potential to transform the regulatory landscape and streamline the submission process.*
