@@ -534,7 +534,7 @@ m5
 
         \|   │   │   ├── adrg.pdf
 
-        \|   │   │   ├── ADaM - Pilot 3.xlsx
+        \|   │   │   ├── adam-pilot-3.xlsx
 
         \|   │   │   ├── define.xml
 
@@ -672,7 +672,7 @@ The package installation procedure may take a few minutes or longer depending on
 
 5.  Upon completion of installing packages using {renv}, please restart your R session.
 
-6.  Install the {pilot3} package running the code below.
+6.  Install the {pilot3utils} package running the code below.
 
 `# Option 1`
 
@@ -738,11 +738,11 @@ All these paths must be defined before executing the analysis programs. For exam
 
 `path <- list(`
 
-`sdtm = "~/pilot3-files/m5/datasets/rconsortiumpilot3/tabulations/sdtm",`
+`sdtm = "Enter full file path to source sdtm data here",`
 
-`adam = "~/pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam/datasets",`
+`adam = "``Enter full file path to where adam data should be saved and sourced here``",`
 
-`output = "."`
+`output = "``Enter full file path to where outputs should be saved here``"`
 
 `)`
 
@@ -771,24 +771,3 @@ To reproduce analysis results, rerun the following programs:
 {{< pagebreak >}}
 
 {{< pagebreak >}}
-
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
