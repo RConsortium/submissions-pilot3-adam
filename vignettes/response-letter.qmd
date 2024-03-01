@@ -1,0 +1,135 @@
+---
+title: "Response Letter"
+subtitle: "R Consortium  \nR Submission Pilot 3 2024-03-01"
+format: 
+  pdf:
+    toc: true
+    number-sections: true
+editor: source
+format:
+  docx:
+    number-sections: true
+    number-offset: 6
+    toc: true
+    toc-depth: 3
+---
+
+# Minor Differences Between CDISC and Pilot 3 Datasets
+
+## Introduction
+
+The team previously explored all differences between the original CDISC and Pilot 3 datasets. Important findings are documented in the ADRG in the section 'QC findings'. To address the concern of the reviewers, we explored if other discrepancies are present that could impact on the analysis.
+
+To this point, the team used three different packages:
+
+```         
+library(arsenal)
+library(diffdf)
+library(waldo)
+
+path <- list(sdtm = "~/submissions-pilot3-adam/submission/sdtm",
+             adam = "~/submissions-pilot3-adam/submission/adam",
+             cdisc = "~/submissions-pilot3-adam/adam")
+```
+
+### ADSL
+
+```         
+adsl <- read_xpt(file.path(path$adam, "adsl.xpt"))  adsl_cdisc <- read_xpt(file.path(path$cdisc, "adsl.xpt"))
+
+arsenal::comparedf(adsl, adsl_cdisc)
+diffdf::diffdf(adsl, adsl_cdisc, keys = c("STUDYID", "USUBJID"))
+waldo::compare(adsl, x_arg = "old", adsl_cdisc, y_arg = "new")
+
+
+`attr(old, 'label')` is a character vector ('Subject-Level Analysis Dataset')
+`attr(new, 'label')` is absent
+```
+
+### ADTTE
+
+```         
+adtte <- read_xpt(file.path(path$adam, "adtte.xpt"))
+adtte_cdisc <- read_xpt(file.path(path$cdisc, "adtte.xpt"))
+
+arsenal::comparedf(adtte, adtte_cdisc)
+diffdf::diffdf(adtte, adtte_cdisc, keys = c("STUDYID", "USUBJID")) 
+waldo::compare(adtte, x_arg = "old", adtte_cdisc, y_arg = "new")
+
+  ================================================
+   VARIABLE  ATTR_NAME   VALUES.BASE  VALUES.COMP 
+  ------------------------------------------------
+     AGE     format.sas     NULL           3      
+    AGEGR1   format.sas     NULL          $5      
+   AGEGR1N   format.sas     NULL           3      
+   EVNTDESC  format.sas     NULL          $25     
+    PARAM    format.sas     NULL          $32     
+   PARAMCD   format.sas     NULL          $4      
+     RACE    format.sas     NULL          $32     
+    RACEN    format.sas     NULL           3      
+    SAFFL    format.sas     NULL          $1      
+     SEX     format.sas     NULL          $1      
+  ------------------------------------------------
+```
+
+### ADAE
+
+```         
+adae <- read_xpt(file.path(path$adam, "adae.xpt"))
+adae_cdisc <- read_xpt(file.path(path$cdisc, "adae.xpt"))
+
+arsenal::comparedf(adae, adae_cdisc)
+diffdf::diffdf(adae, adae_cdisc, keys = c("STUDYID", "USUBJID", "AESEQ"))
+waldo::compare(adae, x_arg = "old", adae_cdisc, y_arg = "new")
+
+=======================================================================================
+   VARIABLE  ATTR_NAME             VALUES.BASE                      VALUES.COMP          
+  --------------------------------------------------------------------------------------
+    ADURN      label          Analysis Duration (N)               AE Duration (N)        
+    ADURU      label         Analysis Duration Units             AE Duration Units       
+    AOCCFL     label    1st Occurrence within Subject ...  1st Occurrence of Any AE Flag 
+  --------------------------------------------------------------------------------------
+```
+
+### ADLBC
+
+```         
+adlbc <- read_xpt(file.path(path$adam, "adlbc.xpt"))
+adlbc_cdisc <- read_xpt(file.path(path$cdisc, "adlbc.xpt"))
+
+arsenal::comparedf(adlbc, adlbc_cdisc)
+diffdf::diffdf(adlbc, adlbc_cdisc, keys = c("STUDYID", "USUBJID", "LBSEQ", "PARAMCD", "AVISIT")) 
+waldo::compare(adlbc, x_arg = "old", adlbc_cdisc, y_arg = "new")
+
+  ==================================
+   VARIABLE  CLASS.BASE  CLASS.COMP 
+  ----------------------------------
+     ADT        Date      numeric   
+    TRTEDT      Date      numeric   
+    TRTSDT      Date      numeric   
+  ----------------------------------
+```
+
+### ADADAS
+
+```         
+adadas <- read_xpt(file.path(path$adam, "adadas.xpt"))
+adadas_cdisc <- read_xpt(file.path(path$cdisc, "adadas.xpt"))
+
+arsenal::comparedf(adadas, adadas_cdisc)
+diffdf::diffdf(adadas, adadas_cdisc, keys = c("STUDYID", "USUBJID", "QSSEQ", "PARAMCD", "AVISIT"))
+waldo::compare(adadas, x_arg = "old", adadas_cdisc, y_arg = "new")
+
+========================================================================================
+   VARIABLE  ATTR_NAME             VALUES.BASE                        VALUES.COMP            
+  --------------------------------------------------------------------------------------
+   ANL01FL     label            Analysis Flag 01                Analysis Record Flag 01      
+    ITTFL      label    Intent-To-Treat Population Fla...  Intent-to-Treat Population Fla... 
+  --------------------------------------------------------------------------------------
+```
+
+### Conclusion
+
+Any observed difference in variables is documented in QC findings, including NA versus NULL which we did not encounter. Any observed difference in attribute will not affect the analysis.
+
+In conclusion, the team was unable to identify any differences that could have an impact on the analysis. If the reviewer disagrees, we are happy to respond to more detailed findings that includes examples.
