@@ -5,9 +5,10 @@ format:
   pdf:
     toc: true
     number-sections: true
+    include-before:
+      - '`\newpage{}`'
 editor: visual
 ---
-
 {{< pagebreak >}}
 
 # Introduction
@@ -91,26 +92,26 @@ This was a prospective, randomized, multi-center, double-blind, placebo-controll
 
 Core variables are those that are represented across all/most analysis datasets.
 
-| **Variable Name** | **Variable Description**              |
-|-------------------|---------------------------------------|
-| STUDYID           | Study Identifier                      |
-| USUBJID           | Unique Subject Identifier             |
-| SUBJID            | Subject Identifier for the Study      |
-| SITEID            | Study Site Identifier                 |
-| SITEGR1           | Pooled Site Group 1                   |
-| TRTSDT            | Date of First Exposure to Treatment   |
-| TRTEDT            | Date of Last Exposure to Treatment    |
-| AGE               | Age                                   |
-| AGEGR1            | Pooled Age Group 1                    |
-| AGEGR1N           | Pooled Age Group 1 (N)                |
-| RACE              | Race                                  |
-| RACEN             | Race (N)                              |
-| SEX               | Sex                                   |
-| SAFFL             | Safety Population Flag                |
-| ITTFL             | Intent-To-Treat Population Flag       |
-| EFFFL             | Efficacy Population Flag              |
-| COMP24FL          | Completers of Week 24 Population Flag |
-| DSRAEFL           | Discontinued due to AE?               |
+| **Variable Name**   | **Variable Description**              |
+|---------------------|---------------------------------------|
+| STUDYID             | Study Identifier                      |
+| USUBJID             | Unique Subject Identifier             |
+| SUBJID              | Subject Identifier for the Study      |
+| SITEID              | Study Site Identifier                 |
+| SITEGR1             | Pooled Site Group 1                   |
+| TRTSDT              | Date of First Exposure to Treatment   |
+| TRTEDT              | Date of Last Exposure to Treatment    |
+| AGE                 | Age                                   |
+| AGEGR1              | Pooled Age Group 1                    |
+| AGEGR1N             | Pooled Age Group 1 (N)                |
+| RACE                | Race                                  |
+| RACEN               | Race (N)                              |
+| SEX                 | Sex                                   |
+| SAFFL               | Safety Population Flag                |
+| ITTFL               | Intent-To-Treat Population Flag       |
+| EFFFL               | Efficacy Population Flag              |
+| COMP24FL            | Completers of Week 24 Population Flag |
+| DSRAEFL             | Discontinued due to AE?               |
 
 ## Treatment Variables
 
@@ -136,8 +137,8 @@ Use of ADaM Treatment Variables in Analysis
   Are both planned and actual treatment variables used in analysis?
 
     Yes. Planned treatment variables are used for study population and efficacy 
-    analyses, whilst actual treatment variables are used for the safety analysis. 
-    All subjects received the treatment arm to which they were randomised and so 
+    analyses, whilst actual treatment variables are used for the safety analysis.
+    All subjects received the treatment arm to which they were randomised and so
     the planned treatment is equivalent to the actual treatment for all subjects.
 ```
 
@@ -154,13 +155,13 @@ Use of ADaM Treatment Grouping Variables in Analysis
 Was windowing used in one or more analysis datasets?
 
 ```         
-Yes
+  Yes
 ```
 
 Were unscheduled visits used in any analyses?
 
 ```         
-Yes
+  Yes
 ```
 
 ## Imputation/Derivation Methods
@@ -177,13 +178,12 @@ There were no datasets that required splitting due to size constraints.
 
 ## Data Dependencies
 
-|                      |                                              |
-|----------------------|----------------------------------------------|
-| **Analysis Dataset** | **Dependent on Following Analysis Datasets** |
-| ADAE                 | ADSL                                         |
-| ADTTE                | ADSL, ADAE                                   |
-| ADLBC                | ADSL                                         |
-| ADADAS               | ADSL                                         |
+| **Analysis Dataset**   | **Dependent on Following Analysis Datasets** |
+|------------------------|----------------------------------------------|
+| ADAE                   | ADSL                                         |
+| ADTTE                  | ADSL, ADAE                                   |
+| ADADAS                 | ADSL                                         |
+| ADLBC                  | ADSL                                         |
 
 ## Intermediate Datasets
 
@@ -225,7 +225,7 @@ The following provides detailed information for each analysis dataset included i
 | ADTTE - AE Time To 1st Derm. Event Analysis  | BASIC DATA STRUCTURE           | x        | x      |                         |           | One or more records per subject per analysis parameter per analysis timepoint |
 +----------------------------------------------+--------------------------------+----------+--------+-------------------------+-----------+-------------------------------------------------------------------------------+
 
-: {tbl-colwidths="\[15,15,5,5,15,5,15\]"}
+: {tbl-colwidths="\[20,20,10,10,20,10,10\]"}
 
 ### ADSL - Subject-Level Analysis Dataset
 
@@ -257,7 +257,7 @@ Were the analysis datasets evaluated for conformance with CDISC ADaM Validation 
 
 ```         
   Yes, Version of CDISC ADaM Validation Checks and software used: Pinnacle 21® 
-Community 4.0.2
+  Community 4.0.2
 ```
 
 Were the ADaM datasets evaluated in relation to define.xml?
@@ -279,6 +279,8 @@ Was define.xml evaluated?
 +==========+==============================================================================+=========+====================+=========================================================================================================================================================================================+
 | AD1012   | Secondary custom variable is present but its primary variable is not present | ADSL    | 1 (50.00%)         | This is a Sponsor Extension to the ADaM Model. The VISNUMEN \[End of Trt Visit (Vis 12 or Early Term.)\] variable is a integer variable which is not related to any character variable. |
 +----------+------------------------------------------------------------------------------+---------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+: {tbl-colwidths="\[17,22,15,22,25\]"}
+
 
 ## QC Findings and Common Issues
 
