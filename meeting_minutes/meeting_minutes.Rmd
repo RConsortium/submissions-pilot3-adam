@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Pilot 3 team should be able to see updated meeting minutes here on a
 weekly basis.
 
-# Meeting Minutes - 07mar2024 by Joel Laxamana 
+# Meeting Minutes - 07mar2024 by Joel Laxamana
 
 ## New member Alexandra - Welcome!
 
