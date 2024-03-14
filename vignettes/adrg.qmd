@@ -9,6 +9,7 @@ format:
       - '`\newpage{}`'
 editor: visual
 ---
+
 {{< pagebreak >}}
 
 # Introduction
@@ -82,7 +83,7 @@ This was a prospective, randomized, multi-center, double-blind, placebo-controll
 
 ### Study schema:
 
-![](adrg_images/Screenshot%202024-02-28%20223852.png){fig-align="center"}
+![](adrg_images/cdiscpilot01-study-schema.png){fig-align="center"}
 
 {{< pagebreak >}}
 
@@ -92,26 +93,26 @@ This was a prospective, randomized, multi-center, double-blind, placebo-controll
 
 Core variables are those that are represented across all/most analysis datasets.
 
-| **Variable Name**   | **Variable Description**              |
-|---------------------|---------------------------------------|
-| STUDYID             | Study Identifier                      |
-| USUBJID             | Unique Subject Identifier             |
-| SUBJID              | Subject Identifier for the Study      |
-| SITEID              | Study Site Identifier                 |
-| SITEGR1             | Pooled Site Group 1                   |
-| TRTSDT              | Date of First Exposure to Treatment   |
-| TRTEDT              | Date of Last Exposure to Treatment    |
-| AGE                 | Age                                   |
-| AGEGR1              | Pooled Age Group 1                    |
-| AGEGR1N             | Pooled Age Group 1 (N)                |
-| RACE                | Race                                  |
-| RACEN               | Race (N)                              |
-| SEX                 | Sex                                   |
-| SAFFL               | Safety Population Flag                |
-| ITTFL               | Intent-To-Treat Population Flag       |
-| EFFFL               | Efficacy Population Flag              |
-| COMP24FL            | Completers of Week 24 Population Flag |
-| DSRAEFL             | Discontinued due to AE?               |
+| **Variable Name** | **Variable Description**              |
+|-------------------|---------------------------------------|
+| STUDYID           | Study Identifier                      |
+| USUBJID           | Unique Subject Identifier             |
+| SUBJID            | Subject Identifier for the Study      |
+| SITEID            | Study Site Identifier                 |
+| SITEGR1           | Pooled Site Group 1                   |
+| TRTSDT            | Date of First Exposure to Treatment   |
+| TRTEDT            | Date of Last Exposure to Treatment    |
+| AGE               | Age                                   |
+| AGEGR1            | Pooled Age Group 1                    |
+| AGEGR1N           | Pooled Age Group 1 (N)                |
+| RACE              | Race                                  |
+| RACEN             | Race (N)                              |
+| SEX               | Sex                                   |
+| SAFFL             | Safety Population Flag                |
+| ITTFL             | Intent-To-Treat Population Flag       |
+| EFFFL             | Efficacy Population Flag              |
+| COMP24FL          | Completers of Week 24 Population Flag |
+| DSRAEFL           | Discontinued due to AE?               |
 
 ## Treatment Variables
 
@@ -178,12 +179,17 @@ There were no datasets that required splitting due to size constraints.
 
 ## Data Dependencies
 
-| **Analysis Dataset**   | **Dependent on Following Analysis Datasets** |
-|------------------------|----------------------------------------------|
-| ADAE                   | ADSL                                         |
-| ADTTE                  | ADSL, ADAE                                   |
-| ADADAS                 | ADSL                                         |
-| ADLBC                  | ADSL                                         |
++-----------------------+----------------------------------------------+
+| **Analysis Dataset**  | **Dependent on Following Analysis Datasets** |
++=======================+==============================================+
+| ADAE                  | ADSL                                         |
++-----------------------+----------------------------------------------+
+| ADTTE                 | ADSL, ADAE                                   |
++-----------------------+----------------------------------------------+
+| ADADAS                | ADSL                                         |
++-----------------------+----------------------------------------------+
+| ADLBC                 | ADSL                                         |
++-----------------------+----------------------------------------------+
 
 ## Intermediate Datasets
 
@@ -279,8 +285,8 @@ Was define.xml evaluated?
 +==========+==============================================================================+=========+====================+=========================================================================================================================================================================================+
 | AD1012   | Secondary custom variable is present but its primary variable is not present | ADSL    | 1 (50.00%)         | This is a Sponsor Extension to the ADaM Model. The VISNUMEN \[End of Trt Visit (Vis 12 or Early Term.)\] variable is a integer variable which is not related to any character variable. |
 +----------+------------------------------------------------------------------------------+---------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-: {tbl-colwidths="\[17,22,15,22,25\]"}
 
+: {tbl-colwidths="\[17,22,15,22,25\]"}
 
 ## QC Findings and Common Issues
 
