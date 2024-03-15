@@ -290,7 +290,7 @@ Was define.xml evaluated?
 
 ## QC Findings and Common Issues
 
-In this Pilot 3 study, our focus was to create ADaMs based on Pilot 1 where after ADaM generation we compared them against the analysis datasets used in Pilot 1 as a QC step. With these comparisons we listed the QC Findings with explanations as to why these findings exist. We also came across common issues throughout the ADaM generation process, which could be helpful for improvements utilising the CDISC Pilot data in the future. More details can be found in the appendix (Appendix 2 and Appendix 3).
+In this Pilot 3 study, our focus was to create a subset of ADaMs based on the CDSICPILOT data, using R.  We compared our R generated ADaMs against the CDISCPILOT ADaMs, created in SAS, as a QC step. With these comparisons we listed the QC Findings with explanations as to why these findings exist. We also came across common issues throughout the ADaM generation process, which could be helpful for improvements utilising the CDISC Pilot data in the future. More details can be found in the appendix (Appendix 2 and Appendix 3).
 
 [QC Findings](https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings)
 
