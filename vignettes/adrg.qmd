@@ -301,7 +301,7 @@ The sponsor has provided all programs for analysis results. They are all created
 
 ## ADaM Programs
 
-The following table contains the list of programs that generate the analysis datasets in the R Consortium R submission Pilot 3. It shows the program file name, the analysis dataset name and the label of the analysis dataset. The recommended steps to execute the analysis results using R are described in the Appendix.
+The following table contains the list of programs that generate the analysis datasets in Pilot 3. It shows the program file name, the analysis dataset name and the label of the analysis dataset. The recommended steps to execute the analysis results using R are described in the Appendix.
 
 +------------------+---------------------------+--------------------------------------+
 | **Program Name** | **Analysis Dataset Name** | **Analysis Dataset Label**           |
