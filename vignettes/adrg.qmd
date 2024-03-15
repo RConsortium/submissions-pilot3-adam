@@ -691,7 +691,9 @@ The package installation procedure may take a few minutes or longer depending on
 
     3.  In the field `Install from:`, click on the drop-down menu and select `Package Archive File (.zip; .tar.gz)`
 
-    4.  In the field `Package Archive`, click on `Browse...` and navigate to this directory to point to the {pilot3utils} package : `/m5/datasets/rconsortiumpilot3/analysis/adam/programs/pilot3utils_0.0.2.zip`
+    4.  In the field `Package Archive`, click on `Browse...` and navigate to this directory to point to the {pilot3utils} package :
+
+        `/m5/datasets/rconsortiumpilot3/analysis/adam/programs/pilot3utils_0.0.2.zip`
 
     5.  In the field `Install to Library:`, you may keep this at its default setting.
 
@@ -713,7 +715,7 @@ OUTPUT path: to save the analysis datasets and  results, define the path variab
 
 All these paths must be defined before executing the analysis programs. You may do so by first entering the full file path directories to where the SDTM is currently stored and where the ADaMs and Outputs will be generated upon execution of the analysis programs.
 
-```
+```         
 # Modify path to the sdtm, adam and output location
 # Output saved in current folder
 
@@ -1070,21 +1072,21 @@ First 10 of 20 rows are shown in table below
 
 In pilot3, variable labels were updated per ADaM IG 1.1, which caused some discrepancies with original CDISC pilot data label.
 
-+-------------+-------------+---------------------------------+------------------------------------+
-| Dataset     | Variable    | CDISC pilot data label          | Pilot3 label                       |
-+:============+:============+:================================+:===================================+
-| ADAE        | ADURN       | Analysis Duration (N)           | AE Duration (N)                    |
-+-------------+-------------+---------------------------------+------------------------------------+
-|             | ADURU       | Analysis Duration Units         | AE Duration Units                  |
-+-------------+-------------+---------------------------------+------------------------------------+
-|             | AOCCFL      | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
-+-------------+-------------+---------------------------------+------------------------------------+
-| ADADAS      | ANL01FL     | Analysis Record Flag 01         | Analysis Flag 01                   |
-+-------------+-------------+---------------------------------+------------------------------------+
-|             | ITTFL       | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
-+-------------+-------------+---------------------------------+------------------------------------+
-| ADTTE       | SRCDOM      | Source Data                     | Source Domain                      |
-+-------------+-------------+---------------------------------+------------------------------------+
++------------+------------+---------------------------------+------------------------------------+
+| Dataset    | Variable   | CDISC pilot data label          | Pilot3 label                       |
++:===========+:===========+:================================+:===================================+
+| ADAE       | ADURN      | Analysis Duration (N)           | AE Duration (N)                    |
++------------+------------+---------------------------------+------------------------------------+
+|            | ADURU      | Analysis Duration Units         | AE Duration Units                  |
++------------+------------+---------------------------------+------------------------------------+
+|            | AOCCFL     | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
++------------+------------+---------------------------------+------------------------------------+
+| ADADAS     | ANL01FL    | Analysis Record Flag 01         | Analysis Flag 01                   |
++------------+------------+---------------------------------+------------------------------------+
+|            | ITTFL      | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
++------------+------------+---------------------------------+------------------------------------+
+| ADTTE      | SRCDOM     | Source Data                     | Source Domain                      |
++------------+------------+---------------------------------+------------------------------------+
 
 {{< pagebreak >}}
 
