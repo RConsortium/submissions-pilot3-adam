@@ -289,11 +289,7 @@ Was define.xml evaluated?
 
 ## QC Findings and Common Issues
 
-In this Pilot 3 study, our focus was to create a subset of ADaMs based on the CDSICPILOT data, using R.  We compared our R generated ADaMs against the CDISCPILOT ADaMs, created in SAS, as a QC step. With these comparisons we listed the QC Findings with explanations as to why these findings exist. We also came across common issues throughout the ADaM generation process, which could be helpful for improvements utilising the CDISC Pilot data in the future. More details can be found in the appendix (Appendix 2 and Appendix 3).
-
-[QC Findings](https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings)
-
-[Common Issues](https://github.com/RConsortium/submissions-pilot3-adam/wiki/Common-Issues)
+In this Pilot 3 study, our focus was to create a subset of ADaMs based on the CDSICPILOT data, using R. We compared our R generated ADaMs against the CDISCPILOT ADaMs, created in SAS, as a QC step. With these comparisons we listed the QC Findings with explanations as to why these findings exist. We also came across common issues throughout the ADaM generation process, which could be helpful for improvements utilising the CDISC Pilot data in the future. More details can be found in the appendix (Appendix 2 and Appendix 3).
 
 {{< pagebreak >}}
 
@@ -687,9 +683,19 @@ The package installation procedure may take a few minutes or longer depending on
 
 5.  Upon completion of installing packages using {renv}, please restart your R session.
 
-6.  We can now Install the {pilot3utils.zip} package.
+6.  Install the {pilot3utils} package following the steps below.
 
-    -   !!! NEED TO INCLUDE STEPS INSTALLING FROM .ZIP !!!
+    1.  In R Studio, navigate to your `Packages` window pane.
+
+    2.  Then click on `Install`, where a new window called `Install Packages` will show up.
+
+    3.  In the field `Install from:`, click on the drop-down menu and select `Package Archive File (.zip; .tar.gz)`
+
+    4.  In the field `Package Archive`, click on `Browse...` and navigate to this directory to point to the {pilot3utils} package : `/m5/datasets/rconsortiumpilot3/analysis/adam/programs/pilot3utils_0.0.2.zip`
+
+    5.  In the field `Install to Library:`, you may keep this at its default setting.
+
+    6.  Click `Install`.
 
 7.  **Set the paths to run the analysis programs**
 
@@ -705,21 +711,18 @@ OUTPUT path: to save the analysis datasets and  results, define the path variab
 
 -   Path for output TLFs: path\$output. 
 
-All these paths must be defined before executing the analysis programs. For example:
+All these paths must be defined before executing the analysis programs. You may do so by first entering the full file path directories to where the SDTM is currently stored and where the ADaMs and Outputs will be generated upon execution of the analysis programs.
 
-`# Modify path to the sdtm, adam and output location`
+```
+# Modify path to the sdtm, adam and output location
+# Output saved in current folder
 
-`# Output saved in current folder`
-
-`path <- list(`
-
-`sdtm = "Enter full file path to source sdtm data here",`
-
-``` adam = "``Enter full file path to where adam data should be saved and sourced here``", ```
-
-``` output = "``Enter full file path to where outputs should be saved here``" ```
-
-`)`
+path <- list(
+  sdtm = "Enter full file path to the sdtm data here",
+  adam = "Enter full file path to where adam data should be saved and sourced here",
+  output = "Enter full file path to where outputs should be saved here"
+  )
+```
 
 5.  **Execute analysis program**
 
@@ -748,13 +751,14 @@ To reproduce analysis results, rerun the following programs:
 ## Appendix 2 : QC Findings
 
 ### ADSL
-The R-generated ADSL matches the original ADSL from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM), besides the following mismatches:
-* Subject 01-702-1082 has a missing value for BMIBLGR1 in the R-generated ADSL, whilst BMIBLGR1 = "<25" in the original ADSL. This is an issue with the original ADSL, as this subject's BMI at baseline (BMIBL) is missing and therefore the subject shouldn't be assigned a BMI at baseline group.
+
+The R-generated ADSL matches the original ADSL from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM), besides the following mismatches: \* Subject 01-702-1082 has a missing value for BMIBLGR1 in the R-generated ADSL, whilst BMIBLGR1 = "\<25" in the original ADSL. This is an issue with the original ADSL, as this subject's BMI at baseline (BMIBL) is missing and therefore the subject shouldn't be assigned a BMI at baseline group.
 
 ### ADAE
-The R-generated ADAE matches the original ADAE from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM), besides the following mismatches:
-There is an issue with the original CDISC pilot dataset. ADURN is blank, where AESEQ is (5, 6, 7, 8) for the original CDISC dataset for Subject below:
-```r
+
+The R-generated ADAE matches the original ADAE from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM), besides the following mismatches: There is an issue with the original CDISC pilot dataset. ADURN is blank, where AESEQ is (5, 6, 7, 8) for the original CDISC dataset for Subject below:
+
+``` r
 > adae_orig %>% 
      filter(USUBJID=='01-716-1418') %>% 
      select(USUBJID,TRTSDT,ASTDT,AENDT,ADURN,ADURU,AESEQ)
@@ -773,8 +777,10 @@ There is an issue with the original CDISC pilot dataset. ADURN is blank, where A
  9 01-716-1418 2013-05-05 2013-09-26 2013-11-11    47 DAY       9
 10 01-716-1418 2013-05-05 2013-09-26 2013-11-11    47 DAY      10
 ```
+
 Because it seems the original SDTM.AE.AESTDTC was missing Day, where it seems the original ADAE derivation for ADURN was probably using this date instead of the imputed date. Because day is missing in AESTDTC, ADURN can't derive days.
-```r
+
+``` r
 > ae %>% filter(USUBJID=='01-716-1418') %>% select(USUBJID,AESTDTC,AESEQ) %>% arrange(AESEQ)
 # A tibble: 10 × 3
    USUBJID     AESTDTC    AESEQ
@@ -790,8 +796,10 @@ Because it seems the original SDTM.AE.AESTDTC was missing Day, where it seems th
  9 01-716-1418 2013-09-26     9
 10 01-716-1418 2013-09-26    10
 ```
-but the same records, derived in the Pilot 3 dataset do show a calculation since we are using the imputed ASTDT, per the define (ADURN=AENDT-ASTDT+1). 
-```r
+
+but the same records, derived in the Pilot 3 dataset do show a calculation since we are using the imputed ASTDT, per the define (ADURN=AENDT-ASTDT+1).
+
+``` r
 #AE.AESTDTC, converted to a numeric SAS date. Some events with partial dates are imputed in a conservative 
 #manner. If the day component is missing, a value of '01' is used. If both the month and day are missing 
 #no imputation is performed as these dates clearly indicate a start prior to the beginning of treatment. 
@@ -812,10 +820,12 @@ but the same records, derived in the Pilot 3 dataset do show a calculation since
  9 01-716-1418 2013-05-05 2013-09-26 2013-09-26 2013-11-11    191    47 DAY       9
 10 01-716-1418 2013-05-05 2013-09-26 2013-09-26 2013-11-11    191    47 DAY      10
 ```
-This latter approach should be the correct approach. 
+
+This latter approach should be the correct approach.
 
 Due to this, we have outlined the expected differences here :
-```r
+
+``` r
 > diffdf(adae, adae_orig, keys = c("STUDYID", "USUBJID", "AESEQ"))
 Differences found between the objects!
 
@@ -824,8 +834,10 @@ A summary is given below.
 There are columns in BASE and COMPARE with differing attributes !!
 All rows are shown in table below
 ```
-1. ADURN values will be populated in Pilot 3 (i.e. under `BASE`), following the latter derivation approach (i.e. ADURN=AENDT-ASTDT+1) for Subject 01-716-1418 where AESEQ is (5, 6, 7, 8) specified in define.
-```r
+
+1.  ADURN values will be populated in Pilot 3 (i.e. under `BASE`), following the latter derivation approach (i.e. ADURN=AENDT-ASTDT+1) for Subject 01-716-1418 where AESEQ is (5, 6, 7, 8) specified in define.
+
+``` r
 All rows are shown in table below
 
   ===========================================================
@@ -837,8 +849,10 @@ All rows are shown in table below
     ADURN    CDISCPILOT01  01-716-1418    8     96    <NA>   
   -----------------------------------------------------------
 ```
-2. ADURU should be set to 'DAYS' (i.e. under `BASE`) instead of 'DAY' when ADURN is not missing.  Updated in Pilot 3 define.
-```r
+
+2.  ADURU should be set to 'DAYS' (i.e. under `BASE`) instead of 'DAY' when ADURN is not missing. Updated in Pilot 3 define.
+
+``` r
 First 10 of 718 rows are shown in table below
 
   ===========================================================
@@ -857,13 +871,13 @@ First 10 of 718 rows are shown in table below
   -----------------------------------------------------------
 ```
 
-
 ### ADLBC
+
 The R-generated ADLBC matches the original ADLBC from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM), besides the following mismatches:
 
 Three variables from R-generated ADLBC have class date while the same variables are numeric in the CDISC ADLBC. We opted to keep the date class in our R-generated ADLB.
 
-```r
+``` r
 > diffdf(adlbc, qc_adlbc, keys = c("STUDYID", "USUBJID", "AVISIT", "LBSEQ"))
 Differences found between the objects!
 
@@ -882,16 +896,18 @@ All rows are shown in table below
 ```
 
 ### ADADAS
+
 The R-generated ADADAS matches original adadas from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM), except for the records where `PARAMCD=ACTOT, DTYPE=LOCF`. This is an issue from the CDISC ADADAS.
 
-- CDISC SDTM/qs: 818 records for `QSTESTCD=ACTOT`
-- CDISC ADaM/adadas: 1040 records for `PARAMCD=ACTOT`, 799 (directly from qs, **should be 818**) + 241 imputed records (`DTYPE=LOCF`) 
-- adadas generated by R: 1040 records for `PARAMCD=ACTOT`, 818 (directly from qs) + 222 imputed records (`DTYPE=LOCF`)
+-   CDISC SDTM/qs: 818 records for `QSTESTCD=ACTOT`
+-   CDISC ADaM/adadas: 1040 records for `PARAMCD=ACTOT`, 799 (directly from qs, **should be 818**) + 241 imputed records (`DTYPE=LOCF`)
+-   adadas generated by R: 1040 records for `PARAMCD=ACTOT`, 818 (directly from qs) + 222 imputed records (`DTYPE=LOCF`)
 
 Take a detailed example USUBJID="01-701-1294"
 
 CDISC qs:
-```r
+
+``` r
 > qs %>% filter(QSTESTCD=="ACTOT") %>% 
 +   select(USUBJID, QSSEQ, VISIT, QSTESTCD, QSTEST,QSSTRESN) %>% 
 +   filter(USUBJID=="01-701-1294")
@@ -906,8 +922,9 @@ CDISC qs:
 
 CDISC adadas:
 
-**For the record with `QSSEQ=5045` and `AVISIT=Week 8`, `DTYPE` is populated as `LOCF` , but this record is directly from `qs` dataset, not imputed.** 
-```r
+**For the record with `QSSEQ=5045` and `AVISIT=Week 8`, `DTYPE` is populated as `LOCF` , but this record is directly from `qs` dataset, not imputed.**
+
+``` r
 > qc_adadas %>% filter(PARAMCD=="ACTOT") %>% 
 +   select(USUBJID, QSSEQ, PARAMCD, AVISITN, AVISIT, VISIT, AVAL, DTYPE, ANL01FL, ADT, ADY) %>% 
 +   arrange(USUBJID, AVISITN) %>% filter(USUBJID=="01-701-1294")
@@ -924,7 +941,8 @@ CDISC adadas:
 adadas generated by R:
 
 `DTYPE` is not `LOCF` for the record with `QSSEQ=5045` and `AVISIT=Week 8`, as this record is directly from `qs`.
-```r
+
+``` r
 > adadas %>% filter(PARAMCD=="ACTOT") %>% 
 +       select(USUBJID, QSSEQ, PARAMCD, AVISITN, AVISIT, VISIT, AVAL, DTYPE, ANL01FL, ADT, ADY) %>% 
 +       arrange(USUBJID, AVISITN) %>% filter(USUBJID=="01-701-1294")
@@ -939,7 +957,8 @@ adadas generated by R:
 ```
 
 The same issue occurred for other subjects and resulted in the following discrepancies:
-```r
+
+``` r
 There are rows in BASE that are not in COMPARE !!
 First 10 of 33 rows are shown in table below
 
@@ -989,9 +1008,9 @@ All rows are shown in table below
   ----------------------------
 ```
 
-
 In the CDISC ADADAS, there are 19 subjects whose records have the incorrect `DTYPE=LOCF` value instead of the expected missing `DTYPE`, resulting IN different `AVAL/CHG/PCHG` values for these subjects.
-```r
+
+``` r
 > diff <- diffdf(adadas, qc_adadas, keys = c("USUBJID", "PARAMCD", "AVISIT", "ADT"))
 > count(diff$VarDiff_AVAL, USUBJID)
 # A tibble: 19 × 2
@@ -1019,8 +1038,10 @@ In the CDISC ADADAS, there are 19 subjects whose records have the incorrect `DTY
 ```
 
 ### ADTTE
-The R-generated ADTTE matches original ADTTE from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM) except for minor SAS format discrepancies. Since this adtte was generated in R compared to SAS formats, the columns Type & Length in the define should be sufficient enough to describe the attributes of these variables.  
-```r
+
+The R-generated ADTTE matches original ADTTE from [CDISC pilot data](https://github.com/phuse-org/TestDataFactory/tree/main/Updated/TDF_ADaM) except for minor SAS format discrepancies. Since this adtte was generated in R compared to SAS formats, the columns Type & Length in the define should be sufficient enough to describe the attributes of these variables.
+
+``` r
 > diffdf(adtte, qc_adtte, keys = c("STUDYID", "USUBJID", "PARAMCD", "SRCDOM", "STARTDT"))
 Differences found between the objects!
 
@@ -1045,48 +1066,54 @@ First 10 of 20 rows are shown in table below
   ------------------------------------------------
 ```
 
-### Label discrepancies 
+### Label discrepancies
+
 In pilot3, variable labels were updated per ADaM IG 1.1, which caused some discrepancies with original CDISC pilot data label.
 
-| Dataset | Variable | CDISC pilot data label|Pilot3 label |
-| :---   | :---         |     :---     |          :--- |
-| ADAE| ADURN | Analysis Duration (N) | AE Duration (N) |
-|     | ADURU | Analysis Duration Units | AE Duration Units  |
-|     |AOCCFL  |1st Occurrence of Any AE Flag  | 1st Occurrence within Subject Flag |
-| ADADAS| ANL01FL |  Analysis Record Flag 01  | Analysis Flag 01  |
-|       | ITTFL|  Intent-to-Treat Population Flag  | Intent-To-Treat Population Flag|
-| ADTTE            |SRCDOM      |Source Data | Source Domain |
-
++-------------+-------------+---------------------------------+------------------------------------+
+| Dataset     | Variable    | CDISC pilot data label          | Pilot3 label                       |
++:============+:============+:================================+:===================================+
+| ADAE        | ADURN       | Analysis Duration (N)           | AE Duration (N)                    |
++-------------+-------------+---------------------------------+------------------------------------+
+|             | ADURU       | Analysis Duration Units         | AE Duration Units                  |
++-------------+-------------+---------------------------------+------------------------------------+
+|             | AOCCFL      | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
++-------------+-------------+---------------------------------+------------------------------------+
+| ADADAS      | ANL01FL     | Analysis Record Flag 01         | Analysis Flag 01                   |
++-------------+-------------+---------------------------------+------------------------------------+
+|             | ITTFL       | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
++-------------+-------------+---------------------------------+------------------------------------+
+| ADTTE       | SRCDOM      | Source Data                     | Source Domain                      |
++-------------+-------------+---------------------------------+------------------------------------+
 
 {{< pagebreak >}}
 
 ## Appendix 3 : Common Issues
 
-### Package issue tracking 
-#### Package issues
-* `haven::read_xpt()`
-Some attributes are dropped after using `haven::write_xpt()` `haven::read_xpt()`, e.g., type, length. 
-to do:  further check
+### Package issue tracking
 
-* `xportr::xportr_length()` 
-`NA_character_` is considered as length 2 - [issue resolved on Dec 14, 2022](https://github.com/tidyverse/haven/issues/699) 
-to do: to be incorporated in pilot3
+#### Package issues
+
+-   `haven::read_xpt()` Some attributes are dropped after using `haven::write_xpt()` `haven::read_xpt()`, e.g., type, length. to do: further check
+
+-   `xportr::xportr_length()` `NA_character_` is considered as length 2 - [issue resolved on Dec 14, 2022](https://github.com/tidyverse/haven/issues/699) to do: to be incorporated in pilot3
 
 #### Potential improvement
-* `metatools::build_from_derived()`
-https://github.com/pharmaverse/metatools/issues/46
-Not urgent feature but nice to have - especially when `define.xml` is not in good quality
+
+-   `metatools::build_from_derived()` https://github.com/pharmaverse/metatools/issues/46 Not urgent feature but nice to have - especially when `define.xml` is not in good quality
 
 ### Knowledge sharing
-Summary of similarities and differences between packages, to help user identify the best tool that suits the need. 
-Maybe this could go to [Bayer SAS2R catalog](https://bayer-group.github.io/sas2r/) in the future, 
 
-#### `metatools` vs `xportr` 
-* `metatools::set_variable_labels()` vs `xportr::xportr_label()` 
+Summary of similarities and differences between packages, to help user identify the best tool that suits the need. Maybe this could go to [Bayer SAS2R catalog](https://bayer-group.github.io/sas2r/) in the future,
 
-#### `xportr` vs `haven` 
-* `xportr::xportr_write()` vs `haven::write_xpt()`  
+#### `metatools` vs `xportr`
+
+-   `metatools::set_variable_labels()` vs `xportr::xportr_label()`
+
+#### `xportr` vs `haven`
+
+-   `xportr::xportr_write()` vs `haven::write_xpt()`
 
 #### `diffdf` vs `arsenal`
-* `diffdf::diffdf()` vs `arsenal::comparedf()`
 
+-   `diffdf::diffdf()` vs `arsenal::comparedf()`
