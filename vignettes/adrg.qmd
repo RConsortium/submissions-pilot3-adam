@@ -20,21 +20,35 @@ This document provides context for the analysis datasets and terminology that be
 
 ## Study Data Standards and Dictionary Inventory
 
++-----------------------------+-----------------------------------------------+
 | **Standard or Dictionary**  | **Versions Used**                             |
-|-----------------------------|-----------------------------------------------|
++=============================+===============================================+
 | SDTM                        | SDTM Implementation Guide Version 3.1.2       |
++-----------------------------+-----------------------------------------------+
 |                             | SDTM Version 1.2                              |
++-----------------------------+-----------------------------------------------+
 |                             |                                               |
++-----------------------------+-----------------------------------------------+
 | SDTM Controlled Terminology | CDISC SDTM Controlled Terminology, 2022-12-16 |
++-----------------------------+-----------------------------------------------+
 |                             |                                               |
++-----------------------------+-----------------------------------------------+
 | ADaM                        | ADaM-IG v1.1                                  |
++-----------------------------+-----------------------------------------------+
 |                             | ADaM v2.1                                     |
++-----------------------------+-----------------------------------------------+
 |                             |                                               |
++-----------------------------+-----------------------------------------------+
 | ADaM Controlled Terminology | CDISC ADaM Controlled Terminology, 2022-06-24 |
++-----------------------------+-----------------------------------------------+
 |                             |                                               |
++-----------------------------+-----------------------------------------------+
 | Data Definitions            | Define-XML v2.0                               |
++-----------------------------+-----------------------------------------------+
 |                             |                                               |
++-----------------------------+-----------------------------------------------+
 | Medical Events Dictionary   | MedDRA version 8.0                            |
++-----------------------------+-----------------------------------------------+
 
 ## Source Data Used for Analysis Dataset Creation
 
@@ -265,9 +279,11 @@ Was define.xml evaluated?
 
 ## Issues Summary
 
++----------+------------------------------------------------------------------------------+---------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Check ID | Diagnostic Message                                                           | Dataset | Count (Issue Rate) | Explanation                                                                                                                                                                             |
-|----------|------------------------------------------------------------------------------|---------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
++==========+==============================================================================+=========+====================+=========================================================================================================================================================================================+
 | AD1012   | Secondary custom variable is present but its primary variable is not present | ADSL    | 1 (50.00%)         | This is a Sponsor Extension to the ADaM Model. The VISNUMEN \[End of Trt Visit (Vis 12 or Early Term.)\] variable is a integer variable which is not related to any character variable. |
++----------+------------------------------------------------------------------------------+---------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 : {tbl-colwidths="\[17,22,15,22,25\]"}
 
@@ -287,13 +303,19 @@ The sponsor has provided all programs for analysis results. They are all created
 
 The following table contains the list of programs that generate the analysis datasets in Pilot 3. It shows the program file name, the analysis dataset name and the label of the analysis dataset. The recommended steps to execute the analysis results using R are described in the Appendix.
 
++------------------+---------------------------+--------------------------------------+
 | **Program Name** | **Analysis Dataset Name** | **Analysis Dataset Label**           |
-|------------------|---------------------------|--------------------------------------|
++==================+===========================+======================================+
 | adsl.r           | adsl.xpt                  | Subject-Level Analysis Dataset       |
++------------------+---------------------------+--------------------------------------+
 | adadas.r         | adas.xpt                  | ADAS-Cog Analysis                    |
++------------------+---------------------------+--------------------------------------+
 | adlbc.r          | adlb.xpt                  | Analysis Dataset Lab Blood Chemistry |
++------------------+---------------------------+--------------------------------------+
 | adae.r           | adae.xpt                  | Adverse Events Analysis Dataset      |
++------------------+---------------------------+--------------------------------------+
 | adtte.r          | adtte.xpt                 | AE Time to 1st Derm. Event Analysis  |
++------------------+---------------------------+--------------------------------------+
 
 ## Analysis Output Programs
 
@@ -339,12 +361,17 @@ The following table contains a list of programs that generate outputs used in th
 
 For reference, below is a description of the analysis programs utilized and outputs generated in Pilot 1.
 
++-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | **Program Name**  | **Output Table Number** | **Title**                                                                         |
-|-------------------|-------------------------|-----------------------------------------------------------------------------------|
++===================+=========================+===================================================================================+
 | tlf-demographic.r | Table 14-2.01           | Summary of Demographic and Baseline Characteristics                               |
++-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | tlf-primary.r     | Table 14-3.01           | Primary Endpoint Analysis: ADAS Cog (11) - Change from Baseline to Week 24 - LOCF |
++-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | tlf-efficacy.r    | Table 14-3.02           | ANCOVA of Change from Baseline at Week 20                                         |
++-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | tlf-kmplot.r      | Figure 14-1             | KM plot for Time to First Dermatologic Event: Safety population                   |
++-------------------+-------------------------+-----------------------------------------------------------------------------------+
 
 ## Proprietary R Packages
 
@@ -572,15 +599,17 @@ A minimum set of R packages are required to ensure the Pilot 3 analysis programs
 
 ![](images/clipboard-398207727.png)
 
-2.  In the R Studio console install the {remotes} package: `install.packages("remotes")`
+2.  In the R Studio console install the {remotes} package:
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Notes :                                                                                                                                                                                                                                                                                                                                   |
-|                                                                                                                                                                                                                                                                                                                                           |
-| 1.  The console may display a warning message about Rtools being required to build R packages. However the Rtools utility is not required to run the programs in this pilot 3 study.                                                                                                                                                      |
-|                                                                                                                                                                                                                                                                                                                                           |
-| 2.  If you receive a warning showing “cannot open URL  <https://cran.rstudio.com/src/contrib/PACKAGES>'”, this is due to the default R Studio option ‘Use secure download method for HTTP’. In R Studio, go to Tools → Global Options → Packages, then uncheck the ‘Use secure download method for HTTP’ option, then retry installation. |
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+```         
+        install.packages("remotes")
+```
+
+::: callout-note
+-   *The console may display a warning message about Rtools being required to build R packages. **However the Rtools utility is not required to run the programs in this pilot 3 study.***
+
+-   *If you receive a warning showing “cannot open URL  <https://cran.rstudio.com/src/contrib/PACKAGES>'”, this is due to the default R Studio option ‘Use secure download method for HTTP’. In R Studio, go to Tools → Global Options → Packages, then uncheck the ‘Use secure download method for HTTP’ option, then retry installation.*
+:::
 
 2.  Then,  install the {renv} package, version 0.17.0:
 
@@ -588,95 +617,94 @@ A minimum set of R packages are required to ensure the Pilot 3 analysis programs
         remotes::install_version("renv", version = "0.17.0")
 ```
 
-+--------------------------------------------------------------------------------------------------------+
-| Note :                                                                                                 |
-|                                                                                                        |
-| 1.  If not already set, please verify that the working directory is already set to the project folder. |
-|                                                                                                        |
-| <!-- -->                                                                                               |
-|                                                                                                        |
-| ```                                                                                                    |
-|     1.  getwd()                                                                                        |
-|                                                                                                        |
-|     2.  If not pointing to root project directory then do : setwd("\~/pilot3-files")                   |
-| ```                                                                                                    |
-+--------------------------------------------------------------------------------------------------------+
+::: callout-note
+*If not already set, please verify that the working directory is already set to the project folder.*
+
+1.  `getwd()`
+
+2.  If not pointing to root project directory then do : `setwd("~/pilot3-files")`
+:::
 
 3.  Move the ‘renv-lock.txt’ to the root project directory and rename to ‘renv.lock’ :
 
 ```         
-        ./pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam/programs/renv-lock.txt --\> ./pilot3-files/renv.lock
+        ./pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam/programs/renv-lock.txt 
+        --> ./pilot3-files/renv.lock
 ```
 
-4.  Run the code below, then select option 1 :
+![](images/clipboard-3005280222.png)
+
+![](images/clipboard-2461342323.png)
+
+![](images/clipboard-3313061033.png)
+
+4.  Restart the R Session.
+
+    ![](images/clipboard-1220328888.png)
+
+5.  Run the code below, then select option 1 :
+
+    ![](images/clipboard-2206726057.png)
+
+::: callout-note
+-   If using `{renv}` for the first time, you may get a 'Welcome' message describing the renv folder structure and its components. It will also list the packages that will be installed from the `renv.lock` file. At the end it will ask you if you want to proceed. Select ‘y’.
+
+`Do you want to proceed? [y/N]: y`
+
+-   If after selecting option 1, you may receive a warning such as :
 
 ```         
-        renv::init()
-
-        # This project already has a lockfile. What would you like to do?
-
-        #
-
-        # 1: Restore the project from the lockfile.
-
-        # 2: Discard the lockfile and re-initialize the project.
-
-        # 3: Activate the project without snapshotting or installing any packages.
-
-        # 4: Abort project initialization.
-
-        #
-
-        # Selection: 1
+Warning: error downloading 'https://packagemanager.posit.co/cran/2023-03-15/bin/windows/contrib/4.2/PACKAGES.rds' ['CreateProcess' failed to run 'C:\WINDOWS\SYSTEM32\curl.exe --config "C:\Users\laxamanj\AppData\Local\Temp\RtmpQrN0y7\renv-download-config-2e24149c3b5f"']
 ```
 
+-   If so, then run again selecting option 3 instead :
+
+![](images/clipboard-3523315358.png)
+
+-   This warning will show, which can be ignored :
+
+![](images/clipboard-2575842320.png)
+
+-   Open the .Rprofile : C:/pilot3-files/.Rprofile and ensure these 2 lines are there :
+
+![](images/clipboard-4064866343.png)
+
+-   Restart the R Session (ignoring the warning once more), then run `renv::restore()` and select `y` :
+
+![](images/clipboard-1835977816.png)
+
+![](images/clipboard-3983121962.png)
+
 The package installation procedure may take a few minutes or longer depending on internet bandwidth.
+:::
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Note :                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| 1.  If running {renv} for the first time, you may get a Welcome message describing the renv folder structure and its components. It will also list the packages that will be installed from the renv.lock file. At the end it will ask you if you want to proceed. Select ‘y’. \|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `Do you want to proceed? [y/N]: y` \|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| 2.  If after selecting option 1, you receive a warning such as “Warning: error downloading 'https://packagemanager.posit.co/cran/2023-03-15/bin/windows/contrib/4.2/PACKAGES.rds' \['CreateProcess' failed to run 'C:\\WINDOWS\\SYSTEM32\\curl.exe --config "C:\\Users\\laxamanj\\AppData\\Local\\Temp\\RtmpQrN0y7\\renv-download-config-2e24149c3b5f"'\]”, then do                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-|     1.  run the code below and select option 3 :                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `renv::init()                                                                                                                                                                    # This project already has a lockfile. What would you like to do?                      #                                                                                       # 1: Restore the project from the lockfile.                                            # 2: Discard the lockfile and re-initialize the project.                               # 3: Activate the project without snapshotting or installing any packages.             # 4: Abort project initialization.**                                                    #                                                                                      # Selection: 3` |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Upon this selection you may get this message below, which can be ignored during this set-up. Continue on as you will install the packages needed to run the project analyses in the subsequent steps :                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `` Restarting R session...                                                                 * Project '\~/pilot3_renv' loaded. \[renv 0.17.0\]                                      * One or more packages recorded in the lockfile are not installed.                      * Use \`renv::status()\` for more details. ``                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| 2.  Open the .Rprofile : C:/pilot3-files/.Rprofile and ensure these 2 lines are there : `Sys.setenv(RENV_DOWNLOAD_FILE_METHOD = "libcurl")                                       source("renv/activate.R")`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| 3.  Restart the R Session (again you may ignore the message as mentioned in step a).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| 4.  Then run code below, then select ‘y’:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `renv::restore()                                                                                                                                                                 # Do you want to proceed? \[y/N\]: y`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| The package installation procedure may take a few minutes or longer depending on internet bandwidth.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+5.  Upon completion of installing packages using `{renv}`, please restart your R session.
 
-5.  Upon completion of installing packages using {renv}, please restart your R session.
+6.  Install the {pilot3utils} package following the steps below :
 
-6.  Install the {pilot3utils} package following the steps below.
+    -   In R Studio, navigate to your `Packages` window pane, then click on `Install`.
 
-    1.  In R Studio, navigate to your `Packages` window pane.
+    ![](images/clipboard-3779894600.png)
 
-    2.  Then click on `Install`, where a new window called `Install Packages` will show up.
+    -   A new window called `Install Packages` will show up.
 
-    3.  In the field `Install from:`, click on the drop-down menu and select `Package Archive File (.zip; .tar.gz)`
+    ![](images/clipboard-695201532.png)
 
-    4.  In the field `Package Archive`, click on `Browse...` and navigate to this directory to point to the {pilot3utils} package :
+    -   In the field `Install from:`, click on the drop-down menu and select `Package Archive File (.zip; .tar.gz)`
+
+    ![](images/clipboard-1218742851.png)
+
+    -   In the field `Package Archive`, click on `Browse...` and navigate to this directory to point to the `{pilot3utils}` package :
 
         `/m5/datasets/rconsortiumpilot3/analysis/adam/programs/pilot3utils_0.0.2.zip`
 
-    5.  In the field `Install to Library:`, you may keep this at its default setting.
+    ![](images/clipboard-3031640318.png)
 
-    6.  Click `Install`.
+    -   In the field `Install to Library:`, you may keep this at its default setting.
+
+    -   Click `Install`.
+
+        ![](images/clipboard-2776928439.png)
 
 7.  **Set the paths to run the analysis programs**
 
@@ -1051,14 +1079,21 @@ First 10 of 20 rows are shown in table below
 
 In pilot3, variable labels were updated per ADaM IG 1.1, which caused some discrepancies with original CDISC pilot data label.
 
-| Dataset | Variable | CDISC pilot data label          | Pilot3 label                       |
-|:--------|:---------|:--------------------------------|:-----------------------------------|
-| ADAE    | ADURN    | Analysis Duration (N)           | AE Duration (N)                    |
-|         | ADURU    | Analysis Duration Units         | AE Duration Units                  |
-|         | AOCCFL   | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
-| ADADAS  | ANL01FL  | Analysis Record Flag 01         | Analysis Flag 01                   |
-|         | ITTFL    | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
-| ADTTE   | SRCDOM   | Source Data                     | Source Domain                      |
++------------+------------+---------------------------------+------------------------------------+
+| Dataset    | Variable   | CDISC pilot data label          | Pilot3 label                       |
++:===========+:===========+:================================+:===================================+
+| ADAE       | ADURN      | Analysis Duration (N)           | AE Duration (N)                    |
++------------+------------+---------------------------------+------------------------------------+
+|            | ADURU      | Analysis Duration Units         | AE Duration Units                  |
++------------+------------+---------------------------------+------------------------------------+
+|            | AOCCFL     | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
++------------+------------+---------------------------------+------------------------------------+
+| ADADAS     | ANL01FL    | Analysis Record Flag 01         | Analysis Flag 01                   |
++------------+------------+---------------------------------+------------------------------------+
+|            | ITTFL      | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
++------------+------------+---------------------------------+------------------------------------+
+| ADTTE      | SRCDOM     | Source Data                     | Source Domain                      |
++------------+------------+---------------------------------+------------------------------------+
 
 {{< pagebreak >}}
 
