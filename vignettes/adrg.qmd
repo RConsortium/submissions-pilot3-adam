@@ -1085,21 +1085,21 @@ First 10 of 20 rows are shown in table below
 
 In pilot3, variable labels were updated per ADaM IG 1.1, which caused some discrepancies with original CDISC pilot data label.
 
-+------------+------------+---------------------------------+------------------------------------+
-| Dataset    | Variable   | CDISC pilot data label          | Pilot3 label                       |
-+:===========+:===========+:================================+:===================================+
-| ADAE       | ADURN      | Analysis Duration (N)           | AE Duration (N)                    |
-+------------+------------+---------------------------------+------------------------------------+
-|            | ADURU      | Analysis Duration Units         | AE Duration Units                  |
-+------------+------------+---------------------------------+------------------------------------+
-|            | AOCCFL     | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
-+------------+------------+---------------------------------+------------------------------------+
-| ADADAS     | ANL01FL    | Analysis Record Flag 01         | Analysis Flag 01                   |
-+------------+------------+---------------------------------+------------------------------------+
-|            | ITTFL      | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
-+------------+------------+---------------------------------+------------------------------------+
-| ADTTE      | SRCDOM     | Source Data                     | Source Domain                      |
-+------------+------------+---------------------------------+------------------------------------+
++-----------+-----------+---------------------------------+------------------------------------+
+| Dataset   | Variable  | CDISC pilot data label          | Pilot3 label                       |
++:==========+:==========+:================================+:===================================+
+| ADAE      | ADURN     | Analysis Duration (N)           | AE Duration (N)                    |
++-----------+-----------+---------------------------------+------------------------------------+
+|           | ADURU     | Analysis Duration Units         | AE Duration Units                  |
++-----------+-----------+---------------------------------+------------------------------------+
+|           | AOCCFL    | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
++-----------+-----------+---------------------------------+------------------------------------+
+| ADADAS    | ANL01FL   | Analysis Record Flag 01         | Analysis Flag 01                   |
++-----------+-----------+---------------------------------+------------------------------------+
+|           | ITTFL     | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
++-----------+-----------+---------------------------------+------------------------------------+
+| ADTTE     | SRCDOM    | Source Data                     | Source Domain                      |
++-----------+-----------+---------------------------------+------------------------------------+
 
 {{< pagebreak >}}
 
