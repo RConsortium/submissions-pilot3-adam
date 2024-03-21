@@ -27,7 +27,7 @@ library(haven)
 library(r2rtf)
 library(emmeans)
 devtools::load_all()
-library(pilot3)
+library(pilot3utils)
 
 
 ## ------------------------------------------------------------------------------------------------------------------------------
@@ -80,12 +80,12 @@ apr0ancova1 <- merge(t10, t11) %>%
   mutate(
     Trt = c("Xanomeline High Dose", "Placebo"),
     N1 = N,
-    Mean1 = pilot3::fmt_est(mean_bl, sd_bl),
+    Mean1 = pilot3utils::fmt_est(mean_bl, sd_bl),
     N2 = N_20,
-    Mean2 = pilot3::fmt_est(mean, sd),
+    Mean2 = pilot3utils::fmt_est(mean, sd),
     N3 = N_20,
-    Mean3 = pilot3::fmt_est(mean_chg, sd_chg),
-    CI = pilot3::fmt_ci(emmean, lower.CL, upper.CL)
+    Mean3 = pilot3utils::fmt_est(mean_chg, sd_chg),
+    CI = pilot3utils::fmt_ci(emmean, lower.CL, upper.CL)
   ) %>%
   select(Trt:CI)
 
@@ -103,8 +103,8 @@ apr0ancova2 <- t2 %>%
   ) %>%
   mutate(
     comp = "Xanomeline High Dose vs. Placebo",
-    mean = pilot3::fmt_ci(estimate, lower, upper),
-    p = pilot3::fmt_pval(p.value)
+    mean = pilot3utils::fmt_ci(estimate, lower, upper),
+    p = pilot3utils::fmt_pval(p.value)
   ) %>%
   select(comp:p)
 

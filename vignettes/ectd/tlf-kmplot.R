@@ -28,7 +28,7 @@ library(ggplot2)
 library(cowplot)
 library(visR)
 devtools::load_all()
-library(pilot3)
+library(pilot3utils)
 
 
 ## ------------------------------------------------------------------------------------------------------------------------------
