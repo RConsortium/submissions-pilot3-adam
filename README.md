@@ -37,6 +37,10 @@ The website is divide into 4 sections that will walk you through our efforts:
 
     - *Blog post with short summary of the R Consortium FDA Pilots 1-4 Series and the ongoing efforts undertaken to evaluate new technologies for submissions to the Food and Drug Administration (FDA). These transformative approaches, including WebAssembly and containers, hold immense potential to transform the regulatory landscape and streamline the submission process.*
 
+* [PharmaSUG 2024 Submission Standards Paper](https://www.pharmasug.org/us/2024/papers.html#SS-344)
+
+    - *In recent years, statisticians and analysts from both industry and regulatory agencies have increased adoption of open-source software such as R. R brings great benefits from its vibrant open-source community by providing a wealth of cutting-edge statistical tools, extension packages for interactive dashboard and documentation as well as adaptability to the latest data science trends.*
+
 ## Get in Touch
 
 Don't be shy!  We like to chat about R and Submissions. Find us on [pharmaverse slack](https://pharmaverse.slack.com/archives/C030EB2M4GM)

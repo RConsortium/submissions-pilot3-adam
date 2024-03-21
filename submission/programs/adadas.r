@@ -25,7 +25,7 @@ library(metacore)
 library(metatools)
 library(stringr)
 library(xportr)
-library(pilot3)
+library(pilot3utils)
 
 dm <- haven::read_xpt(file.path(path$sdtm, "dm.xpt"))
 qs <- haven::read_xpt(file.path(path$sdtm, "qs.xpt"))

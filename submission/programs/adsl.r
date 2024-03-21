@@ -25,7 +25,7 @@ library(dplyr)
 library(tidyr)
 library(metacore)
 library(metatools)
-library(pilot3)
+library(pilot3utils)
 library(xportr)
 library(janitor)
 

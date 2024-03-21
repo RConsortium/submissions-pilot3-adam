@@ -15,282 +15,398 @@ knitr::opts_chunk$set(echo = TRUE)
 Pilot 3 team should be able to see updated meeting minutes here on a
 weekly basis.
 
+# Meeting Minutes - 07mar2024 by Joel Laxamana
+
+## New member Alexandra - Welcome!
+
+-   Add Alexandra to Slack
+
+-   Add Alexandra to pilot3 repos: dev, submission, and pilot3utils
+
+-   Alexandra to email team with slack and github user ids.
+
+-   Alexandra will be a tester of the new steps and provide feedback on
+    adrg.
+
+## Response QMD drafted by Steven
+
+-   Joel to update QMD to include the rest of the FDA feedback
+
+## Pilot3utils .zip file
+
+-   .zip file now ready per Ben
+
+-   Steps to follow:
+
+    -   Run renv.lock first, then unzip pilot3utils
+
+    -   Ben to make a video on these steps
+
+## Timelines
+
+-   Complete by end of March 2024
+
+-   At April R consortium meeting, Pilot 3 team will propose a specific
+    date for when FDA can expect Pilot 3 re-submission
+
+## Review of adrg
+
+-   Per Steven's assessment, no major differences between the initial
+    submission
+
+-   Joel and team to update adrg to include steps from Ben on how to
+    install {pilot3utils} package via unzipping.
+
 # Meeting Minutes - 29th February 2024 by Joel Laxamana
 
 ## Updates:
-- Pilot3utils merge to main by Ben
-- Response for issue #149 by Steven
-- ADRG PR by Joel
+
+-   Pilot3utils merge to main by Ben
+-   Response for issue #149 by Steven
+-   ADRG PR by Joel
 
 ## Actions:
-- Finalize ADRG and response letter
-- Clarify file submission specifications
 
-
+-   Finalize ADRG and response letter
+-   Clarify file submission specifications
 
 # Meeting Minutes - 15th February 2024 by Joel Laxamana
 
 ## Updates:
-- Unit tests for Pilot 3 functions by Ben and Robert
-- LOCF branch merge by Kangjie
-- Comparison of attributes by Steven
+
+-   Unit tests for Pilot 3 functions by Ben and Robert
+-   LOCF branch merge by Kangjie
+-   Comparison of attributes by Steven
 
 ## Actions:
-- Zip for Pilot3utils and storage in eCTD structure
-- ADRG response letter draft
-- Include Alexandra in Pilot 3 team
-- Completion by 1st week of March 2024
+
+-   Zip for Pilot3utils and storage in eCTD structure
+-   ADRG response letter draft
+-   Include Alexandra in Pilot 3 team
+-   Completion by 1st week of March 2024
 
 # Pilot 3 Catch-up - 08th February 2024 by Joel Laxamana
 
 ## Meeting Feedback:
-- Differences between R and R-Studio versions
-- Differences between Pilot 3 ADaM and CDISC datasets
-- Package and filenames standardization
-- File path clarification
-- Different primary output in Pilot 1 vs Pilot 3
+
+-   Differences between R and R-Studio versions
+-   Differences between Pilot 3 ADaM and CDISC datasets
+-   Package and filenames standardization
+-   File path clarification
+-   Different primary output in Pilot 1 vs Pilot 3
 
 ## Actions:
-- Draft responses for feedback
-- Update ADRG
-- Finalize LOCF approach
-- Review with FDA
 
-
+-   Draft responses for feedback
+-   Update ADRG
+-   Finalize LOCF approach
+-   Review with FDA
 
 # Pilot 3 - RCSWG Meeting - 2024 by Joel Laxamana
 
-- Recipients to be changed
-- LOCF considerations
-- Meeting with Eric for system alignment
-
-
+-   Recipients to be changed
+-   LOCF considerations
+-   Meeting with Eric for system alignment
 
 # Meeting Minutes - 18th August 2023 by Joel Laxamana
 
 ## Updates:
-- Updated renv.lock to renv.txt
-- ADRG updated with renv.txt
-- Robert to update report-tlf.pdf
 
+-   Updated renv.lock to renv.txt
+-   ADRG updated with renv.txt
+-   Robert to update report-tlf.pdf
 
 # Meeting Minutes - 30th June 2023 by Joel Laxamana
 
 ## Priority: Running/Testing
-- ADRG update by Joel
-- Renaming renv.lock to renv.txt in the submission repo
+
+-   ADRG update by Joel
+-   Renaming renv.lock to renv.txt in the submission repo
 
 ## Tasks:
-- Relative paths documentation
-- Package and filename standardization
+
+-   Relative paths documentation
+-   Package and filename standardization
 
 # Meeting Minutes - 23rd June 2023 by Joel Laxamana
 
 ## Priority: Testing from the FDA package
-- All to test by next Friday's meeting.
+
+-   All to test by next Friday's meeting.
 
 ## Updates:
-- Pilot 3 Package readme
-- Cover letter approved
-- Website updates by Ben S.
+
+-   Pilot 3 Package readme
+-   Cover letter approved
+-   Website updates by Ben S.
 
 ## Additional Tasks:
-- Deliverable tab updates
-- Wiki PDFs to vignettes
-- QC findings updates
 
-
+-   Deliverable tab updates
+-   Wiki PDFs to vignettes
+-   QC findings updates
 
 # Meeting Minutes - 09th June 2023 by Joel Laxamana
 
 ## Pilot 3 Package Readme
-- [Thanks, Steven](https://github.com/RConsortium/submissions-pilot3-utilities/tree/readme)
+
+-   [Thanks,
+    Steven](https://github.com/RConsortium/submissions-pilot3-utilities/tree/readme)
 
 ## Tasks and Assignments
-- Check R-CMD-check [Thanks, Ben](https://github.com/RConsortium/submissions-pilot3-adam/pull/110)
-- Investigate rtf conversion for report-tlf.pdf [Assigned to Phani](https://merck.github.io/r2rtf/articles/rtf-convert-format.html)
-- Testing from the FDA package [Assigned to Phani, Robert, Nicole](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/12)
-- Update ADRG guide and appendix [Assigned to Robert, Steven](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/13)
-- Cover letter update [Assigned to Lei](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/1)
-- Website update [Thanks, Ben](https://phuse.s3.eu-central-1.amazonaws.com/Archive/2023/SDE/EU/London/PRE_London09.pdf)
-- QUARTO website [Assigned to Phani, Robert](https://quarto.org/docs/publishing/github-pages.html)
 
+-   Check R-CMD-check [Thanks,
+    Ben](https://github.com/RConsortium/submissions-pilot3-adam/pull/110)
+-   Investigate rtf conversion for report-tlf.pdf [Assigned to
+    Phani](https://merck.github.io/r2rtf/articles/rtf-convert-format.html)
+-   Testing from the FDA package [Assigned to Phani, Robert,
+    Nicole](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/12)
+-   Update ADRG guide and appendix [Assigned to Robert,
+    Steven](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/13)
+-   Cover letter update [Assigned to
+    Lei](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/1)
+-   Website update [Thanks,
+    Ben](https://phuse.s3.eu-central-1.amazonaws.com/Archive/2023/SDE/EU/London/PRE_London09.pdf)
+-   QUARTO website [Assigned to Phani,
+    Robert](https://quarto.org/docs/publishing/github-pages.html)
 
 # Meeting Minutes - 02nd June 2023 by Joel Laxamana
 
-- **FDA Repo Updates:**
-  - Cover letter update assigned to Joel.
-  - Robert assigned to issue #59 to update report-tlf.pdf; Phani to connect with Robert for support.
-  - Declan to update readme in FDA repo [here](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/10); Phani/Lei to review.
-
-- **Pilot 3 Package Readme:**
-  - Steven to update; Joel and Kaz to review.
-
-- **Deadlines:**
-  - Initial draft due by June 9th, final by the 16th.
-  - Kaz to be Joel's backup to merge into main after PR pass review.
-
-- **Last Steps:**
-  - Finalize ADRG.
-  - Test running programs from the FDA package.
-
-
+-   **FDA Repo Updates:**
+    -   Cover letter update assigned to Joel.
+    -   Robert assigned to issue #59 to update report-tlf.pdf; Phani to
+        connect with Robert for support.
+    -   Declan to update readme in FDA repo
+        [here](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/10);
+        Phani/Lei to review.
+-   **Pilot 3 Package Readme:**
+    -   Steven to update; Joel and Kaz to review.
+-   **Deadlines:**
+    -   Initial draft due by June 9th, final by the 16th.
+    -   Kaz to be Joel's backup to merge into main after PR pass review.
+-   **Last Steps:**
+    -   Finalize ADRG.
+    -   Test running programs from the FDA package.
 
 # Meeting Minutes - 19th May 2023 by Joel Laxamana
 
 ## Agenda: Pilot 3 Progress
 
 ### Attendees:
-- Robert
-- Kaz
-- Declan
-- Ben
 
----
+-   Robert
+-   Kaz
+-   Declan
+-   Ben
+
+------------------------------------------------------------------------
 
 ### Robert:
-- Updated the site [https://rconsortium.github.io/submissions-pilot3-adam/main/](https://rconsortium.github.io/submissions-pilot3-adam/main/)
-    - Included QC wiki page and Declan's slides on Pilot 3
-    - Suggested using Quarto
-- Provided materials for discussion:
-    1. [Pilot3 report-tlf.pdf](1) (based upon Pilot1) with timestamps
-    2. [Pilot3 report-adam.pdf](2) (based on updated Pilot3 QC Findings with finalized ADRG)
-    3. Pilot3 Website (GH Pages feature) for discussion (limitations, differences from Pilot1, and related)
 
----
+-   Updated the site
+    <https://rconsortium.github.io/submissions-pilot3-adam/main/>
+    -   Included QC wiki page and Declan's slides on Pilot 3
+    -   Suggested using Quarto
+-   Provided materials for discussion:
+    1.  [Pilot3 report-tlf.pdf](1) (based upon Pilot1) with timestamps
+    2.  [Pilot3 report-adam.pdf](2) (based on updated Pilot3 QC Findings
+        with finalized ADRG)
+    3.  Pilot3 Website (GH Pages feature) for discussion (limitations,
+        differences from Pilot1, and related)
+
+------------------------------------------------------------------------
 
 ### Kaz:
-- Discussed the Pinnacle 21 report for SDTM.
-- Proposed creating a submissions folder called 'sdtm' [here](https://github.com/RConsortium/submissions-pilot3-adam/tree/main/submission).
 
----
+-   Discussed the Pinnacle 21 report for SDTM.
+-   Proposed creating a submissions folder called 'sdtm'
+    [here](https://github.com/RConsortium/submissions-pilot3-adam/tree/main/submission).
+
+------------------------------------------------------------------------
 
 ### Declan:
-- Shared slides for Pilot 3.
-- Updating slides on 3 repos or 2.
-- Moving departments to a different team.
 
----
+-   Shared slides for Pilot 3.
+-   Updating slides on 3 repos or 2.
+-   Moving departments to a different team.
+
+------------------------------------------------------------------------
 
 ### Ben:
-- Will collaborate with Joel to understand the cleanup of the project area vs package area for Pilot 3.
 
----
+-   Will collaborate with Joel to understand the cleanup of the project
+    area vs package area for Pilot 3.
 
-[1]: Pilot3 report-tlf.pdf
-[2]: Pilot3 report-adam.pdf
+------------------------------------------------------------------------
 
 ## 28Apr2023 - Minutes by Joel Laxamana
+
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
 -   Submission Pilot3 - ADaM Check In
--   Meeting Organizer: Joel Laxamana
--   Summary: Discussed tasks still in progress
--   Project Board: <https://github.com/orgs/RConsortium/projects/7>
--   Meeting Recorded: Yes : https://drive.google.com/file/d/1ApLsg52brtVxt6UuAxcu3rzFpCDk8Y0j/view?usp=sharing
 
--   New Pilot 3 package repo (for utility functions to be placed) : https://github.com/RConsortium/submissions-pilot3-utilities
--   P21 Free Community version : https://www.pinnacle21.com/downloads 
+-   Meeting Organizer: Joel Laxamana
+
+-   Summary: Discussed tasks still in progress
+
+-   Project Board: <https://github.com/orgs/RConsortium/projects/7>
+
+-   Meeting Recorded: Yes :
+    <https://drive.google.com/file/d/1ApLsg52brtVxt6UuAxcu3rzFpCDk8Y0j/view?usp=sharing>
+
+-   New Pilot 3 package repo (for utility functions to be placed) :
+    <https://github.com/RConsortium/submissions-pilot3-utilities>
+
+-   P21 Free Community version : <https://www.pinnacle21.com/downloads>
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
-1. Kangjie
-  - Reviewed define.xml for ADAE$ADURU.  The unit 'DAYS' is in place and should be good to move forward.
-  - ADSL$DURDIS update. Aligning with SAS conventions.
-  - QC findings Wiki updated to remove these rounding discrepancy issues.
-  - Supporting SDTM datasets in Pilot 3 package to run through P21 community. Link to recent P21 community version above. 
+1.  Kangjie
 
-2. Ben
-  - Also interested in working with Kaz to run SDTM datasets through P21 community. In addition, these datasets may also help with Xportr enhancements
-  - Furthermore, will borrow Pilot 3 datasets to help with Xportr updates.
-  - Will review ADRG
-  - Supporting the separation of utility functions in another package repo (link above).
+-   Reviewed define.xml for ADAE\$ADURU. The unit 'DAYS' is in place and
+    should be good to move forward.
+-   ADSL\$DURDIS update. Aligning with SAS conventions.
+-   QC findings Wiki updated to remove these rounding discrepancy
+    issues.
+-   Supporting SDTM datasets in Pilot 3 package to run through P21
+    community. Link to recent P21 community version above.
 
-3. Declan
-  - Reviewed and approved Kaz's PR for ADSL$DURDIS update.
-  - Will be presenting at Phuse to share more Pilot 3 awareness.
-  - Can help support Ben with creating Pilot 3 package repo (link above).
+2.  Ben
 
-4. Lei
-  - Continue to Review ADRG
-  - Posed the question on steps to finalize ADRG
-    - suggested that everyone be empowered to resolve or accept updates edits made by other team members per their experience and as they see fit, that meet their submission requirements.  Any more complex questions I'm happy to jump in and resolve.
+-   Also interested in working with Kaz to run SDTM datasets through P21
+    community. In addition, these datasets may also help with Xportr
+    enhancements
+-   Furthermore, will borrow Pilot 3 datasets to help with Xportr
+    updates.
+-   Will review ADRG
+-   Supporting the separation of utility functions in another package
+    repo (link above).
 
-5. Phani
-  - ADRG review
-  - Can also help support Kaz with SDTM P21 run.
+3.  Declan
 
-6. Joel
-  - ADaM datasets to run in P21 community.
-  - add all team members as collaborators to the new utility repo.
-  - Resolve ADRG questions.
-  - Will Tag Robert to help with unpackaging testing.
+-   Reviewed and approved Kaz's PR for ADSL\$DURDIS update.
+-   Will be presenting at Phuse to share more Pilot 3 awareness.
+-   Can help support Ben with creating Pilot 3 package repo (link
+    above).
 
+4.  Lei
+
+-   Continue to Review ADRG
+-   Posed the question on steps to finalize ADRG
+    -   suggested that everyone be empowered to resolve or accept
+        updates edits made by other team members per their experience
+        and as they see fit, that meet their submission requirements.
+        Any more complex questions I'm happy to jump in and resolve.
+
+5.  Phani
+
+-   ADRG review
+-   Can also help support Kaz with SDTM P21 run.
+
+6.  Joel
+
+-   ADaM datasets to run in P21 community.
+-   add all team members as collaborators to the new utility repo.
+-   Resolve ADRG questions.
+-   Will Tag Robert to help with unpackaging testing.
 
 ## 20Apr2023 - Minutes by Joel Laxamana
+
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
 -   Submission Pilot3 - ADaM Check In
 -   Meeting Organizer: Joel Laxamana
 -   Summary: Discussed tasks still in progress
 -   Project Board: <https://github.com/orgs/RConsortium/projects/7>
--   Meeting Recorded: Yes : https://drive.google.com/file/d/1gCcvsIli9QPBLZBsEaUQqPmtn6U-a0pR/view?usp=sharing
+-   Meeting Recorded: Yes :
+    <https://drive.google.com/file/d/1gCcvsIli9QPBLZBsEaUQqPmtn6U-a0pR/view?usp=sharing>
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
-1. Declan - no updates at this time
-2. Nicole - adlbc updates are good 82. will review 
-3. Robert - issue #59
-    - will create report-tlf, will update and state using pilot 1 programs but sourcing pilot 3 data. show updated time stamps will crete report-adam, using information from QC findings : https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings 
-4. Steven - worked on ADRG and comments
-5. Joel - finalized define, now working on adrg and will post link in slack
-6. Kaz - Haven issue when readin in .xpt, but attributes like type, length are not showing up in compare. only showing format.sas.
-	- check adadas QC discrepancies in branch 10.
+1.  Declan - no updates at this time
+2.  Nicole - adlbc updates are good 82. will review
+3.  Robert - issue #59
+    -   will create report-tlf, will update and state using pilot 1
+        programs but sourcing pilot 3 data. show updated time stamps
+        will crete report-adam, using information from QC findings :
+        <https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings>
+4.  Steven - worked on ADRG and comments
+5.  Joel - finalized define, now working on adrg and will post link in
+    slack
+6.  Kaz - Haven issue when readin in .xpt, but attributes like type,
+    length are not showing up in compare. only showing format.sas.
+    -   check adadas QC discrepancies in branch 10.
 
+## 14Apr2023 - Minutes by Joel Laxamana
 
-## 14Apr2023 - Minutes by Joel Laxamana 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
--   Submission Pilot3 - ADaM Check In
-No Meeting today. Individual updates via Slack. 
+-   Submission Pilot3 - ADaM Check In No Meeting today. Individual
+    updates via Slack.
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
-1. Kaz - Shared awareness on https://github.com/tidyverse/haven/issues/718
-2. Robert - working on issue #59
+1.  Kaz - Shared awareness on
+    <https://github.com/tidyverse/haven/issues/718>
+2.  Robert - working on issue #59
 
 ## 07Apr2023 - Minutes by Joel Laxamana
+
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
 -   Submission Pilot3 - ADaM Check In
 -   Meeting Organizer: Joel Laxamana
--   Summary: Discussed Pilot 3 project set-up and proposal to R Consortium
+-   Summary: Discussed Pilot 3 project set-up and proposal to R
+    Consortium
 -   Project Board: <https://github.com/orgs/RConsortium/projects/7>
--   Meeting Recorded: Yes : https://drive.google.com/file/d/1jvTWLtbLCa3_QbeWwtk88lt9rX3BfI_M/view?usp=sharing 
+-   Meeting Recorded: Yes :
+    <https://drive.google.com/file/d/1jvTWLtbLCa3_QbeWwtk88lt9rX3BfI_M/view?usp=sharing>
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
 #### Pilot 3 Progress Update :
-All 5 ADaMs now generated and in review. 
 
-Per development steps, we have noted discrepancies or findings when comparing our Pilot 3 ADaMs with the original Pilot 1 ADaMs. You may see these noted in our Wiki here : https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings .
+All 5 ADaMs now generated and in review.
 
-Minor updates are being made to clean up code, updating our variable labels appropriately and updating the ADaM specifications (define) to meet CDISC guidance as we go through our routine P21 checks. 
+Per development steps, we have noted discrepancies or findings when
+comparing our Pilot 3 ADaMs with the original Pilot 1 ADaMs. You may see
+these noted in our Wiki here :
+<https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings>
+.
 
-We are also currently developing our ADRG based off of the Pilot 3 specifications we are reading into P21.  We plan to use the P21 ADRG as a base, then we will add in information similar to that of Pilot 1 for complete instructions prior to submission.
+Minor updates are being made to clean up code, updating our variable
+labels appropriately and updating the ADaM specifications (define) to
+meet CDISC guidance as we go through our routine P21 checks.
 
-As we finalize both the define and the ADaMs, we are also developing a batch run code to run all of our ADaM and TLF scripts, with that we are looking into implementing dependency recognition using a package called {targets} (e.g. before ADAE is run, checks latest ADSL code has been run first).  
+We are also currently developing our ADRG based off of the Pilot 3
+specifications we are reading into P21. We plan to use the P21 ADRG as a
+base, then we will add in information similar to that of Pilot 1 for
+complete instructions prior to submission.
 
-Additionally, we are rerunning all TFL scripts from Pilot 1 and re-sourcing the Pilot 3 data.
+As we finalize both the define and the ADaMs, we are also developing a
+batch run code to run all of our ADaM and TLF scripts, with that we are
+looking into implementing dependency recognition using a package called
+{targets} (e.g. before ADAE is run, checks latest ADSL code has been run
+first).
 
-Once the above is finalized, we will do a batch run, check against P21, then bring everything over into our eSubmission repo. We have made contact with Roche's Regulatory function who will help support the preparation of our eSubmission in eCTD structure.
+Additionally, we are rerunning all TFL scripts from Pilot 1 and
+re-sourcing the Pilot 3 data.
+
+Once the above is finalized, we will do a batch run, check against P21,
+then bring everything over into our eSubmission repo. We have made
+contact with Roche's Regulatory function who will help support the
+preparation of our eSubmission in eCTD structure.
 
 #### Current Project workflow discussion as seen in Pilot 1 :
-Upon reviewing Pilot1's work and the R4CSR guidance they have followed, we see the current flow suggests the use of 2 repos : 1)Project repo & 2)Submission repo
 
-In the project repo, this includes the project analysis R scripts (ADaMs and TFLs) and R utility functions within the same package.
+Upon reviewing Pilot1's work and the R4CSR guidance they have followed,
+we see the current flow suggests the use of 2 repos : 1)Project repo &
+2)Submission repo
 
-```r
+In the project repo, this includes the project analysis R scripts (ADaMs
+and TFLs) and R utility functions within the same package.
+
+``` r
 14.2.2 programs
 
 Folder path: ectddemo/m5/datasets/ectddemo/analysis/adam/programs/.
@@ -299,65 +415,98 @@ r0pkgs.txt: contains all internally developed proprietary R packages.
 Other .txt files: each contains R code for a specific analysis.
 ```
 
-They also suggest using .RMD files as the source analysis scripts, which are then converted to .R/.txt for submission.
+They also suggest using .RMD files as the source analysis scripts, which
+are then converted to .R/.txt for submission.
 
-Then all .txt are brought over to the Submission repo to deliver to Regulatory for eCTD structure and formal submission to the FDA portal.
+Then all .txt are brought over to the Submission repo to deliver to
+Regulatory for eCTD structure and formal submission to the FDA portal.
 
-In Pilot 3 our project flow emulates more of the usual project work we would see in our companies.
+In Pilot 3 our project flow emulates more of the usual project work we
+would see in our companies.
 
-For instance, our source code will just use plain .R instead of .RMD as source analysis code.  Especially for ADaMs, it make more sense to just start in .R scripts.
+For instance, our source code will just use plain .R instead of .RMD as
+source analysis code. Especially for ADaMs, it make more sense to just
+start in .R scripts.
 
-For the most part Pilot3 will follow the same submission process as Pilot1, but the minor difference will just be our project flow. I.E., Pilot 3 will seperate the Utility functions from the Project analysis scripts into different repos.  It makes more sense to treat the study specific utility functions as seperate package, similar to how we call on other R packages from CRAN or other git repositories, where then the project analysis repo scripts will call on the aformentioned study specific utility functions package.  This is still in line with the R4CSR guidance in section 14.3  
+For the most part Pilot3 will follow the same submission process as
+Pilot1, but the minor difference will just be our project flow. I.E.,
+Pilot 3 will seperate the Utility functions from the Project analysis
+scripts into different repos. It makes more sense to treat the study
+specific utility functions as seperate package, similar to how we call
+on other R packages from CRAN or other git repositories, where then the
+project analysis repo scripts will call on the aformentioned study
+specific utility functions package. This is still in line with the R4CSR
+guidance in section 14.3
 
-Following this approach, makes it clear from a study perspective where the utility functions are being called from, where the project analysis scripts are stored and developed and where the submission will be.  For illustration purposes we have this graphic (Thanks, Thomas Neitman!) : 
+Following this approach, makes it clear from a study perspective where
+the utility functions are being called from, where the project analysis
+scripts are stored and developed and where the submission will be. For
+illustration purposes we have this graphic (Thanks, Thomas Neitman!) :
 
 ![](images/pilot3_3repos.PNG)
 
-Overall, to our Health Agencies, the single source of truth will of course come from our 'Submission' repo, where they may not need all of the details of the study project flow steps.  We just wanted to be able to discern that R packages should be kept in their own packages and project analysis work should not be stored as a package.
+Overall, to our Health Agencies, the single source of truth will of
+course come from our 'Submission' repo, where they may not need all of
+the details of the study project flow steps. We just wanted to be able
+to discern that R packages should be kept in their own packages and
+project analysis work should not be stored as a package.
 
-Best,
-Thomas and Joel
+Best, Thomas and Joel
 
-#### POST Meeting notes/actions from R Consortium Submissions WG (07Apr2023) : 
-  -Per Paul Shuette, Pilot 3 needs a link to the 'FREE' P21 version that the Pilot 3 team should be using.  Paul to share link with Joel.
-  -We should also include SDTM in the P21 run, but just mention in the ADRG that we will not be updating or fixing the SDTMs due to any P21 issues to follow the same approach as Pilot 1. Though Pilot 3 is mainly focused on ADaMs, we do plan on fixing the P21 issues the best we can and noting discrepancies compared to the CDISCPILOT data.
-  -Need new repo from submission_wg to store the utility functions into. Joe R, could you help us with this?
-  -For the study project repo set-up, there are example template repos that can be followed. Pilot 3 team to look into this.
-  -Targeting mid-June 2023 to wrap-up submission.
-Link to all Pilot 3 members, for Eric to include in Submission WG webpage : https://rconsortium.github.io/submissions-pilot3-adam/main/
+#### POST Meeting notes/actions from R Consortium Submissions WG (07Apr2023) :
 
-Update : 
-New repo for Proprietary R Package : https://github.com/RConsortium/submissions-pilot3-utilities
+-Per Paul Shuette, Pilot 3 needs a link to the 'FREE' P21 version that
+the Pilot 3 team should be using. Paul to share link with Joel. -We
+should also include SDTM in the P21 run, but just mention in the ADRG
+that we will not be updating or fixing the SDTMs due to any P21 issues
+to follow the same approach as Pilot 1. Though Pilot 3 is mainly focused
+on ADaMs, we do plan on fixing the P21 issues the best we can and noting
+discrepancies compared to the CDISCPILOT data. -Need new repo from
+submission_wg to store the utility functions into. Joe R, could you help
+us with this? -For the study project repo set-up, there are example
+template repos that can be followed. Pilot 3 team to look into this.
+-Targeting mid-June 2023 to wrap-up submission. Link to all Pilot 3
+members, for Eric to include in Submission WG webpage :
+<https://rconsortium.github.io/submissions-pilot3-adam/main/>
 
+Update : New repo for Proprietary R Package :
+<https://github.com/RConsortium/submissions-pilot3-utilities>
 
 ## 31Mar2023 - Minutes by Joel Laxamana
+
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
 -   Submission Pilot3 - ADaM Check In
 -   Meeting Organizer: Thomas Neitman, Joel Laxamana
--   Participants: Joel Laxamana, Kangjie Zhang, Robert Devine, Phani Tata
+-   Participants: Joel Laxamana, Kangjie Zhang, Robert Devine, Phani
+    Tata
 -   Summary: Discussed tasks still in progress
 -   Project Board: <https://github.com/orgs/RConsortium/projects/7>
--   Meeting Recorded: Yes : https://drive.google.com/file/d/1-AUuNCTD_-UCtGrRV2GSGcUOpJEhAxZv/view?usp=sharing 
+-   Meeting Recorded: Yes :
+    <https://drive.google.com/file/d/1-AUuNCTD_-UCtGrRV2GSGcUOpJEhAxZv/view?usp=sharing>
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
-- 89 adtte specs updates
-- latest specs now in branch 82
+-   89 adtte specs updates
+-   latest specs now in branch 82
 
-1. Robert
-- issue 32 resolved. .RMD -> .R
-- Questionnaire meeting.
-- reviewing 82
+1.  Robert
 
-2. Kaz
-- updated LOCF function from admiral 0.10 in ADADAS
-- format discrepancy resolved in ADSL
-- reviewing 82
-- #57 Common issues facing datasets, to add another tab to create another wiki page.
+-   issue 32 resolved. .RMD -\> .R
+-   Questionnaire meeting.
+-   reviewing 82
 
-3. Phani
-- Work on ADRG. see issue 61 to get links to all ADRG.
+2.  Kaz
+
+-   updated LOCF function from admiral 0.10 in ADADAS
+-   format discrepancy resolved in ADSL
+-   reviewing 82
+-   #57 Common issues facing datasets, to add another tab to create
+    another wiki page.
+
+3.  Phani
+
+-   Work on ADRG. see issue 61 to get links to all ADRG.
 
 #### Project board reviewed and updated.
 
@@ -368,49 +517,65 @@ New repo for Proprietary R Package : https://github.com/RConsortium/submissions-
 -   Submission Pilot3 - ADaM Check In
 -   Meeting Organizer: Thomas Neitman, Joel Laxamana
 -   Participants: Joel Laxamana, Thomas Neitman, Kangjie Zhang, Ben
-    Straub, Robert Devine, Declan Hodges, Nicole Jones, Dadong Zhang, Lei Zhao
+    Straub, Robert Devine, Declan Hodges, Nicole Jones, Dadong Zhang,
+    Lei Zhao
 -   Summary: Discussed tasks still in progress
 -   Project Board: <https://github.com/orgs/RConsortium/projects/7>
--   Meeting Recorded: Yes : https://drive.google.com/file/d/1Gt7l2NOorQe43jVJ-McCaBKE_-vW_j4X/view?usp=sharing
+-   Meeting Recorded: Yes :
+    <https://drive.google.com/file/d/1Gt7l2NOorQe43jVJ-McCaBKE_-vW_j4X/view?usp=sharing>
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
-1. Declan.
-- Updating renv.lock with most current snapshot. updating packages including admiral .10.
-  - Datasets need updates with new snapshot
-  - Joel to merge 77 to main and Declan to create new issues for ADSL, ADADAS, ADTTE
-  - ADLBC and ADAE are good to go.
+1.  Declan.
 
-2. Nicole
-- Reviewing ADLBC specs and populating AVAL with correct derivation.
-- Reviewing codelist 
+-   Updating renv.lock with most current snapshot. updating packages
+    including admiral .10.
+    -   Datasets need updates with new snapshot
+    -   Joel to merge 77 to main and Declan to create new issues for
+        ADSL, ADADAS, ADTTE
+    -   ADLBC and ADAE are good to go.
 
-3. Dadong
-- Reviewing ADLBC specs with Nicole.
-- Issue with max values - fix derivation issue for when subject's values are all missing NA.
-  - Will update specs on this. See #82.
+2.  Nicole
 
-4. Ben
-- Will work on updating the ADRG
+-   Reviewing ADLBC specs and populating AVAL with correct derivation.
+-   Reviewing codelist
 
-5. Kaz
-- Summarize discrepancies on attribute and format issues for all datasets
-- Metacore issue on removing duplicate formats. all details in #87
-- These are minor issues, so long as we document in wiki we should be good.
- 
-6. Robert
-- Issue 83 adtte specs look good.
-- Declan to add Robert to adtte issues per #77.
+3.  Dadong
 
-7. Lei
-- Will work on updating the ADRG
+-   Reviewing ADLBC specs with Nicole.
+-   Issue with max values - fix derivation issue for when subject's
+    values are all missing NA.
+    -   Will update specs on this. See #82.
 
-8. Thomas/Joel
-- Update R Consortium Submissions WG on Pilot 3 : https://docs.google.com/presentation/d/1-aZEZw8HAUm_T3ywXWKGNIxQP7Ez0DHgN2BaRNQZJ3k/edit?usp=sharing
+4.  Ben
 
-@channel Pilot 3 ADRG to update : https://drive.google.com/drive/folders/15Ec2FCjuiCothwdilUOlFGgPKEG78BFF?usp=share_link 
-Please let me know if you all have access to these or not.  Thanks. 
+-   Will work on updating the ADRG
 
+5.  Kaz
+
+-   Summarize discrepancies on attribute and format issues for all
+    datasets
+-   Metacore issue on removing duplicate formats. all details in #87
+-   These are minor issues, so long as we document in wiki we should be
+    good.
+
+6.  Robert
+
+-   Issue 83 adtte specs look good.
+-   Declan to add Robert to adtte issues per #77.
+
+7.  Lei
+
+-   Will work on updating the ADRG
+
+8.  Thomas/Joel
+
+-   Update R Consortium Submissions WG on Pilot 3 :
+    <https://docs.google.com/presentation/d/1-aZEZw8HAUm_T3ywXWKGNIxQP7Ez0DHgN2BaRNQZJ3k/edit?usp=sharing>
+
+@channel Pilot 3 ADRG to update :
+<https://drive.google.com/drive/folders/15Ec2FCjuiCothwdilUOlFGgPKEG78BFF?usp=share_link>
+Please let me know if you all have access to these or not. Thanks.
 
 ## 17Mar2023 - Minutes by Joel Laxamana
 
@@ -427,49 +592,74 @@ Please let me know if you all have access to these or not.  Thanks.
 
 -\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*-
 
-1. 
--   {admiral} v0.10 (or maybe even update CRAN snapshot and update all packages we are using.)
+1.  
 
-## ACTION : Decision to update admiral - adadas locf derivation now available. We need to update renv.lock then do renv::restore(). 
-### Is everyone ok with updating CRAN snapshot and all packages? See https://github.com/RConsortium/submissions-pilot3-adam/issues/77#issuecomment-1476000593 and input your comments/responses. 
+-   {admiral} v0.10 (or maybe even update CRAN snapshot and update all
+    packages we are using.)
 
-2. 
--   Pinnacle 21 report 
+## ACTION : Decision to update admiral - adadas locf derivation now available. We need to update renv.lock then do renv::restore().
 
-## ACTION : Check on ADTTE & ADLBC derivation specs : Bingjun and Nicole 
-  
-  - All other dataset specs OK, per Declan (ADSL), Kaz (ADADAS), ADAE (Phani/Joel)
-  
+### Is everyone ok with updating CRAN snapshot and all packages? See <https://github.com/RConsortium/submissions-pilot3-adam/issues/77#issuecomment-1476000593> and input your comments/responses.
+
+2.  
+
+-   Pinnacle 21 report
+
+## ACTION : Check on ADTTE & ADLBC derivation specs : Bingjun and Nicole
+
+-   All other dataset specs OK, per Declan (ADSL), Kaz (ADADAS), ADAE
+    (Phani/Joel)
+
 ## ACTION : I've created git issues for all datasets, please close issue in git to formally track that the specs are ok now.
 
-  - This is the most up-to-date specs, where the define has 0 issues in Pinnacle 21 now.
-https://docs.google.com/spreadsheets/d/13T15AS69ENeHktMofEQD4QBOg_moY-mU/edit?usp=sharing&ouid=103991081896680964420&rtpof=true&sd=true
+-   This is the most up-to-date specs, where the define has 0 issues in
+    Pinnacle 21 now.
+    <https://docs.google.com/spreadsheets/d/13T15AS69ENeHktMofEQD4QBOg_moY-mU/edit?usp=sharing&ouid=103991081896680964420&rtpof=true&sd=true>
 
-    - Please use your gmail account to open this link. Direct message me in slack your gmail so that I can share the doc.
-  
-3. 
-- Joel to continue to resolve ADADAS.AVAL length, will reach out to Kaz if
-    needed.
-    - working on branch 10 to update this before PR.
+    -   Please use your gmail account to open this link. Direct message
+        me in slack your gmail so that I can share the doc.
+
+3.  
+
+-   Joel to continue to resolve ADADAS.AVAL length, will reach out to
+    Kaz if needed.
+    -   working on branch 10 to update this before PR.
 
 ### Update : length now fixed and P21 issue now resolved.
 
-4. 
-- ADRG needs to be worked on. How best to collaborate 
-  - Decision - we will continue with google docs. Since this is an open source pilot study, there is nothing too confidential to worry about.  Feel free to create temporary google accounts if you don't have one, then share your gmail with me so that I can share google docs with you.  [Thanks Ben and Declan for sharing your accounts with me.  I've added you to the google doc list where you should be able to now access the meeting recordings (or at least request access) and the google docs.]
+4.  
 
-## ACTION : To update ADRG, we can 
-#### 1) copy text from Pilot 1 to Pilot 3 adrg. Pilot 1 adrg : <https://github.com/RConsortium/submissions-pilot1-to-fda/blob/main/m5/datasets/rconsortiumpilot1/analysis/adam/datasets/adrg.pdf>, 
-#### 2) Take Pilot 3 proposal : <https://github.com/RConsortium/submissions-pilot3-adam/blob/main/vignettes/fda/R_Submission_Pilot_3_ADaM_FDA_Execution_Proposal_02Dec2022.pdf> and include this info into the Pilot 3 ADRG (should list out all steps for FDA to unpack the Pilot 3 project.) 
-#### 3) This is the current base ADRG directly coming from P21 : https://docs.google.com/document/d/13xMUVQgZMmXd1igdZNUQy1Pc-WxoMxL7/edit?usp=share_link&ouid=103991081896680964420&rtpof=true&sd=true We then just need to mash all of this information into one cohesive Reviewer's guide that is specific to Pilot 3.  
+-   ADRG needs to be worked on. How best to collaborate
+    -   Decision - we will continue with google docs. Since this is an
+        open source pilot study, there is nothing too confidential to
+        worry about. Feel free to create temporary google accounts if
+        you don't have one, then share your gmail with me so that I can
+        share google docs with you. [Thanks Ben and Declan for sharing
+        your accounts with me. I've added you to the google doc list
+        where you should be able to now access the meeting recordings
+        (or at least request access) and the google docs.]
+
+## ACTION : To update ADRG, we can
+
+#### 1) copy text from Pilot 1 to Pilot 3 adrg. Pilot 1 adrg : <https://github.com/RConsortium/submissions-pilot1-to-fda/blob/main/m5/datasets/rconsortiumpilot1/analysis/adam/datasets/adrg.pdf>,
+
+#### 2) Take Pilot 3 proposal : <https://github.com/RConsortium/submissions-pilot3-adam/blob/main/vignettes/fda/R_Submission_Pilot_3_ADaM_FDA_Execution_Proposal_02Dec2022.pdf> and include this info into the Pilot 3 ADRG (should list out all steps for FDA to unpack the Pilot 3 project.)
+
+#### 3) This is the current base ADRG directly coming from P21 : <https://docs.google.com/document/d/13xMUVQgZMmXd1igdZNUQy1Pc-WxoMxL7/edit?usp=share_link&ouid=103991081896680964420&rtpof=true&sd=true> We then just need to mash all of this information into one cohesive Reviewer's guide that is specific to Pilot 3.
+
 #### One recommednation would be to just copy Pilot 1's ADRG and update it with the Pilot 3 proposal/project unpacking steps and information.
 
-5. 
-- Once above is up to date, we need to move over programs to esub repo, then Robert Devine can unpack and test.
-    
-#### Announcements : 
-- Thomas leaving Roche to pursue new position. Congrats to Thomas! You will be missed at Roche, but glad to know you'll still be Co-Leading/Collaborating with us in this open source Pilot 3 project.
+5.  
 
+-   Once above is up to date, we need to move over programs to esub
+    repo, then Robert Devine can unpack and test.
+
+#### Announcements :
+
+-   Thomas leaving Roche to pursue new position. Congrats to Thomas! You
+    will be missed at Roche, but glad to know you'll still be
+    Co-Leading/Collaborating with us in this open source Pilot 3
+    project.
 
 ## 10Mar2023 - Minutes by Joel Laxamana
 
@@ -492,7 +682,6 @@ https://docs.google.com/spreadsheets/d/13T15AS69ENeHktMofEQD4QBOg_moY-mU/edit?us
     should be resolvable as we remove all reference to datasets,
     codelists, variables from datasets that we are not generating in
     Pilot 3.
-
 
 ### ACTION to Lei Zhao : Thanks to the discussion within the team, we should be able to resolve the issues directly in P21. Then Lei will : <https://github.com/RConsortium/submissions-pilot3-adam/issues/61>
 
@@ -787,7 +976,9 @@ R Consortium meeting conflict with Pilot 3 catch-up today
 
 ### ACTION for those that can work on updating the output programs, they can be found here :
 
-    <https://github.com/RConsortium/submissions-pilot3-adam/tree/main/vignettes> Each of the .RMD scripts that start with `tlf-*` can be used to update and read our Pilot 3 datasets. Then pick either #29 , #31 , #32.
+```         
+<https://github.com/RConsortium/submissions-pilot3-adam/tree/main/vignettes> Each of the .RMD scripts that start with `tlf-*` can be used to update and read our Pilot 3 datasets. Then pick either #29 , #31 , #32.
+```
 
 Meeting Recording :
 <https://drive.google.com/file/d/1D2sUlnpLaGV8BGb2GeS5tJePinOMRaEd/view>
@@ -879,11 +1070,13 @@ Meeting Recording :
 
 ### ACTION : ALL REVIEW meeting recording below to see Ben's demo on project board (10:22)
 
-    -   ADBLC in PR, but still has issues.
-    -   ADAE still in progress.
-    -   For new issues, please add them to the backlog (11:55). This
-        will help to see if issues need to be re-assigned.
-    -   Package down site, still in progress.
+```         
+-   ADBLC in PR, but still has issues.
+-   ADAE still in progress.
+-   For new issues, please add them to the backlog (11:55). This
+    will help to see if issues need to be re-assigned.
+-   Package down site, still in progress.
+```
 
 ### ACTION : Ben work with Steven to help set-up github pages.
 
@@ -894,7 +1087,9 @@ Meeting Recording :
 
 ### ACTION : All add any new corrections needed from original datasets
 
-    <https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings>
+```         
+<https://github.com/RConsortium/submissions-pilot3-adam/wiki/QC-Findings>
+```
 
 7.  AOB
 
@@ -976,7 +1171,7 @@ Meeting recording :
 
 -   Catching up with the team.
 
-### ACTION : looking through new issues to assign herself. 
+### ACTION : looking through new issues to assign herself.
 
 8.  AOB
 
@@ -986,7 +1181,6 @@ Meeting recording :
 ### ACTION : bring this question to R Consortium group meeting.
 
 Meeting adjourned.
-
 
 ## 06Jan2023 - Minutes by Joel Laxamana
 
@@ -1058,7 +1252,6 @@ Happy New Year and Welcome back!
     scripts and source our ADaMs to generate the Tables/Graphs.
 
 Meeting adjourned.
-
 
 ## 23Dec2022 - Minutes by Joel Laxamana
 
@@ -1145,8 +1338,10 @@ everyone. We'll pick it up again next year! \~Thomas and Joel
 
 ### ACTION to Thomas : Current Posit Cloud is now using R 4.2.2, where there is a check in `startup` that notes we should be using 4.2.1. But this should not be the case. Thomas will create an issue to remove the R version check so that we all just use the most current version in Posit Cloud. Current issue :
 
-    R version change [4.2.1 -> 4.2.2] detected when restoring session; search path not restored
-    Connected to your session in progress, last started 2022-Dec-23 20:09:44 UTC (14 minutes ago)
+```         
+R version change [4.2.1 -> 4.2.2] detected when restoring session; search path not restored
+Connected to your session in progress, last started 2022-Dec-23 20:09:44 UTC (14 minutes ago)
+```
 
 4.  Thomas
 
@@ -1356,10 +1551,12 @@ meeting. Just to bullet :
 
 <!-- -->
 
-    git checkout main
-    git pull
-    git checkout <your_branch>
-    git merge --no-edit main
+```         
+git checkout main
+git pull
+git checkout <your_branch>
+git merge --no-edit main
+```
 
 -   SAP :
     <https://pharmaverse.slack.com/files/U028SDSVAR0/F04A5FFSGA3/cdiscpilot01.pdf>
