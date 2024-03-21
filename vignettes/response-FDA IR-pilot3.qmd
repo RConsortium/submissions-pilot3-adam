@@ -1,19 +1,19 @@
 ---
-title: "Response Letter"
-subtitle: "R Consortium  \nR Submission Pilot 3 2024-03-01"
+title: |
+   | R Consortium 
+   |
+   | Health Authority Request
+   |
+subtitle: "\nResponse to xxJAN2024 FDA Information Request - Pilot 3"
 format: 
   pdf:
     toc: true
     number-sections: true
+    include-before:
+      - '\newpage{}'
 editor: source
-format:
-  docx:
-    number-sections: true
-    number-offset: 6
-    toc: true
-    toc-depth: 3
 ---
-
+{{< pagebreak >}}
 # Minor Differences Between CDISC and Pilot 3 Datasets
 
 ## Introduction
