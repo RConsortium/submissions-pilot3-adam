@@ -60,7 +60,7 @@ navbar:
       - text: ADADAS - ADS-COG Analysis
         href: articles/adam-adadas.html
       - text: ADRG - Analysis Data Reviewer's Guide
-        href: articles/adrg.html
+        href: articles/adrg_website.html
     conferences:
       text: Conferences
       menu:

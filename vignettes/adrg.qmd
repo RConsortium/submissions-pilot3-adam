@@ -83,7 +83,7 @@ This was a prospective, randomized, multi-center, double-blind, placebo-controll
 
 ### Study schema:
 
-![](adrg_images/cdiscpilot01-study-schema.png){fig-align="center"}
+![](images/cdiscpilot01-study-schema.png){fig-align="center"}
 
 {{< pagebreak >}}
 

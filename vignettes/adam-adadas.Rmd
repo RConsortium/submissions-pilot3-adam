@@ -24,7 +24,7 @@ This was the specification file used to help generate the ADaM.
 
 
 ```{r, echo = FALSE}
-adadas_spec <- read_xlsx("../submission/adam/ADaM - Pilot 3.xlsx", sheet = 3) %>%
+adadas_spec <- read_xlsx("../submission/adam/adam-pilot-3.xlsx", sheet = 3) %>%
   filter(Dataset == "ADADAS")
 
 admiraldev::dataset_vignette(adadas_spec)
