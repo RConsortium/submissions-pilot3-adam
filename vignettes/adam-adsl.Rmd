@@ -23,7 +23,7 @@ The ADSL dataset R-code can be found [here](https://github.com/RConsortium/submi
 This was the specification file used to help generate the ADaM.
 
 ```{r, echo = FALSE}
-adsl_spec <- read_xlsx("../submission/adam/ADaM - Pilot 3.xlsx", sheet = 3) %>%
+adsl_spec <- read_xlsx("../submission/adam/adam-pilot-3.xlsx", sheet = 3) %>%
   filter(Dataset == "ADSL")
 dataset_vignette(adsl_spec)
 ```

@@ -23,7 +23,7 @@ The ADSL dataset code can be found [here](https://github.com/RConsortium/submiss
 This was the specification file used to help generate the ADaM.
 
 ```{r, echo = FALSE}
-adae_spec <- read_xlsx("../submission/adam/ADaM - Pilot 3.xlsx", sheet = 3) %>%
+adae_spec <- read_xlsx("../submission/adam/adam-pilot-3.xlsx", sheet = 3) %>%
   filter(Dataset == "ADAE")
 dataset_vignette(adae_spec)
 ```
