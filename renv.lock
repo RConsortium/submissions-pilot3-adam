@@ -1157,7 +1157,7 @@
         "xml2"
       ],
       "Hash": "49b625e6aabe4c5f091f5850aba8ff78"
-[O    },
+    },
     "knitr": {
       "Package": "knitr",
       "Version": "1.42",
