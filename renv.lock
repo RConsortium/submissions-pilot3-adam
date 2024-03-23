@@ -1506,7 +1506,7 @@
       ],
       "Hash": "01f28d4278f15c76cddbea05899c5d6f"
     },
-[I    "pkgdown": {
+    "pkgdown": {
       "Package": "pkgdown",
       "Version": "2.0.7",
       "Source": "Repository",
