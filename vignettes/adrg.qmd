@@ -697,6 +697,22 @@ The package installation procedure may take a few minutes or longer depending on
 
 5.  Upon completion of installing packages using `{renv}`, please restart your R session.
 
+::: callout-note
+After restarting the R session at this stage, running `renv::status()` will show us that the only package uninstalled is the {pilot3utils} package.
+
+```         
+The following package(s) are used in this project, but are not installed:
+
+    pilot3utils
+
+Consider installing these packages (for example, using `renv::install()`).
+Then, use `renv::snapshot()` to record these packages in the lockfile.
+Use `renv::dependencies()` to see where these packages appear to be used.
+```
+
+We may ignore this as we will be installing the {pilot3utils} package in the following steps.
+:::
+
 6.  Install the {pilot3utils} package following the steps below :
 
     -   In R Studio, navigate to your `Packages` window pane, then click on `Install`.
@@ -715,9 +731,7 @@ The package installation procedure may take a few minutes or longer depending on
 This drop-down option is only available on a local Windows installation, not on linux systems.
 :::
 
-         
--   In the field `Package Archive`, click on `Browse...`
-and navigate to this directory to point to the `{pilot3utils}` package :
+-   In the field `Package Archive`, click on `Browse...` and navigate to this directory to point to the `{pilot3utils}` package :
 
 `~/pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam/programs/pilot3utils_0.0.2.zip`
 
@@ -728,7 +742,6 @@ and navigate to this directory to point to the `{pilot3utils}` package :
 -   Click `Install`.
 
     ![](images/clipboard-2776928439.png)
-
 
 7.  **Set the paths to run the analysis programs**
 
