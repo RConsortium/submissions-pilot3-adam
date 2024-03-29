@@ -684,6 +684,13 @@ PACKAGES.rds'
 
 -   Open the .Rprofile : C:/pilot3-files/.Rprofile and ensure these 2 lines are there :
 
+    ```         
+    Sys.setenv(RENV_DOWNLOAD_FILE_METHOD = "libcurl")
+    source("renv/activate.R")
+    ```
+
+    e.g.,
+
 ![](images/clipboard-4064866343.png)
 
 -   Restart the R Session (ignoring the warning once more), then run `renv::restore()` and select `y` :
