@@ -15,7 +15,7 @@ library(dplyr)
 library(Tplyr)
 library(pharmaRTF)
 devtools::load_all()
-library(pilot3)
+library(pilot3utils)
 
 ## ------------------------------------------------------------------------------------------------------------------------------
 options(huxtable.add_colnames = FALSE)

@@ -23,7 +23,7 @@ The ADTTE dataset code can be found [here](https://github.com/RConsortium/submis
 This was the specification file used to help generate the ADaM.
 
 ```{r, echo = FALSE}
-adtte_spec <- read_xlsx("../submission/adam/ADaM - Pilot 3.xlsx", sheet = 3) %>%
+adtte_spec <- read_xlsx("../submission/adam/adam-pilot-3.xlsx", sheet = 3) %>%
   filter(Dataset == "ADTTE")
 dataset_vignette(adtte_spec)
 ```
