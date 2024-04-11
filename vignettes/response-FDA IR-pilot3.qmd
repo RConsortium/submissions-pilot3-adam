@@ -42,7 +42,7 @@ The purpose of this letter is to provide the working groupâ€™s responses to FDAâ
 
 [**Agency Comment 1**]{.underline}
 
-The agency found issues switching between R versions. The FDA would like the wg \[working group\] to explore the impact of different versions of R, RStudio and RTools, as well as Linux vs. Windows
+The agency found issues switching between R versions. The FDA would like the WG \[Working Group\] to explore the impact of different versions of R, RStudio and RTools, as well as Linux vs. Windows
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
