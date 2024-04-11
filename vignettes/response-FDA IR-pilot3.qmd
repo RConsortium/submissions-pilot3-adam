@@ -46,23 +46,20 @@ package submitted through the eCTD portal.
 The purpose of this letter is to provide the working group’s responses to FDA’s 
 Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 
 3. The following information is provided in response to the findings from FDA 
-Staff’s review :
+Staff’s review.
 
 {{< pagebreak >}}
 
 [**Agency Comment 1**]{.underline}
 
-The agency found issues switching between R versions. The FDA would like the 
-wg \[working group\] to explore the impact of different versions of R, RStudio 
-and RTools, as well as Linux vs. Windows
+The agency found issues switching between R versions. The FDA would like the WG \[Working Group\] to explore the impact of different versions of R, RStudio and RTools, as well as Linux vs. Windows
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-It is recommended by the Working group to download and install the R and R 
-Studio versions specified in the ADRG. Switching to other versions, not 
-specified, could most likely be the cause of issues when running the R ADaM and 
-analysis output programs. Certain versions of the R packages used in these 
-analysis programs only correspond to the specified R version.
+It is recommended by the WG to download and install the R and R Studio versions specified in the ADRG. Switching to other versions, not specified, could most 
+likely be the cause of issues when running the R ADaM and analysis output 
+programs. Certain versions of the R packages used in these programs only 
+correspond to the specified R version.
 
 Regarding RTools, referencing the installation instructions on its website,
 
@@ -75,7 +72,7 @@ Windows, for which again one does not need to install Rtools42 locally. The
 Winbuilder check service uses identical setup as the CRAN incomming packages 
 checks and has already all CRAN and Bioconductor packages pre-installed."*^1^
 
-As discussed in the R Consortium R Submission working group, *"It appears that 
+As discussed in the R Consortium R Submission Working Group, *"It appears that 
 the most practical path forward as to what preemptive measures sponsors can take 
 to match submission environments with the FDA test environment is to work with 
 the FDA to lock down the environment as best as can be done just prior to 
