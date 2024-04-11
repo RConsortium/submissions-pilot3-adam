@@ -46,7 +46,7 @@ The agency found issues switching between R versions. The FDA would like the WG 
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-It is recommended by the Working group to download and install the R and R Studio versions specified in the ADRG. Switching to other versions, not specified, could most likely be the cause of issues when running the R ADaM and analysis output programs. Certain versions of the R packages used in these analysis programs only correspond to the specified R version.
+It is recommended by the WG to download and install the R and R Studio versions specified in the ADRG. Switching to other versions, not specified, could most likely be the cause of issues when running the R ADaM and analysis output programs. Certain versions of the R packages used in these programs only correspond to the specified R version.
 
 Regarding RTools, referencing the installation instructions on its website,
 
