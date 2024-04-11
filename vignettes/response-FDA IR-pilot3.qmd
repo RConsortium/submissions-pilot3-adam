@@ -54,7 +54,7 @@ Regarding RTools, referencing the installation instructions on its website,
 
 *Moreover, online build services are available to check and build R packages for Windows, for which again one does not need to install Rtools42 locally. The Winbuilder check service uses identical setup as the CRAN incomming packages checks and has already all CRAN and Bioconductor packages pre-installed."*^1^
 
-As discussed in the R Consortium R Submission working group, *"It appears that the most practical path forward as to what preemptive measures sponsors can take to match submission environments with the FDA test environment is to work with the FDA to lock down the environment as best as can be done just prior to submission."*^2^
+As discussed in the R Consortium R Submission Working Group, *"It appears that the most practical path forward as to what preemptive measures sponsors can take to match submission environments with the FDA test environment is to work with the FDA to lock down the environment as best as can be done just prior to submission."*^2^
 
 For Linux vs Windows, many others in the R community have asked similar questions. *"R programming language is well-suited for both Windows and Linux operating systems. It is an open-source programming language, so it can be used on a variety of platforms. The choice between Windows and Linux depends on your specific needs, familiarity with the operating systems, and the tools and packages you plan to use with R. Both platforms have their own advantages and it ultimately comes down to personal preference and the specific requirements of your project."*^3^
 
