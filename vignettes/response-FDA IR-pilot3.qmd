@@ -28,37 +28,70 @@ Center for Drug Evaluation and Research 5901-B Ammendale Road
 Beltsville, MD 20705-1266
 
 
-Re: Response to FDA’s Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 3 eCTD submission
+Re: Response to FDA’s Statistical Review and Evaluation Summary of the R 
+Consortium R submission Pilot 3 eCTD submission
 
 
 Dear Sir/Madam:
 
 
-On February 2, 2024, the R Consortium R submission Working Group received FDA’s Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 3 submission. The working group would like to thank FDA staff for the comprehensive review and thoughtful recommendations. We are thrilled to learn that the FDA staff was able to reproduce the ADaM (Analysis Data Model) datasets as well as the analysis outputs using the R programs and the proprietary R package submitted through the eCTD portal.
+On February 2, 2024, the R Consortium R submission Working Group received FDA’s 
+Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 
+3 submission. The working group would like to thank FDA staff for the 
+comprehensive review and thoughtful recommendations. We are thrilled to learn 
+that the FDA staff was able to reproduce the ADaM (Analysis Data Model) datasets 
+as well as the analysis outputs using the R programs and the proprietary R 
+package submitted through the eCTD portal.
 
-The purpose of this letter is to provide the working group’s responses to FDA’s Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 3. The following information is provided in response to the findings from FDA Staff’s review :
+The purpose of this letter is to provide the working group’s responses to FDA’s 
+Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 
+3. The following information is provided in response to the findings from FDA 
+Staff’s review :
 
 {{< pagebreak >}}
 
 [**Agency Comment 1**]{.underline}
 
-The agency found issues switching between R versions. The FDA would like the wg \[working group\] to explore the impact of different versions of R, RStudio and RTools, as well as Linux vs. Windows
+The agency found issues switching between R versions. The FDA would like the 
+wg \[working group\] to explore the impact of different versions of R, RStudio 
+and RTools, as well as Linux vs. Windows
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-It is recommended by the Working group to download and install the R and R Studio versions specified in the ADRG. Switching to other versions, not specified, could most likely be the cause of issues when running the R ADaM and analysis output programs. Certain versions of the R packages used in these analysis programs only correspond to the specified R version.
+It is recommended by the Working group to download and install the R and R 
+Studio versions specified in the ADRG. Switching to other versions, not 
+specified, could most likely be the cause of issues when running the R ADaM and 
+analysis output programs. Certain versions of the R packages used in these 
+analysis programs only correspond to the specified R version.
 
 Regarding RTools, referencing the installation instructions on its website,
 
-*"Rtools42 is only needed for installation of R packages from source or building R from source. R can be installed from the R binary installer and by default will install binary versions of CRAN packages, which does not require Rtools42.*
+*"Rtools42 is only needed for installation of R packages from source or building 
+R from source. R can be installed from the R binary installer and by default will 
+install binary versions of CRAN packages, which does not require Rtools42.*
 
-*Moreover, online build services are available to check and build R packages for Windows, for which again one does not need to install Rtools42 locally. The Winbuilder check service uses identical setup as the CRAN incomming packages checks and has already all CRAN and Bioconductor packages pre-installed."*^1^
+*Moreover, online build services are available to check and build R packages for 
+Windows, for which again one does not need to install Rtools42 locally. The 
+Winbuilder check service uses identical setup as the CRAN incomming packages 
+checks and has already all CRAN and Bioconductor packages pre-installed."*^1^
 
-As discussed in the R Consortium R Submission working group, *"It appears that the most practical path forward as to what preemptive measures sponsors can take to match submission environments with the FDA test environment is to work with the FDA to lock down the environment as best as can be done just prior to submission."*^2^
+As discussed in the R Consortium R Submission working group, *"It appears that 
+the most practical path forward as to what preemptive measures sponsors can take 
+to match submission environments with the FDA test environment is to work with 
+the FDA to lock down the environment as best as can be done just prior to 
+submission."*^2^
 
-For Linux vs Windows, many others in the R community have asked similar questions. *"R programming language is well-suited for both Windows and Linux operating systems. It is an open-source programming language, so it can be used on a variety of platforms. The choice between Windows and Linux depends on your specific needs, familiarity with the operating systems, and the tools and packages you plan to use with R. Both platforms have their own advantages and it ultimately comes down to personal preference and the specific requirements of your project."*^3^
+For Linux vs Windows, many others in the R community have asked similar 
+questions. *"R programming language is well-suited for both Windows and Linux 
+operating systems. It is an open-source programming language, so it can be used 
+on a variety of platforms. The choice between Windows and Linux depends on your 
+specific needs, familiarity with the operating systems, and the tools and 
+packages you plan to use with R. Both platforms have their own advantages and it 
+ultimately comes down to personal preference and the specific requirements of 
+your project."*^3^
 
-For the Pilot 3 project team, due to cross-industry collaboration, Linux was the best option for us to work in allowing us work in a stable R environment.
+For the Pilot 3 project team, due to cross-industry collaboration, Linux was the 
+best option for us to work in allowing us work in a stable R environment.
 
 1.  <https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html>
 
@@ -70,11 +103,16 @@ For the Pilot 3 project team, due to cross-industry collaboration, Linux was the
 
 [**Agency Comment 2**]{.underline}
 
-Differences between generated Pilot 2 ADaM and CDISC data sets : attributes, types (e.g. integer vs. double), and NA vs. NULL
+Differences between generated Pilot 2 ADaM and CDISC data sets : attributes, 
+types (e.g. integer vs. double), and NA vs. NULL
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-The Pilot 3 project team explored all differences between the original CDISC datasets generated in SAS vs the Pilot 3 datasets generated in R. More detailed findings are documented in the ADRG in the section 'QC findings'. To address the agency's concerns, we explored these specific discrepancies that are present that could impact the analysis results.
+The Pilot 3 project team explored all differences between the original CDISC 
+datasets generated in SAS vs the Pilot 3 datasets generated in R. More detailed 
+findings are documented in the ADRG in the section 'QC findings'. To address the 
+agency's concerns, we explored these specific discrepancies that are present 
+that could impact the analysis results.
 
 The team used three different packages:
 
@@ -194,19 +232,26 @@ ITTFL      label    Intent-To-Treat Population Flag  Intent-to-Treat Population 
 ----------------------------------------------------------------------------------------
 ```
 
-Any observed difference in variables is documented in QC findings, including NA versus NULL which we did not encounter. Any observed difference in attribute will not affect the analysis.
+Any observed difference in variables is documented in QC findings, including NA 
+versus NULL which we did not encounter. Any observed difference in attribute 
+will not affect the analysis.
 
-In conclusion, the team was unable to identify any differences that could have an impact on the analysis.
+In conclusion, the team was unable to identify any differences that could have 
+an impact on the analysis.
 
 {{< pagebreak >}}
 
 [**Agency Comment 3**]{.underline}
 
-In the eSub Package, the proprietary Pilot 3 package had the incorrect package name {pilot3} instead of {pilot3utils}. For one of the file names, it was renamed from Pilot 3.xlsx to adam-pilot-3.xlsx.
+In the eSub Package, the proprietary Pilot 3 package had the incorrect package 
+name {pilot3} instead of {pilot3utils}. For one of the file names, it was 
+renamed from Pilot 3.xlsx to adam-pilot-3.xlsx.
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-The Pilot 3 package and the .xlsx files is now correctly named to {pilot3utils}^1^ and adam-pilot-3.xlsx, respectively. These are referenced as so in the Pilot 3 ADaM and analysis output programs as well as the ADRG.
+The Pilot 3 package and the .xlsx files is now correctly named to 
+{pilot3utils}^1^ and adam-pilot-3.xlsx, respectively. These are referenced as 
+so in the Pilot 3 ADaM and analysis output programs as well as the ADRG.
 
 1.  <https://github.com/RConsortium/submissions-pilot3-utilities/blob/main/DESCRIPTION>
 
@@ -214,11 +259,14 @@ The Pilot 3 package and the .xlsx files is now correctly named to {pilot3utils}^
 
 [**Agency Comment 4**]{.underline}
 
-File path - Relative vs Full path name. The location of a directory was specified using relative file path, where the Agency recommends specifying and using the full path.
+File path - Relative vs Full path name. The location of a directory was 
+specified using relative file path, where the Agency recommends specifying and 
+using the full path.
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-This has been updated in the ADRG with further detailed notes on how to specify the full file path upon execution of the R programs.
+This has been updated in the ADRG with further detailed notes on how to specify 
+the full file path upon execution of the R programs.
 
 {{< pagebreak >}}
 
@@ -232,7 +280,12 @@ Different primary output in Pilot 1 and Pilot 3
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-Upon the Pilot 3 team's investigation, they noted that there are 818 available records in the QS domain. The CDISC ADADAS only brought in 799 records and imputed the rest, whereas Pilot 3 brought in all available 818 records into ADADAS and then imputed. When the Pilot 3 team adjusted by subsetting to ANL01FL=‘Y’ records first before doing the LOCF imputation the results matched Pilot 1 and the discrepancy was resolved.^1^
+Upon the Pilot 3 team's investigation, they noted that there are 818 available 
+records in the QS domain. The CDISC ADADAS only brought in 799 records and 
+imputed the rest, whereas Pilot 3 brought in all available 818 records into 
+ADADAS and then imputed. When the Pilot 3 team adjusted by subsetting to 
+ANL01FL=‘Y’ records first before doing the LOCF imputation the results matched 
+Pilot 1 and the discrepancy was resolved.^1^
 
 1.  <https://github.com/RConsortium/submissions-pilot3-adam/pull/146>
 
