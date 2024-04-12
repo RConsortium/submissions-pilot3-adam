@@ -577,7 +577,7 @@ In  addition, create  a  new  directory  to  hold  the  unpacked  Pilot
 
 ### Installation of R and R Studio
 
-Download and install R 4.2.3 for Windows from[ ](https://cran.r-project.org/bin/windows/base/old/4.2.1/R-4.2.1-win.exe)<https://cran.r-project.org/bin/windows/base/old/4.2.3/> . Then download and run the [R-4.2.3-win.exe](https://cran.r-project.org/bin/windows/base/old/4.2.3/R-4.2.3-win.exe) file. Also download RStudio for Windows by visiting[ ](https://www.rstudio.com/products/rstudio/download/#download)<https://dailies.rstudio.com/version/2023.03.1+446.pro1/>
+Download and install R 4.2.3 for Windows from <https://cran.r-project.org/bin/windows/base/old/4.2.3/>. Then download and run the [R-4.2.3-win.exe](https://cran.r-project.org/bin/windows/base/old/4.2.3/R-4.2.3-win.exe) file. Also download RStudio for Windows by visiting <https://dailies.rstudio.com/version/2023.03.1+446.pro1/>
 
 ### Create a new R Studio project within the pilot3-files directory
 
@@ -623,7 +623,7 @@ A minimum set of R packages are required to ensure the Pilot 3 analysis programs
 -   *If you receive a warning showing “cannot open URL  <https://cran.rstudio.com/src/contrib/PACKAGES>'”, this is due to the default R Studio option ‘Use secure download method for HTTP’. In R Studio, go to Tools → Global Options → Packages, then uncheck the ‘Use secure download method for HTTP’ option, then retry installation.*
 :::
 
-2.  Then,  install the {renv} package, version 0.17.0:
+3.  Then,  install the {renv} package, version 0.17.0:
 
 ```         
         remotes::install_version("renv", version = "0.17.0")
@@ -637,7 +637,7 @@ A minimum set of R packages are required to ensure the Pilot 3 analysis programs
 2.  If not pointing to root project directory then do : `setwd("~/pilot3-files")`
 :::
 
-3.  Move the ‘renv-lock.txt’ to the root project directory and rename to ‘renv.lock’ :
+4.  Move the ‘renv-lock.txt’ to the root project directory and rename to ‘renv.lock’ :
 
 ```         
 ./pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam/programs/renv-lock.txt 
@@ -650,11 +650,13 @@ A minimum set of R packages are required to ensure the Pilot 3 analysis programs
 
 ![](images/clipboard-3313061033.png)
 
-4.  Restart the R Session.
+5.  Restart the R Session.
 
     ![](images/clipboard-1220328888.png)
 
-5.  Run the code below, then select option 1 :
+6.  Run the code below, then select option 1 :
+
+    `renv::init()`
 
     ![](images/clipboard-2206726057.png)
 
@@ -702,7 +704,7 @@ PACKAGES.rds'
 The package installation procedure may take a few minutes or longer depending on internet bandwidth.
 :::
 
-5.  Upon completion of installing packages using `{renv}`, please restart your R session.
+7.  Upon completion of installing packages using `{renv}`, please restart your R session.
 
 ::: callout-note
 After restarting the R session at this stage, running `renv::status()` will show us that the only package uninstalled is the {pilot3utils} package.
@@ -720,7 +722,7 @@ Use `renv::dependencies()` to see where these packages appear to be used.
 We may ignore this as we will be installing the {pilot3utils} package in the following steps.
 :::
 
-6.  Install the {pilot3utils} package following the steps below :
+8.  Install the {pilot3utils} package following the steps below :
 
     -   In R Studio, navigate to your `Packages` window pane, then click on `Install`.
 
@@ -750,7 +752,7 @@ This drop-down option is only available on a local Windows installation, not on 
 
     ![](images/clipboard-2776928439.png)
 
-7.  **Set the paths to run the analysis programs**
+9.  **Set the paths to run the analysis programs**
 
 INPUT path: to rerun the analysis programs, define the path variable
 
@@ -798,13 +800,16 @@ path <- list(
 
 path <- list(
   sdtm = "~/pilot3-files/m5/datasets/rconsortiumpilot3/tabulations/sdtm",
-  adam = "~/pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam-reviewer/datasets",
+  adam = "~/pilot3-files/m5/datasets/rconsortiumpilot3/analysis/
+          adam-reviewer/datasets",
   output = "~/pilot3-files/m5/datasets/rconsortiumpilot3/analysis/output"
   )
 ```
 :::
 
-5.  **Execute analysis program**
+{{< pagebreak >}}
+
+10. **Execute analysis program**
 
 To reproduce analysis results, rerun the following programs in the order below from `~/pilot3-files/m5/datasets/rconsortiumpilot3/analysis/adam-reviewer/programs` :
 
