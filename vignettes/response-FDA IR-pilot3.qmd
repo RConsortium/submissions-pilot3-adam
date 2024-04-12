@@ -23,25 +23,22 @@ editor: source
 April 12, 2024
 :::
 
-Food and Drug Administration
-Center for Drug Evaluation and Research 5901-B Ammendale Road
+Food and Drug Administration Center for Drug Evaluation and Research \
+5901-B Ammendale Road \
 Beltsville, MD 20705-1266
-
 
 Re: Response to FDA’s Statistical Review and Evaluation Summary of the R 
 Consortium R submission Pilot 3 eCTD submission
 
-
 Dear Sir/Madam:
-
 
 On February 2, 2024, the R Consortium R submission Working Group received FDA’s 
 Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 
 3 submission. The working group would like to thank FDA staff for the 
 comprehensive review and thoughtful recommendations. We are thrilled to learn 
 that the FDA staff was able to reproduce the ADaM (Analysis Data Model) datasets 
-as well as the analysis outputs using the R programs and the proprietary R 
-package submitted through the eCTD portal.
+as well as the analysis outputs using the R programs and the proprietary R package 
+submitted through the eCTD portal.
 
 The purpose of this letter is to provide the working group’s responses to FDA’s 
 Statistical Review and Evaluation Summary of the R Consortium R submission Pilot 
@@ -52,14 +49,17 @@ Staff’s review.
 
 [**Agency Comment 1**]{.underline}
 
-The agency found issues switching between R versions. The FDA would like the WG \[Working Group\] to explore the impact of different versions of R, RStudio and RTools, as well as Linux vs. Windows
+The agency found issues switching between R versions. The FDA would like the WG 
+\[Working Group\] to explore the impact of different versions of R, RStudio and 
+RTools, as well as Linux vs. Windows
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-It is recommended by the WG to download and install the R and R Studio versions specified in the ADRG. Switching to other versions, not specified, could most 
-likely be the cause of issues when running the R ADaM and analysis output 
-programs. Certain versions of the R packages used in these programs only 
-correspond to the specified R version.
+It is recommended by the WG to download and install the R and R Studio versions 
+specified in the ADRG. Switching to other versions, not specified, could most 
+likely be the cause of issues when running the R ADaM and analysis output programs. 
+Certain versions of the R packages used in these programs only correspond to the 
+specified R version.
 
 Regarding RTools, referencing the installation instructions on its website,
 
@@ -78,17 +78,20 @@ to match submission environments with the FDA test environment is to work with
 the FDA to lock down the environment as best as can be done just prior to 
 submission."*^2^
 
-For Linux vs Windows, many others in the R community have asked similar 
-questions. *"R programming language is well-suited for both Windows and Linux 
-operating systems. It is an open-source programming language, so it can be used 
-on a variety of platforms. The choice between Windows and Linux depends on your 
-specific needs, familiarity with the operating systems, and the tools and 
-packages you plan to use with R. Both platforms have their own advantages and it 
-ultimately comes down to personal preference and the specific requirements of 
-your project."*^3^
+For Linux vs Windows, many others in the R community have asked a similar question 
+with responses such as, *"R programming language is well-suited for both Windows 
+and Linux operating systems. It is an open-source programming language, so it can 
+be used on a variety of platforms. The choice between Windows and Linux depends 
+on your specific needs, familiarity with the operating systems, and the tools 
+and packages you plan to use with R. Both platforms have their own advantages 
+and it ultimately comes down to personal preference and the specific requirements 
+of your project."*^3^
 
 For the Pilot 3 project team, due to cross-industry collaboration, Linux was the 
-best option for us to work in allowing us work in a stable R environment.
+best option for us to work in allowing us work in a stable R environment. At the 
+time of final testing of the programs in this package, we did test in the Windows 
+environment as well to ensure all programs were still running as expected with 
+matching results as was output in Linux.
 
 1.  <https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html>
 
@@ -100,18 +103,25 @@ best option for us to work in allowing us work in a stable R environment.
 
 [**Agency Comment 2**]{.underline}
 
-Differences between generated Pilot 2 ADaM and CDISC data sets : attributes, 
-types (e.g. integer vs. double), and NA vs. NULL
+Explore these differences between generated Pilot 3 ADaM and CDISC data sets :
+
+-   attributes,
+
+-   types (e.g. integer vs. double),
+
+-   NA vs. NULL
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
 The Pilot 3 project team explored all differences between the original CDISC 
 datasets generated in SAS vs the Pilot 3 datasets generated in R. More detailed 
-findings are documented in the ADRG in the section 'QC findings'. To address the 
-agency's concerns, we explored these specific discrepancies that are present 
-that could impact the analysis results.
+findings are documented in Appendix 2 of the ADRG in the section 'QC findings'. 
+To address the agency's concerns, we explored these specific discrepancies that 
+are present that could impact the analysis results.
 
-The team used three different packages:
+These were the checks we ran below, with a final response below these checks.
+
+The team used three different packages for these checks :
 
 ```         
   library(arsenal)
@@ -131,12 +141,17 @@ adsl_cdisc <- read_xpt(file.path(path$cdisc, "adsl.xpt"))
 
 arsenal::comparedf(adsl, adsl_cdisc)
 diffdf::diffdf(adsl, adsl_cdisc, keys = c("STUDYID", "USUBJID"))
-waldo::compare(adsl, x_arg = "old", adsl_cdisc, y_arg = "new")
+waldo::compare(adsl, x_arg = "new", adsl_cdisc, y_arg = "old")
 
 
-`attr(old, 'label')` is a character vector ('Subject-Level Analysis Dataset')
-`attr(new, 'label')` is absent
+`attr(new, 'label')` is a character vector ('Subject-Level Analysis Dataset')
+`attr(old, 'label')` is absent
 ```
+
+The difference found here is that Pilot 3 ADSL includes the dataset label per 
+the define.xml, whereas the CDISC ADSL dataset label was blank. No impact on the 
+analysis itself.
+
 {{< pagebreak >}}
 
 ***ADTTE***
@@ -147,7 +162,7 @@ adtte_cdisc <- read_xpt(file.path(path$cdisc, "adtte.xpt"))
 
 arsenal::comparedf(adtte, adtte_cdisc)
 diffdf::diffdf(adtte, adtte_cdisc, keys = c("STUDYID", "USUBJID")) 
-waldo::compare(adtte, x_arg = "old", adtte_cdisc, y_arg = "new")
+waldo::compare(adtte, x_arg = "new", adtte_cdisc, y_arg = "old")
 
   ================================================
    VARIABLE  ATTR_NAME   VALUES.BASE  VALUES.COMP 
@@ -165,6 +180,11 @@ waldo::compare(adtte, x_arg = "old", adtte_cdisc, y_arg = "new")
   ------------------------------------------------
 ```
 
+The differences found in ADTTE were just metadata attributes where these listed 
+variables had SAS formats in the CDISC SAS datasets, whereas the Pilot 3 R 
+datasets did not have these SAS formats. These did not have any impact on the 
+analysis itself.
+
 {{< pagebreak >}}
 
 ***ADAE***
@@ -175,7 +195,7 @@ adae_cdisc <- read_xpt(file.path(path$cdisc, "adae.xpt"))
 
 arsenal::comparedf(adae, adae_cdisc)
 diffdf::diffdf(adae, adae_cdisc, keys = c("STUDYID", "USUBJID", "AESEQ"))
-waldo::compare(adae, x_arg = "old", adae_cdisc, y_arg = "new")
+waldo::compare(adae, x_arg = "new", adae_cdisc, y_arg = "old")
 
 =======================================================================================
    VARIABLE  ATTR_NAME             VALUES.BASE                      VALUES.COMP          
@@ -188,6 +208,9 @@ waldo::compare(adae, x_arg = "old", adae_cdisc, y_arg = "new")
 ---------------------------------------------------------------------------------------
 ```
 
+The differences shown in ADAE were only variable labels, which also did not 
+have any impact on the analysis.
+
 ***ADLBC***
 
 ```         
@@ -197,7 +220,7 @@ adlbc_cdisc <- read_xpt(file.path(path$cdisc, "adlbc.xpt"))
 arsenal::comparedf(adlbc, adlbc_cdisc)
 diffdf::diffdf(adlbc, adlbc_cdisc, keys = c("STUDYID", "USUBJID", "LBSEQ", 
 "PARAMCD", "AVISIT")) 
-waldo::compare(adlbc, x_arg = "old", adlbc_cdisc, y_arg = "new")
+waldo::compare(adlbc, x_arg = "new", adlbc_cdisc, y_arg = "old")
 
   ==================================
    VARIABLE  CLASS.BASE  CLASS.COMP 
@@ -207,6 +230,10 @@ waldo::compare(adlbc, x_arg = "old", adlbc_cdisc, y_arg = "new")
     TRTSDT      Date      numeric   
   ----------------------------------
 ```
+
+The differences in ADLBC, were only regarding date variables, where the Pilot 3 
+R dataset rightly attributed these variables as dates as oppose to just a numeric 
+value.
 
 {{< pagebreak >}}
 
@@ -229,26 +256,41 @@ ITTFL      label    Intent-To-Treat Population Flag  Intent-to-Treat Population 
 ----------------------------------------------------------------------------------------
 ```
 
-Any observed difference in variables is documented in QC findings, including NA 
-versus NULL which we did not encounter. Any observed difference in attribute 
-will not affect the analysis.
+The differences shown in ADADAS were also only variable labels, which also did not 
+have any impact on the analysis.
 
-In conclusion, the team was unable to identify any differences that could have 
-an impact on the analysis.
+Any difference in attributes are because Pilot 3 ensures that the datasets are 
+labelled according to the define.xml and that there is traceability and transparency. 
+We found that these differences in attributes had no impact on the results.
+
+Regarding differences between types (integer vs double). The impact on a discrepancy 
+such as this will be in the accuracy of the results when a double is defined as 
+integer. In this project these differences also had no impact on the results.
+
+We also did not see any result discrepancies between NA vs NULL.^12^ These observed 
+differences had no impact on the results.
+
+In conclusion, the discrepancies found between the Pilot 3 vs the CDISC ADaMs 
+were all metadata related. The team was unable to identify any of these issues 
+impacting the analysis.
+
+1.  <https://www.r-bloggers.com/2010/04/r-na-vs-null/>
+
+2.  <https://bayer-group.github.io/sas2r/r-and-sas-syntax.html#handling-of-missing-values>
 
 {{< pagebreak >}}
 
 [**Agency Comment 3**]{.underline}
 
 In the eSub Package, the proprietary Pilot 3 package had the incorrect package 
-name {pilot3} instead of {pilot3utils}. For one of the file names, it was 
-renamed from Pilot 3.xlsx to adam-pilot-3.xlsx.
+name {pilot3} instead of {pilot3utils}. For one of the file names, it was renamed 
+from Pilot 3.xlsx to adam-pilot-3.xlsx.
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
-The Pilot 3 package and the .xlsx files is now correctly named to 
-{pilot3utils}^1^ and adam-pilot-3.xlsx, respectively. These are referenced as 
-so in the Pilot 3 ADaM and analysis output programs as well as the ADRG.
+The Pilot 3 package and the .xlsx files are now correctly named to {pilot3utils}^1^ 
+and adam-pilot-3.xlsx, respectively. These are now referenced as so in the Pilot 
+3 ADaM and analysis output programs as well as the ADRG.
 
 1.  <https://github.com/RConsortium/submissions-pilot3-utilities/blob/main/DESCRIPTION>
 
@@ -256,9 +298,9 @@ so in the Pilot 3 ADaM and analysis output programs as well as the ADRG.
 
 [**Agency Comment 4**]{.underline}
 
-File path - Relative vs Full path name. The location of a directory was 
-specified using relative file path, where the Agency recommends specifying and 
-using the full path.
+File path - Relative vs Full path name. The location of a directory was specified 
+using relative file path, where the Agency recommends specifying and using the 
+full path.
 
 [**The R Consortium R Submission Working Group Response**]{.underline}
 
