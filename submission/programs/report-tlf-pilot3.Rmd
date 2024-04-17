@@ -30,10 +30,11 @@ source("/cloud/project/submission/programs/tlf-demographic.r")
 print(tbl)
 ```
 
+\newpage
+
 #### Figure 14-1
 #### Time to Dermatologic Event by Treatment Group
-\
-\
+
 ```{r plot, echo=FALSE, message=FALSE, comment=NA, fig.align="center",out.width="100%"}
 setwd("/cloud/project")
 source("/cloud/project/submission/programs/tlf-kmplot.r")
