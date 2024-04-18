@@ -35,9 +35,6 @@ library(dplyr)
 library(ggplot2)
 library(cowplot)
 library(visR)
-
-# Propitiatory Package, please refer appendix of ADRG to install
-library(pilot1wrappers)
 ```
 
 

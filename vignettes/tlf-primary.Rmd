@@ -30,9 +30,6 @@ library(tidyr)
 library(dplyr)
 library(Tplyr)
 library(pharmaRTF)
-
-# Propitiatory Package, please refer appendix of ADRG to install
-library(pilot1wrappers)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
@@ -86,7 +83,7 @@ hdr_fin <- stringr::str_replace_all(hdr_fin, "\\|Xanomeline ", "|Xanomeline\\\\l
 
 sum_data <- t %>%
   build() %>%
-  nest_rowlabels() %>%
+  pilot3utils::nest_rowlabels() %>%
   select(row_label, var1_Placebo, `var1_Xanomeline Low Dose`, `var1_Xanomeline High Dose`) %>%
   add_column_headers(
     hdr_fin,

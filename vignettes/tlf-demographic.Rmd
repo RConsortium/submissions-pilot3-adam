@@ -1,11 +1,14 @@
 ---
-title: "CDISC Pilot: Summary of Demographic and Baseline Characteristics"
+title: 'CDISC Pilot: Summary of Demographic and Baseline Characteristics'
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
   html_document:
     df_print: paged
     toc: yes
     toc_depth: '2'
-    toc_float: true
+    toc_float: yes
 ---
 
 The Pilot 1 Team generated the below output using R and it was delivered to the FDA. You can find the source code that generated this output [here](https://github.com/RConsortium/submissions-pilot1/blob/main/vignettes/tlf-demographic.Rmd) and a deeper dive of the process [here](https://rconsortium.github.io/submissions-pilot1/articles/tlf-demographic.html).  We delivered the identical output with the R generated ADaM.
@@ -30,9 +33,6 @@ if (file.access(".", 2) != 0) {
 library(haven)
 library(dplyr)
 library(rtables)
-
-# Propitiatory Package, please refer appendix of ADRG to install
-library(pilot1wrappers)
 ```
 
 
