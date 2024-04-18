@@ -20,35 +20,21 @@ This document provides context for the analysis datasets and terminology that be
 
 ## Study Data Standards and Dictionary Inventory
 
-+-----------------------------+-----------------------------------------------+
 | **Standard or Dictionary**  | **Versions Used**                             |
-+=============================+===============================================+
+|-----------------------------|-----------------------------------------------|
 | SDTM                        | SDTM Implementation Guide Version 3.1.2       |
-+-----------------------------+-----------------------------------------------+
 |                             | SDTM Version 1.2                              |
-+-----------------------------+-----------------------------------------------+
 |                             |                                               |
-+-----------------------------+-----------------------------------------------+
 | SDTM Controlled Terminology | CDISC SDTM Controlled Terminology, 2022-12-16 |
-+-----------------------------+-----------------------------------------------+
 |                             |                                               |
-+-----------------------------+-----------------------------------------------+
 | ADaM                        | ADaM-IG v1.1                                  |
-+-----------------------------+-----------------------------------------------+
 |                             | ADaM v2.1                                     |
-+-----------------------------+-----------------------------------------------+
 |                             |                                               |
-+-----------------------------+-----------------------------------------------+
 | ADaM Controlled Terminology | CDISC ADaM Controlled Terminology, 2022-06-24 |
-+-----------------------------+-----------------------------------------------+
 |                             |                                               |
-+-----------------------------+-----------------------------------------------+
 | Data Definitions            | Define-XML v2.0                               |
-+-----------------------------+-----------------------------------------------+
 |                             |                                               |
-+-----------------------------+-----------------------------------------------+
 | Medical Events Dictionary   | MedDRA version 8.0                            |
-+-----------------------------+-----------------------------------------------+
 
 ## Source Data Used for Analysis Dataset Creation
 
@@ -279,11 +265,9 @@ Was define.xml evaluated?
 
 ## Issues Summary
 
-+----------+------------------------------------------------------------------------------+---------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Check ID | Diagnostic Message                                                           | Dataset | Count (Issue Rate) | Explanation                                                                                                                                                                             |
-+==========+==============================================================================+=========+====================+=========================================================================================================================================================================================+
+|----------|------------------------------------------------------------------------------|---------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AD1012   | Secondary custom variable is present but its primary variable is not present | ADSL    | 1 (50.00%)         | This is a Sponsor Extension to the ADaM Model. The VISNUMEN \[End of Trt Visit (Vis 12 or Early Term.)\] variable is a integer variable which is not related to any character variable. |
-+----------+------------------------------------------------------------------------------+---------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 : {tbl-colwidths="\[17,22,15,22,25\]"}
 
@@ -303,19 +287,13 @@ The sponsor has provided all programs for analysis results. They are all created
 
 The following table contains the list of programs that generate the analysis datasets in Pilot 3. It shows the program file name, the analysis dataset name and the label of the analysis dataset. The recommended steps to execute the analysis results using R are described in the Appendix.
 
-+------------------+---------------------------+--------------------------------------+
 | **Program Name** | **Analysis Dataset Name** | **Analysis Dataset Label**           |
-+==================+===========================+======================================+
+|------------------|---------------------------|--------------------------------------|
 | adsl.r           | adsl.xpt                  | Subject-Level Analysis Dataset       |
-+------------------+---------------------------+--------------------------------------+
 | adadas.r         | adas.xpt                  | ADAS-Cog Analysis                    |
-+------------------+---------------------------+--------------------------------------+
 | adlbc.r          | adlb.xpt                  | Analysis Dataset Lab Blood Chemistry |
-+------------------+---------------------------+--------------------------------------+
 | adae.r           | adae.xpt                  | Adverse Events Analysis Dataset      |
-+------------------+---------------------------+--------------------------------------+
 | adtte.r          | adtte.xpt                 | AE Time to 1st Derm. Event Analysis  |
-+------------------+---------------------------+--------------------------------------+
 
 ## Analysis Output Programs
 
@@ -363,17 +341,12 @@ The following table contains a list of programs that generate outputs used in th
 
 For reference, below is a description of the analysis programs utilized and outputs generated in Pilot 1.
 
-+-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | **Program Name**  | **Output Table Number** | **Title**                                                                         |
-+===================+=========================+===================================================================================+
+|-------------------|-------------------------|-----------------------------------------------------------------------------------|
 | tlf-demographic.r | Table 14-2.01           | Summary of Demographic and Baseline Characteristics                               |
-+-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | tlf-primary.r     | Table 14-3.01           | Primary Endpoint Analysis: ADAS Cog (11) - Change from Baseline to Week 24 - LOCF |
-+-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | tlf-efficacy.r    | Table 14-3.02           | ANCOVA of Change from Baseline at Week 20                                         |
-+-------------------+-------------------------+-----------------------------------------------------------------------------------+
 | tlf-kmplot.r      | Figure 14-1             | KM plot for Time to First Dermatologic Event: Safety population                   |
-+-------------------+-------------------------+-----------------------------------------------------------------------------------+
 
 ## Proprietary R Packages
 
@@ -455,7 +428,17 @@ For reference, below is a description of the analysis programs utilized and outp
 
 # Directory Structure
 
+m1
+
+└── cover-letter.pdf
+
+└── report-tlf-pilot3.pdf
+
+└── response-FDA-IR-pilot3.pdf
+
 m5
+
+└── sap-cdiscpilot01.pdf
 
 └── datasets
 
@@ -1178,21 +1161,14 @@ First 10 of 20 rows are shown in table below
 
 In Pilot3, variable labels were updated per ADaM IG 1.1, which caused some discrepancies with original CDISC pilot data label.
 
-+------------+------------+---------------------------------+------------------------------------+
-| Dataset    | Variable   | CDISC pilot data label          | Pilot3 label                       |
-+:===========+:===========+:================================+:===================================+
-| ADAE       | ADURN      | Analysis Duration (N)           | AE Duration (N)                    |
-+------------+------------+---------------------------------+------------------------------------+
-|            | ADURU      | Analysis Duration Units         | AE Duration Units                  |
-+------------+------------+---------------------------------+------------------------------------+
-|            | AOCCFL     | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
-+------------+------------+---------------------------------+------------------------------------+
-| ADADAS     | ANL01FL    | Analysis Record Flag 01         | Analysis Flag 01                   |
-+------------+------------+---------------------------------+------------------------------------+
-|            | ITTFL      | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
-+------------+------------+---------------------------------+------------------------------------+
-| ADTTE      | SRCDOM     | Source Data                     | Source Domain                      |
-+------------+------------+---------------------------------+------------------------------------+
+| Dataset | Variable | CDISC pilot data label          | Pilot3 label                       |
+|:--------|:---------|:--------------------------------|:-----------------------------------|
+| ADAE    | ADURN    | Analysis Duration (N)           | AE Duration (N)                    |
+|         | ADURU    | Analysis Duration Units         | AE Duration Units                  |
+|         | AOCCFL   | 1st Occurrence of Any AE Flag   | 1st Occurrence within Subject Flag |
+| ADADAS  | ANL01FL  | Analysis Record Flag 01         | Analysis Flag 01                   |
+|         | ITTFL    | Intent-to-Treat Population Flag | Intent-To-Treat Population Flag    |
+| ADTTE   | SRCDOM   | Source Data                     | Source Domain                      |
 
 {{< pagebreak >}}
 
