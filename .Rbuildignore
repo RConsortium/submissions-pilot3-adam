@@ -2,9 +2,6 @@
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^pilot1wrappers\.Rcheck$
-^pilot1wrappers.*\.tar\.gz$
-^pilot1wrappers.*\.tgz$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$

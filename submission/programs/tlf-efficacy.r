@@ -146,9 +146,9 @@ tbl_1 <- apr0ancova1 %>%
       "{^b} Based on an Analysis of covariance (ANCOVA) model with treatment and baseline value as covariates",
       "CI = Confidence Interval, LS = Least Squares, SD = Standard Deviation"
     )
-  ) %>% 
+  ) %>%
   rtf_source(
-    source = c(paste("Table generated on:", Sys.time()),"Source: [pilot3: adam-adsl; adlbc]"),
+    source = c(paste("Table generated on:", Sys.time()), "Source: [pilot3: adam-adsl; adlbc]"),
     text_justification = "c"
   )
 
