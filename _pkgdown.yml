@@ -59,14 +59,14 @@ navbar:
         href: articles/adam-adtte.html
       - text: ADADAS - ADS-COG Analysis
         href: articles/adam-adadas.html
-      - text: ADRG - Analysis Data Reviewer's Guide
+      - text: ADRG - Analysis Data Reviewers Guide
         href: articles/adrg_website.html
     conferences:
       text: Conferences
       menu:
       - text: PHUSE SDE London
         href: articles/conf_phuse_sde_london.html
-      - text: PHARMA SUG Baltimore - Paper Index: SS-344
+      - text: PHARMA SUG Baltimore Paper Index SS 344
         href: https://www.pharmasug.org/us/2024/papers.html
     feedback:
       text: WG Minutes and Regulatory Feedback

@@ -39,8 +39,8 @@ library(visR)
 
 
 ```{r, echo = FALSE, message = FALSE}
-adsl <- read_xpt(file.path(path$adam, "adsl.xpt"))
-adtte <- read_xpt(file.path(path$adam, "adtte.xpt"))
+adsl <- read_xpt("../adam/adsl.xpt")
+adtte <- read_xpt("../adam/adtte.xpt")
 ```
 
 ```{r, echo = FALSE, message = FALSE}

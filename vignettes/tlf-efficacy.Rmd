@@ -36,8 +36,8 @@ library(emmeans)
 ```
 
 ```{r, message = FALSE, echo = FALSE}
-adsl <- read_xpt(file.path(path$adam, "adsl.xpt"))
-adlb <- read_xpt(file.path(path$adam, "adlbc.xpt"))
+adsl <- read_xpt("../adam/adsl.xpt")
+adlb <- read_xpt("../adam/adlbc.xpt")
 ```
 
 ```{r, message = FALSE, echo = FALSE}

@@ -37,8 +37,8 @@ options(huxtable.add_colnames = FALSE)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
-adas <- haven::read_xpt(file.path(path$adam, "adadas.xpt"))
-adsl <- haven::read_xpt(file.path(path$adam, "adsl.xpt"))
+adas <- haven::read_xpt("../adam/adadas.xpt")
+adsl <- haven::read_xpt("../adam/adsl.xpt")
 ```
 
 ```{r, echo = FALSE, message = FALSE}
@@ -92,7 +92,7 @@ sum_data <- t %>%
 ```
  
 ```{r, echo = FALSE, message = FALSE}
-model_portion <- efficacy_models(adas, "CHG", 24)
+model_portion <- pilot3utils::efficacy_models(adas, "CHG", 24)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
