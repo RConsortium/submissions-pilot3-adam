@@ -1,0 +1,26 @@
+pandoc: 2.7.3
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  adam-adadas: adam-adadas.html
+  adam-adae: adam-adae.html
+  adam-adlbc: adam-adlbc.html
+  adam-adsl: adam-adsl.html
+  adam-adtte: adam-adtte.html
+  adrg-prepare: adrg-prepare.html
+  adrg_website: adrg_website.html
+  conf_phuse_sde_london: conf_phuse_sde_london.html
+  cover-letter: cover-letter.html
+  feedback_jan2024: feedback_jan2024.html
+  project_background: project_background.html
+  project_setup: project_setup.html
+  statistical-software-clarifying-statement: statistical-software-clarifying-statement.html
+  tlf-demographic: tlf-demographic.html
+  tlf-efficacy: tlf-efficacy.html
+  tlf-kmplot: tlf-kmplot.html
+  tlf-primary: tlf-primary.html
+last_built: 2024-05-30T17:04Z
+urls:
+  reference: https://rconsortium.github.io/submissions-pilot3-adam/main/reference
+  article: https://rconsortium.github.io/submissions-pilot3-adam/main/articles
+
