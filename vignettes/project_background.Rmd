@@ -18,6 +18,7 @@ The submission package is small and makes use of a modernized version of the [CD
 
 The CDISC Pilot SAP is located [here](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/blob/main/m5/sap-cdiscpilot01.pdf).
 
+
 ### The Team
 
 The Pilot 3 team met weekly over the course of 2022 and 2023 comprising of individuals across the Pharma Industry. We used [pharmaverse slack](https://pharmaverse.slack.com/archives/C03J2MD2SLC) and [GitHub](https://github.com/RConsortium/submissions-pilot3-adam) to communicate on blockers and ideas in between meetings.
