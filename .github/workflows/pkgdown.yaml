@@ -90,7 +90,7 @@ jobs:
           restore-keys: ${{ runner.os }}-renv-
 
       - name: Setup pandoc
-        uses: r-lib/actions/setup-pandoc@v1
+        uses: r-lib/actions/setup-pandoc@v2
 
       - name: Run Staged dependencies
         uses: insightsengineering/staged-dependencies-action@v1
