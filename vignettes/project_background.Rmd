@@ -14,8 +14,9 @@ Below we discuss the scope of the project and how we worked as a team.  All subm
 
 The team landed on developing five ADaM datasets in R with a focus on using the R package `{admiral}`. These five ADaMs supported the already developed [Submission Pilot 1](https://rconsortium.github.io/submissions-pilot1/) TLFs that were delivered to the FDA in 2021. A Cover Letter and ADRG were also created as part of this submission.
 
-The submission package is small and makes use of a modernized version of the [CDISC Pilot data](https://www.pharmasug.org/cd/papers/CD/CD04.pdf). The CDSIC Pilot was developed to demonstrate that the CDSIC standards met the requirements of FDA Reviewers. The R-based Pilots are more interested in the delivery process and use of R. Therefore, it was decided that only a subset of the [CDISC Pilot data](https://www.pharmasug.org/cd/papers/CD/CD04.pdf) was needed to accomplish our goals.  
+The submission package is small and makes use of a modernized version of the [CDISC Pilot data](https://www.pharmasug.org/cd/papers/CD/CD04.pdf). The CDSIC Pilot was developed to demonstrate that the CDSIC standards met the requirements of FDA Reviewers. The R-based Pilots are more interested in the delivery process and use of R. Therefore, it was decided that only a subset of the [CDISC Pilot data](https://www.pharmasug.org/cd/papers/CD/CD04.pdf) was needed to accomplish our goals.
 
+The CDISC Pilot SAP is located [here](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/blob/main/m5/sap-cdiscpilot01.pdf).
 
 ### The Team
 
