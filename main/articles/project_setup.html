@@ -114,7 +114,8 @@
 
 
 
-<script src="project_setup_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Project Setup</h1>
             
@@ -125,12 +126,24 @@
 
     
     
-<p>In this section, we will quickly cover the environment, setup of the project, folder and file structure and supporting repositories/packages.</p>
+<p>In this section, we will quickly cover the environment, setup of the
+project, folder and file structure and supporting
+repositories/packages.</p>
 <div class="section level2">
 <h2 id="environment">Environment<a class="anchor" aria-label="anchor" href="#environment"></a>
 </h2>
-<p>As we were a large team, it was decided for us all to use the same version of R packages needed for the creation of the TLFs and ADaMs. We also felt that this <strong>snapshot</strong> of packages used in our submission would more closely mimic a typical setup at a company delivering a R-based submission.</p>
-<p>We made use of the <a href="https://rstudio.github.io/renv/" class="external-link">renv</a> R package to help us generate a <a href="https://github.com/RConsortium/submissions-pilot3-adam/blob/main/renv.lock" class="external-link"><code>renv.lock</code></a> file to help developers configure their environments to be identical. The <a href="https://github.com/RConsortium/submissions-pilot3-adam/blob/main/renv.lock" class="external-link"><code>renv.lock</code></a> has all primary and dependency packages versions that were installed in our environments. We encourage readers to check out <a href="https://rstudio.github.io/renv/" class="external-link">renv</a> package to find out more.</p>
+<p>As we were a large team, it was decided for us all to use the same
+version of R packages needed for the creation of the TLFs and ADaMs. We
+also felt that this <strong>snapshot</strong> of packages used in our
+submission would more closely mimic a typical setup at a company
+delivering a R-based submission.</p>
+<p>We made use of the <a href="https://rstudio.github.io/renv/" class="external-link">renv</a> R package to help us generate
+a <a href="https://github.com/RConsortium/submissions-pilot3-adam/blob/main/renv.lock" class="external-link"><code>renv.lock</code></a>
+file to help developers configure their environments to be identical.
+The <a href="https://github.com/RConsortium/submissions-pilot3-adam/blob/main/renv.lock" class="external-link"><code>renv.lock</code></a>
+has all primary and dependency packages versions that were installed in
+our environments. We encourage readers to check out <a href="https://rstudio.github.io/renv/" class="external-link">renv</a>
+package to find out more.</p>
 <p>A synopsis of our environment:</p>
 <ul>
 <li>OS: Ubuntu 20.04</li>
@@ -145,35 +158,51 @@
 <div class="section level2">
 <h2 id="github-repositories">GitHub Repositories<a class="anchor" aria-label="anchor" href="#github-repositories"></a>
 </h2>
-<p>We make use of several GitHub Repositories to store and collaborate for our work.</p>
+<p>We make use of several GitHub Repositories to store and collaborate
+for our work.</p>
 <div class="section level3">
 <h3 id="core-analysis-repository">Core Analysis Repository<a class="anchor" aria-label="anchor" href="#core-analysis-repository"></a>
 </h3>
-<p>The website you are viewing is built on top of this Repository, which is where 95% percent of Pilot 3 work was done. The source code can be found on <a href="https://github.com/RConsortium/submissions-pilot3-adam" class="external-link">RConsortium/submissions-pilot3-adam</a>. Below we discuss some of the key folders where our analysis was done as well as some files that we found useful for locking in our environments and keeping things reproducible.</p>
+<p>The website you are viewing is built on top of this Repository, which
+is where 95% percent of Pilot 3 work was done. The source code can be
+found on <a href="https://github.com/RConsortium/submissions-pilot3-adam" class="external-link">RConsortium/submissions-pilot3-adam</a>.
+Below we discuss some of the key folders where our analysis was done as
+well as some files that we found useful for locking in our environments
+and keeping things reproducible.</p>
 <ul>
 <li>
-<code>adam/</code>: Original CDISC ADaM Pilot data created in SAS used for comparison</li>
+<code>adam/</code>: Original CDISC ADaM Pilot data created in SAS
+used for comparison</li>
 <li>
 <code>submission/adam:</code> R generated ADaM datasets</li>
 <li>
 <code>submission/output:</code> R generated TLFs</li>
 <li>
-<code>submission/programs:</code> Production and QC programs for ADaMS</li>
+<code>submission/programs:</code> Production and QC programs for
+ADaMS</li>
 <li>
-<code>submission/sdtm:</code>Original CDISC SDTM Pilot data created in SAS</li>
+<code>submission/sdtm:</code>Original CDISC SDTM Pilot data created
+in SAS</li>
 <li>
-<code>.Rprofile</code>: Project startup file to set up environment,</li>
+<code>.Rprofile</code>: Project startup file to set up
+environment,</li>
 <li>
-<code>renv.lock</code>: Locks in the versions of R packages and version of R</li>
+<code>renv.lock</code>: Locks in the versions of R packages and
+version of R</li>
 <li>
-<code>vignettes/</code>: Markdown files that render TLFs and Datasets for Website</li>
+<code>vignettes/</code>: Markdown files that render TLFs and
+Datasets for Website</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="utility-package-repository">Utility Package Repository<a class="anchor" aria-label="anchor" href="#utility-package-repository"></a>
 </h3>
-<p>Originally, the Pilot 3 Core Analysis Repository was a R package, but this quickly got messy and it was decided to split out the custom helper functions for the TLFs and Datasets to a separate R package.</p>
-<p>The source code for our Utility R package can be found <a href="https://github.com/RConsortium/submissions-pilot3-utilities" class="external-link">here</a>. Please note that this is not a CRAN package and is loaded in from <code>renv.lock</code> file via GitHub.</p>
+<p>Originally, the Pilot 3 Core Analysis Repository was a R package, but
+this quickly got messy and it was decided to split out the custom helper
+functions for the TLFs and Datasets to a separate R package.</p>
+<p>The source code for our Utility R package can be found <a href="https://github.com/RConsortium/submissions-pilot3-utilities" class="external-link">here</a>.
+Please note that this is not a CRAN package and is loaded in from
+<code>renv.lock</code> file via GitHub.</p>
 </div>
 <div class="section level3">
 <h3 id="submission-repository">Submission Repository<a class="anchor" aria-label="anchor" href="#submission-repository"></a>
