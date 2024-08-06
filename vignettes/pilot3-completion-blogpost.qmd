@@ -1,0 +1,236 @@
+---
+title: "Pilot 3 Announcement"
+subtitle: "R Consortium R Submissions WG - Pilot 3 Successfully Reviewed by FDA CDER"
+author: "Pilot 3 Team"
+format: html
+editor: visual
+---
+
+The R Consortium is pleased to announce that on XX, the R Submissions Working Group successfully completed the follow-up to the pilot 3 submission and received FDA CDER response letter! 
+
+The full response letter can be found at: xx  
+
+All submission materials can be found at:  [submissions-pilot3-adam-to-fda](https://github.com/RConsortium/submissions-pilot3-adam-to-fda)
+
+This is the first publicly available R-based FDA submission package which includes R scripts to generate ADaM datasets and TLFs.
+
+**Pilot 3 Scope**
+
+The pilot 3 test submission is an example of an all R submission package following Electronic Common Technical Document (eCTD) specifications. The R Submission package  included the installation and loading of the proprietary {pilot3utils} R package and other open-source R packages, R scripts for the analysis data model (ADaM) datasets from pilot 3 and tables, listings, figures (TLFs) from pilot 1, analysis data reviewer's guide (adrg), and other required eCTD components. 
+
+Pilot 3 complements pilot 1 and pilot 2, which demonstrated the feasibility of submitting TLF R codes and Shiny codes, respectively. Pilot 3 also successfully tested the feasibility of submitting proprietary R packages as compressed files.
+
+**Pilot 3 timeline**
+
+The initial submission was submitted through the eCTD gateway on Aug 28, 2023. FDA verbal responses were received from Jan-July 2024 during R submission working group meetings. The updated submission package addressed reported issues and was submitted on Apr 19, 2024. The final response letter from FDA was received on xxx, 2024.
+
+**Pilot 3 Developers**
+
+-   Joel Laxamana-Roche\
+    Author, maintainer - Lead
+
+-   Robert Devine-J&J\
+    Author
+
+-   Benjamin Straub-GSK\
+    Author
+
+-   Kangjie Zhang-Bayer\
+    Author
+
+-   Thomas Neitmann-Roche\
+    Author
+
+-   Phanikumar Tata-Syneos\
+    Author
+
+-   Steven Haesendonckx-J&J\
+    Author
+
+-   Rikimaru Nishimura-J&J\
+    Author
+
+-   Yutong Liu-Moderna\
+    Author
+
+-   Lei Zhao-Roche\
+    Author
+
+-   Nicole Jones-Merck\
+    Author
+
+-   Benjamin Wang-Merck\
+    Author
+
+-   Ryan Johnson-Posit\
+    Author
+
+-   Dadong Zhang-Illumina\
+    Author
+
+-   Declan Hodges-GSK\
+    Author
+
+…
+
+**Pilot 1-3 learnings**
+
+In the three pilots, for various TLFs, the working group members intentionally created different tables in different formats using various open-source R packages. The FDA staff successfully accepted and reproduced the results generated from these different open-source packages. However, sponsors are responsible for selecting open-source packages that demonstrate sufficient reliability, such as those with adequate test coverage.
+
+The majority of FDA staff feedback falls under the following themes
+
+1.  Clear ADRG documentation on computing environment, package dependencies, and expected warnings
+
+2.  Clear documentation on data processing rules and statistical method implementation
+
+3.  Good statistical practice in confirmatory trials, such as avoiding the possibility of “p-hacking” 
+
+For future submissions using open-source languages, it is recommended to give special attention to recommendation theme 1. Recommendation themes 2 and 3 are language-agnostic and should always be followed, regardless of the programming language used.
+
+**Upcoming Pilots**
+
+As a next step, the R Consortium R Submission Working Group initiated submission pilot 4, to explore the use of novel technologies such as Linux containers and web assembly to bundle a Shiny application into a self-contained package, facilitating a smoother process of both transferring and executing the application.
+
+**The R Consortium R Submission Working Group**
+
+The [R Consortium R Submissions Working Group](https://rconsortium.github.io/submissions-wg/) is focused on improving practices for R-based clinical trial regulatory submissions.
+
+To bring an experimental clinical product to market, electronic submission of data, computer programs, and relevant documentation is required by health authority agencies from different countries. In the past, submissions have been mainly based on the SAS language. 
+
+In recent years, the use of open source languages, especially the R language, has become very popular in the pharmaceutical industry and research institutions. Although the health authorities accept submissions based on open source programming languages, sponsors may be hesitant to conduct submissions using open source languages due to a lack of working examples.
+
+Therefore, the R Submissions Working Group aims at providing R-based submission examples and identifying potential gaps during submission of these example packages. All materials, including submission examples and communications, are publicly available on the R consortium Github page: <https://github.com/RConsortium> .
+
+The R consortium R submission working group includes members from more than 10 pharmaceutical companies, as well as regulatory agencies. More details of the working group can be found at: <https://rconsortium.github.io/submissions-wg/> .
+
+The R consortium R submission working group is open to anyone who is interested in joining. If interested, please contact Joseph Rickert at director\@r-consortium.org. 
+
+# ~~Pilot 2 announcement 2~~
+
+Shiny App Successfully Reviewed by FDA CDER Staff (Pilot 2 Announcement 2)
+
+The R Consortium is pleased to announce that on Sept 27, 2023, the R Submissions Working Group successfully completed the follow-up to the pilot 2 R shiny based submission and received FDA CDER response letter! 
+
+To our knowledge, this is the first publicly available submission package that includes a Shiny component. 
+
+The full response letter can be found at: <https://github.com/RConsortium/submissions-wg/blob/0f1dc5c30985d413f75d196c2b6caa96231b26ee/_Documents/Summary_R_Pilot2_Submission%2027SEP2023.pdf>  All submission materials can be found at:  <https://github.com/RConsortium/submissions-pilot2-to-fda>
+
+The objective of the R Consortium R submission Pilot 2 Project is to test the concept that a Shiny application created with the R-language can be bundled into a submission package and transferred successfully to FDA reviewers. 
+
+The initial submission was submitted through the eCTD gateway on Nov 18, 2022. FDA verbal responses were received from Jan-June 2023 during R submission working group meetings. The FDA response commented on minor findings on warnings and recommended best practices on filters, documentation and package source. The updated submission package addressed reported issues and was submitted on July 19, 2023. The final response letter from FDA was received on Sept 27, 2023.
+
+As a next step, the R Consortium R Submission Working Group initiated submission pilot 4, to explore the use of novel technologies such as Linux containers and web assembly to bundle a Shiny application into a self-contained package, facilitating a smoother process of both transferring and executing the application.
+
+The initial announcement of the R Consortium R Submission pilot 2 can be found at: 
+
+<https://www.r-consortium.org/blog/2022/12/07/update-successful-r-based-package-submission-with-shiny-component-to-fda>
+
+Announcement of the R Consortium R submission pilot 1:
+
+<https://www.r-consortium.org/blog/2021/12/08/successful-r-based-test-package-submitted-to-fda>
+
+# First Publicly Available R-Based Submission Package Submitted to FDA (Pilot 3)
+
+The R Consortium is pleased to announce that on August 28, 2023, the [R Submissions Working Group](https://rconsortium.github.io/submissions-wg/) successfully submitted an R-based test submission pilot 3 package through the FDA eCTD gateway! The FDA Center for Drug Evaluation and Research (CDER) staff are now able to begin their evaluation process. 
+
+All submission materials can be found at: <https://github.com/RConsortium/submissions-pilot3-adam-to-fda> 
+
+The pilot 3 test submission is an example of an all R submission package following Electronic Common Technical Document (eCTD) specifications. These include the installation and loading of the proprietary {pilot3} R package and other open-source R packages, R scripts for the analysis data model (ADaM) datasets from pilot 3 and tables, listings, figures (TLFs) from pilot 1, analysis data reviewer's guide (adrg), and other required eCTD components. 
+
+This is the first publicly available R-based FDA submission package which includes R scripts to generate ADaM datasets and TLFs. We hope this submission package and our learnings can serve as a good reference for future R-based regulatory submissions from different sponsors. Additional agency feedback will be shared in future communications.  
+
+For any questions, you may contact the pilot 3 team here : <https://rconsortium.github.io/submissions-pilot3-adam/main/index.html> 
+
+The R Submissions Working Group also began working on a pilot 4 project to explore the use of novel technologies such as Linux containers and WebAssembly software to bundle a Shiny application into a self-contained package in order to facilitate a smoother process for transferring and executing the application. Stay tuned for more about pilot 4 in the future.
+
+For past announcements on pilot 1 and pilot 2, see:
+
+Announcement of the R Consortium R submission pilot 1:
+
+<https://www.r-consortium.org/blog/2021/12/08/successful-r-based-test-package-submitted-to-fda>   
+
+Announcement of the R Consortium R submission pilot 2, an R based test submission with a Shiny component:
+
+<https://www.r-consortium.org/blog/2022/12/07/update-successful-r-based-package-submission-with-shiny-component-to-fda>
+
+**About the R Consortium R Submission Working Group**
+
+The [R Consortium R Submissions Working Group](https://rconsortium.github.io/submissions-wg/) is focused on improving practices for R-based clinical trial regulatory submissions.
+
+To bring an experimental clinical product to market, electronic submission of data, computer programs, and relevant documentation is required by health authority agencies from different countries. In the past, submissions have been mainly based on the SAS language. 
+
+In recent years, the use of open source languages, especially the R language, has become very popular in the pharmaceutical industry and research institutions. Although the health authorities accept submissions based on open source programming languages, sponsors may be hesitant to conduct submissions using open source languages due to a lack of working examples.
+
+Therefore, the R Submissions Working Group aims at providing R-based submission examples and identifying potential gaps during submission of these example packages. All materials, including submission examples and communications, are publicly available on the R consortium Github page: <https://github.com/RConsortium> .
+
+The R consortium R submission working group includes members from more than 10 pharmaceutical companies, as well as regulatory agencies. More details of the working group can be found at: <https://rconsortium.github.io/submissions-wg/> .
+
+The R consortium R submission working group is open to anyone who is interested in joining. If interested, please contact Joseph Rickert at director\@r-consortium.org. 
+
+# Pilot 2 announcement 2
+
+The R Consortium is happy to announce that on Aug XX, 2023, the R Submissions Working Group successfully completed the follow-up to the pilot 2 R shiny based submission and received FDA CDER response letter! All submission materials can be found at:  <https://github.com/RConsortium/submissions-pilot2-to-fda>
+
+The objective of the R Consortium R submission Pilot 2 Project is to test the concept that a Shiny application created with the R-language can be bundled into a submission package and transferred successfully to FDA reviewers. To our knowledge, this is the first publicly available submission package that includes a Shiny component. The initial submission was submitted through the eCTD gateway on Nov 18, 2022. FDA verbal responses were received from Jan-June 2023 during R submission working group meetings. The FDA response commented on minor findings on warnings and recommended best practices on filters and footnotes. The updated submission package addressed all of these issues and was submitted on July 19, 2023. The final response letter from FDA was received on Aug XX, 2023, and can be found at: xxx
+
+As a next step, the R Consortium R Submission Working Group aims at submitting submission pilot 3 to experiment with R based ADaM code submission through the eCTD gateway. In addition, the working group also initiated submission pilot 4, to explore the use of novel technologies such as Linux containers and web assembly to bundle a Shiny application into a self-contained package, facilitating a smoother process of both transferring and executing the application.
+
+The initial announcement of the R Consortium R Submission pilot 2 can be found at: 
+
+<https://www.r-consortium.org/blog/2022/12/07/update-successful-r-based-package-submission-with-shiny-component-to-fda>
+
+Announcement of the R Consortium R submission pilot 1:
+
+<https://www.r-consortium.org/blog/2021/12/08/successful-r-based-test-package-submitted-to-fda>
+
+**Pilot 2 announcement 1**
+
+The R Consortium is happy to announce that on Nov 18th, 2022, the R Submissions Working Group successfully submitted a test submission package with a Shiny component through the FDA eCTD gateway! The submission package has been received by the FDA CDER staff. All submission materials can be found at: <https://github.com/RConsortium/submissions-pilot2-to-fda>
+
+The objective of the R Consortium R submission Pilot 2 Project is to test the concept that a Shiny application created with the R-language can be bundled into a submission package and transferred successfully to FDA reviewers. The application was built using the source data sets and analyses contained in the R submission Pilot 1 Project.
+
+To our knowledge, this is the first publicly available submission package that includes a Shiny component. We hope this submission package and our learnings can serve as a good reference for future regulatory submission efforts, when considering Shiny as a tool for a more user-friendly interface to navigate through analysis results. Additional agency feedback will be shared in future communications.
+
+To learn more about the R consortium R submission Working Group and the Pilot 1 submission, more information can be found at:
+
+<https://www.r-consortium.org/blog/2021/12/08/successful-r-based-test-package-submitted-to-fda>
+
+<https://www.r-consortium.org/blog/2022/03/16/update-successful-r-based-test-package-submitted-to-fda>
+
+—-------
+
+# Pilot 1 announcement 1
+
+The R Consortium is happy to announce that on Nov 22nd, 2021, the R Submissions Working Group successfully submitted an R-based test submission package through the FDA eCTD gateway! The submission package has been received by the FDA staff who were able to reproduce  the numerical results. All submission materials can be found at: <https://github.com/RConsortium/submissions-pilot1-to-fda>
+
+The pilot 1 test submission,  was an example submission package following eCTD specifications which include a proprietary R package, R scripts for analysis, R-based analysis data reviewer guide, and other required eCTD components. To our knowledge, this is the first publicly available R-based FDA submission package. We hope this submission package and our learnings can serve as a good reference for future R-based regulatory submissions from different sponsors. Additional agency feedback will be shared in future communications.
+
+**About the R consortium R submission working group**
+
+The R Consortium R Submissions Working Group is focused on improving practices for R-based clinical trial regulatory submissions.
+
+To bring an experimental clinical product to market, electronic submission of data, computer programs, and relevant documentation is required by health authority agencies from different countries. In the past, submissions have been mainly based on the SAS language. 
+
+In recent years, the use of open source languages, especially the R language, has become very popular in the pharmaceutical industry and research institutions. Although the health authorities accept submissions based on open source programming languages, sponsors may be hesitant to conduct submissions using open source languages due to a lack of working examples.
+
+Therefore, the R Consortium R Submissions Working Group aims at providing R-based submission examples and identifying potential gaps during submission of these example packages. All materials, including submission examples and communications, are publicly available on the R consortium Github page: <https://github.com/RConsortium>
+
+The R consortium R submission working group includes members from more than 10 pharmaceutical companies, as well as regulatory agencies. More details of the working group can be found at: <https://rconsortium.github.io/submissions-wg/>
+
+The R consortium R submission working group is open to anyone who is interested in joining. If interested, please contact Joseph Rickert at [joseph.rickert\@rstudio.com](mailto:joseph.rickert@rstudio.com)
+
+**—--------**
+
+Pilot 1 Announcement 2
+
+The R Consortium is happy to announce that the R Submissions Working Group successfully completed the follow-up to the original pilot 1 eCTD submission! All submission materials can be found at: <https://github.com/RConsortium/submissions-pilot1-to-fda>
+
+The pilot 1 test submission, was an example submission package following eCTD specifications which include a proprietary R package, R scripts for analysis, R-based analysis data reviewer guide (ADRG), and other required eCTD components. The initial submission was submitted through the eCTD gateway on Nov 22, 2021. An FDA written response letter was received on Dec 3, 2021. The FDA response commented on two minor findings and included a number of suggestions for best practices. The updated submission package addressed all of these issues and was submitted on Feb 11, 2022. The final response letter from FDA was received on Mar 14, 2022, and can be found at: <https://github.com/RConsortium/submissions-wg/blob/main/Documents/Summary_R_Pilot_Submission2.pdf> .
+
+Throughout the submission process, we successfully submitted R scripts with its natural file extension (.r) through the eCTD gateway. A proprietary R package was also submitted through the eCTD gateway. Following the submitted ADRG, the FDA staff successfully installed the proprietary and open source R packages, reran the submitted R scripts, and reproduced the analysis results. In addition, the FDA staff performed independent programming in R to evaluate the results.
+
+To our knowledge, this was the first publicly-available regulatory submission package using open source language; this successful pilot sets an important milestone to streamline future open-source language-based submissions. 
+
+As a next step, the R Consortium R Submission Working Group aims at initiating an R submission pilot 2 to experiment with Shiny app code submission through the eCTD gateway. In addition, the working group is also exploring R based pilot submissions to other health authority agencies globally. 
+
+The initial announcement of the R Consortium R Submission pilot 1 can be found at: <https://www.r-consortium.org/blog/2021/12/08/successful-r-based-test-package-submitted-to-fda>
