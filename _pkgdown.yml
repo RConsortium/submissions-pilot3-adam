@@ -73,6 +73,10 @@ navbar:
       menu:
       - text: -------
       - text: "R Consortium WG Meeting Minutes"
+      - text: August 2024
+        href: https://rconsortium.github.io/submissions-wg/minutes/2024-08-02/
+      - text: June 2024
+        href: https://rconsortium.github.io/submissions-wg/minutes/2024-06-07/
       - text: May 2024
         href: https://rconsortium.github.io/submissions-wg/minutes/2024-05-03/
       - text: April 2024

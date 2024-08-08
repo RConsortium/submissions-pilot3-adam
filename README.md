@@ -41,6 +41,14 @@ The website is divide into 4 sections that will walk you through our efforts:
 
     - *In recent years, statisticians and analysts from both industry and regulatory agencies have increased adoption of open-source software such as R. R brings great benefits from its vibrant open-source community by providing a wealth of cutting-edge statistical tools, extension packages for interactive dashboard and documentation as well as adaptability to the latest data science trends.*
 
+* [R Consortium's R-based Test Submission Package for FDA Evaluation: A Milestone in R-based Regulatory Submissions](https://rconsortium.github.io/RMedicine_2024/Program.html)
+
+    - *Pilot 3 Demo: R/Medicine 2024 Demo Day, Wednesday, June 12, 2024 10:00AM-10:55AM EST*
+
+* [A Milestone and a new Frontier in R-based Regulatory Submissions - Pilot 3 Demo : useR! 2024 On-line talk](https://www.youtube.com/watch?v=vPmNdHTVYm8&list=PL77T87Q0eoJhsC203plZ1H4p21AGrM9rl&index=12)
+
+   - *The R Consortium is delighted to share knowledge of the successful submission of an R-based test submission Pilot 3 package through the FDA eCTD gateway by the R Submissions Working Group. This groundbreaking achievement marks one of the early publicly available R-based FDA submission packages, including R scripts for generating analysis data model (ADaM) datasets and tables, listings, and figures (TLFs). The package adheres to eCTD specifications and serves as a valuable reference for future R-based regulatory submissions.*
+
 ## Get in Touch
 
 Don't be shy!  We like to chat about R and Submissions. Find us on [pharmaverse slack](https://pharmaverse.slack.com/archives/C030EB2M4GM)
