@@ -93,7 +93,7 @@ If you have any questions, we would love to hear from you. Feel free to submit a
 
 **Upcoming Pilots**
 
-As a next step, the R Consortium R Submission Working Group initiated submission pilot 4, to explore the use of novel technologies such as Linux containers and web assembly to bundle a Shiny application into a self-contained package, facilitating a smoother process of both transferring and executing the application.
+As a next step, the R Consortium R Submission Working Group initiated [submission pilot 4](https://rconsortium.github.io/submissions-pilot4/), to explore the use of novel technologies such as Linux containers and web assembly to bundle a Shiny application into a self-contained package, facilitating a smoother process of both transferring and executing the application.
 
 **The R Consortium R Submission Working Group**
 
