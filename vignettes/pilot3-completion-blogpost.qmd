@@ -1,7 +1,7 @@
 ---
 title: "Pilot 3 Announcement"
 subtitle: "R Consortium R Submissions WG - Pilot 3 Successfully Reviewed by FDA CDER"
-author: "Pilot 3 Team"
+author: "Ning Leng & Joel Laxamana"
 format: html
 editor: visual
 ---
@@ -14,23 +14,28 @@ All submission materials can be found at: [submissions-pilot3-adam-to-fda](https
 
 This is the first publicly available R-based FDA submission package including R scripts to generate Analysis Data Models (ADaM) and Tables, Listings & Figures (TLFs).
 
-**Pilot 3 Scope**
-
-The Pilot 3 test submission is an example of an all R submission package for ADaMs and TLFs following electronic Common Technical Document (eCTD) specifications. This R Submission package included the installation and loading of the proprietary {pilot3utils} R package and other open-source R packages, R scripts for the analysis data model (ADaM) datasets from Pilot 3 and tables, listings, figures (TLFs) from Pilot 1, the Analysis Data Reviewer's Guide (ADRG), and other required eCTD components. 
-
-Pilot 3 complements pilot 1 and pilot 2, which demonstrated the feasibility of submitting TLF R codes and Shiny codes, respectively. Pilot 3 also successfully tested the feasibility of submitting proprietary R packages as compressed files.
-
-Alternative phrasing :
-
-------------------------------------------------------------------------
-
-The Pilot 3 test submission exemplifies an all-R submission package for ADaMs and TLFs, adhering to electronic Common Technical Document (eCTD) specifications. This comprehensive package not only includes ADaMs and TLGs, but it emulates a full study submission package including the source Study Data Tabulation Models (SDTMs) used to generate the Pilot 3 ADaMs, it also encompasses the installation and loading of the proprietary {pilot3utils} R package, various open-source R packages, R scripts for the Analysis Data Model (ADaM) datasets derived from Pilot 3, and tables, listings, and figures (TLFs) from Pilot 1. Additionally, it includes the Analysis Data Reviewer’s Guide (ADRG) and other requisite eCTD components, which provides detailed steps leading to the execution of the analysis R scripts to re-produce the ADaMs and TLFs from a FDA reviewers perspective.
-
-Pilot 3 serves as a complement to Pilots 1 and 2, which demonstrated the feasibility of submitting TLF R scripts and R Shiny code, respectively. Furthermore, Pilot 3 successfully validated the submission of proprietary R packages in compressed file formats, serving as another alternative to {pkglite} or installation directly from github.
-
 **Pilot 3 Timeline**
 
 The initial submission was submitted through the eCTD gateway on Aug 28, 2023. FDA verbal responses were received from Jan-July 2024 during R submission working group meetings. Documentation of this initial feedback and response can be found at [response-FDA-IR-pilot3.pdf](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/blob/main/m1/us/response-FDA-IR-pilot3.pdf). The updated submission package addressed reported issues and was re-submitted on Apr 19, 2024. The final response letter from FDA was received on Aug 8, 2024.
+
+**Pilot 3 Scope**
+
+The Pilot 3 test submission exemplifies an all-R submission package for ADaMs and TLFs, adhering to electronic Common Technical Document (eCTD) specifications. This comprehensive package not only includes ADaMs and TLGs, but it emulates a full study submission package including the source Study Data Tabulation Models (SDTMs) used to generate the Pilot 3 ADaMs. It also encompasses the installation and loading of the proprietary {pilot3utils} R package, various open-source R packages, R scripts for the Analysis Data Model (ADaM) datasets derived from Pilot 3, and Tables, Listings, and Figures (TLFs) from Pilot 1. In addition to other requisite eCTD components, the Pilot 3 package also includes the Analysis Data Reviewer’s Guide (ADRG) providing detailed steps leading to the execution of the analysis R scripts to re-produce the ADaMs and TLFs from a FDA reviewers perspective. These Pilot 3 submission materials are linked above.
+
+Pilot 3 serves as a complement to Pilots [1](https://github.com/RConsortium/submissions-pilot1-to-fda) and [2](https://github.com/RConsortium/submissions-pilot2-to-fda), which demonstrated the feasibility of submitting TLF R scripts and R Shiny code, respectively. Furthermore, Pilot 3 successfully validated the submission of proprietary R packages in compressed file formats, serving as another alternative to {pkglite} or installation directly from github.
+
+If you have any questions, we would love to hear from you. Feel free to submit any questions you may have as a [new issue](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/new/choose) in our Pilot 3 github repository or you may find any of the Pilot 3 team members in [Pharmaverse slack](https://pharmaverse.slack.com/archives/C030EB2M4GM).
+
+**Pilot 3 FDA Reviewers**
+
+-   Hye Soo Cho-FDA\
+    Reviewer - Lead
+
+-   Paul Schuette-FDA\
+    Reviewer
+
+-   Youn Kyeong Chang-FDA\
+    Reviewer
 
 **Pilot 3 Developers**
 
@@ -73,13 +78,11 @@ The initial submission was submitted through the eCTD gateway on Aug 28, 2023. F
 -   Declan Hodges-GSK\
     Author
 
-…
-
 **Pilot 1-3 learnings**
 
 In the three pilots, for various TLFs, the working group members intentionally created different tables in different formats using various open-source R packages. The FDA staff successfully accepted and reproduced the results generated from these different open-source packages. However, sponsors are responsible for selecting open-source packages that demonstrate sufficient reliability, such as those with adequate test coverage.
 
-The majority of FDA staff feedback falls under the following themes
+The majority of FDA staff feedback falls under the following themes :
 
 1.  Clear ADRG documentation on computing environment, package dependencies, and expected warnings
 
@@ -88,8 +91,6 @@ The majority of FDA staff feedback falls under the following themes
 3.  Good statistical practice in confirmatory trials, such as avoiding the possibility of “p-hacking” 
 
 For future submissions using open-source languages, it is recommended to give special attention to recommendation theme 1. Recommendation themes 2 and 3 are language-agnostic and should always be followed, regardless of the programming language used.
-
-If you have any questions, we would love to hear from you. Feel free to submit any questions you may have as a [new issue](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/new/choose) in our Pilot 3 github repository or you may find any of the Pilot 3 team members in [Pharmaverse slack](https://pharmaverse.slack.com/archives/C030EB2M4GM).
 
 **Upcoming Pilots**
 
