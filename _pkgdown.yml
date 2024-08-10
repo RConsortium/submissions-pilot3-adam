@@ -66,8 +66,8 @@ navbar:
       menu:
       - text: PHUSE SDE London
         href: articles/conf_phuse_sde_london.html
-      - text: PHARMA SUG Baltimore Paper Index SS 344
-        href: https://www.pharmasug.org/proceedings/2024/SS/PharmaSUG-2024-SS-344.pdf#
+      - text: PHARMA SUG Baltimore 
+        href: articles/conf_pharma_sug_baltimore.html
     feedback:
       text: WG Minutes and Regulatory Feedback
       menu:
