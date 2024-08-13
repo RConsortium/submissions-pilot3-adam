@@ -90,7 +90,7 @@ The majority of FDA staff feedback falls under the following themes :
 
 3.  Good statistical practice in confirmatory trials, such as avoiding the possibility of “p-hacking” 
 
-For future submissions using open-source languages, it is recommended to give special attention to recommendation theme 1. Recommendation themes 2 and 3 are language-agnostic and should always be followed, regardless of the programming language used.
+For future submissions using open-source languages, it is recommended to give special attention to recommendation theme 1. Enter the R Validation Hub, formed in 2018 by the PSI AIMS Special Interest Group and supported by the R Consortium. The validation approach, described in the Hub, aims to promote the adoption of R in the bio-pharmaceutical sector by leveraging its open-source nature. It offers tools like [{riskmetric}](https://www.pharmar.org/posts/news/updates-aug-2024/) to quantify the "risk" of R packages and a user-friendly R Shiny app, [{riskassessment}](https://www.pharmar.org/riskassessment/), to evaluate package reliability. These solutions can help document computing environments, package dependencies, and expected warnings, addressing FDA feedback on clear ADRG documentation and statistical method implementation. The Hub also fosters discussions through community meetings and extends its presence at conferences to support the industry's transition to R. Recommendation themes 2 and 3 are language-agnostic and should always be followed, regardless of the programming language used.
 
 **Upcoming Pilots**
 
