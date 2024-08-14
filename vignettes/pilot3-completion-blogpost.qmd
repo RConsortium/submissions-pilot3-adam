@@ -24,7 +24,7 @@ The Pilot 3 test submission exemplifies an all-R submission package for ADaMs an
 
 Pilot 3 serves as a complement to Pilots [1](https://github.com/RConsortium/submissions-pilot1-to-fda) and [2](https://github.com/RConsortium/submissions-pilot2-to-fda), which demonstrated the feasibility of submitting TLF R scripts and R Shiny code, respectively. Furthermore, Pilot 3 successfully validated the submission of proprietary R packages in compressed file formats, serving as another alternative to {pkglite} or installation directly from github.
 
-If you have any questions, we would love to hear from you. Feel free to submit any questions you may have as a [new issue](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/new/choose) in our Pilot 3 github repository or you may find any of the Pilot 3 team members in [Pharmaverse slack](https://pharmaverse.slack.com/archives/C030EB2M4GM).
+If you have any questions about this Pilot 3 submission, we would love to hear from you. Feel free to submit any questions you may have as a [new issue](https://github.com/RConsortium/submissions-pilot3-adam-to-fda/issues/new/choose) in our Pilot 3 github repository or you may find any of the Pilot 3 team members in [Pharmaverse slack](https://pharmaverse.slack.com/archives/C030EB2M4GM).
 
 **Pilot 3 FDA Reviewers**
 
