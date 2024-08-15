@@ -16,7 +16,7 @@ The objective of the R Consortium R Submission Pilot 3 Project is to test the co
 
 All submission materials can be found at : [submissions-pilot3-adam-to-fda](https://github.com/RConsortium/submissions-pilot3-adam-to-fda). This is the first publicly available R-based FDA submission package including R scripts to generate Analysis Data Models (ADaM) and Tables, Listings & Figures (TLFs).
 
-![Open-Source Collaboration in standardizing Clinical Trial analyses and Submissions. Broadening ways to bring treatments to Patients.](images/Pilot3%20collaboration.png){fig-align="center"}
+![*Open-Source Collaboration in standardizing Clinical Trial analyses and Submissions. Broadening ways to bring treatments to Patients.*](images/Pilot3%20collaboration.png){fig-align="center" width="50%"}
 
 ## Pilot 3 Timeline
 
