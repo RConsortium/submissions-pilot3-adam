@@ -94,6 +94,12 @@ navbar:
       - text: October 2023
         href: https://rconsortium.github.io/submissions-wg/minutes/2023-10-06/
       - text: -------
-      - text: "Pilot3 Submission Issues Compilation"
+      - text: "Pilot 3 Submission Issues Compilation"
       - text: January 2024 FDA Feedback Summary
         href: articles/feedback_jan2024.html
+      - text: -------
+      - text: "Pilot 3 Successfully Reviewed by FDA CDER"
+      - text: FDA Response Letter
+        href: https://github.com/RConsortium/submissions-wg/blob/main/_Documents/Summary_R_Pilot3_Submission.pdf
+      - text: Blog Post Announcement
+        href: TBA.html
