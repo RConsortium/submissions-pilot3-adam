@@ -1,0 +1,12 @@
+---
+title: "PHARMA SUG 2024 Baltimore"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '2'
+    toc_float: true
+---
+
+![PharmaSUG-2024-SS-344](pdf/pharmasug-2024-ss-344.pdf){width=700px height=1100px}
+
