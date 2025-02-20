@@ -2,7 +2,7 @@
 
 The objectives of the **R Consortium R Submission Pilot 3** Project are:  
 
-1. Deliver a **publicly accessible** R-based Submission through the [eCTD portal](https://www.fda.gov/drugs/electronic-regulatory-submission-and-review/electronic-common-technical-document-ectd)
+1. Deliver a **publicly accessible** R-based Submission through the [eCTD portal](https://r-consortium.org/posts/news-from-r-submissions-working-group-pilot-3/)
 1. Expand on the work done in [Submission Pilot 1](https://rconsortium.github.io/submissions-pilot1/), by now utilizing R to generate ADaM datasets.
 
 
@@ -27,7 +27,7 @@ The website is divide into 4 sections that will walk you through our efforts:
 
 ## Latest News
 
-* [First Publicly Available R-Based Submission Package Submitted to FDA (Pilot 3)](https://www.r-consortium.org/announcement/2023/09/11/first-publicly-available-r-based-submission-package-submitted-to-fda-pilot-3)
+* [First Publicly Available R-Based Submission Package Submitted to FDA (Pilot 3)](https://r-consortium.org/posts/news-from-r-submissions-working-group-pilot-3/)
 
 * [Novo Nordisk's Journey to an R based FDA Submission](https://www.youtube.com/watch?v=t33dS17QHuA)
     - *Data scientists at Novo Nordisk, a leading pharmaceutical company in diabetes, obesity, and other chronic diseases, share details of their first FDA submission package featuring outputs and* [ADaM datasets](https://www.cdisc.org/standards/foundational/adam) *written exclusively in R.*
